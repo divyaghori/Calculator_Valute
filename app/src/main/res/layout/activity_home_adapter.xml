@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@color/home_item"
+    app:cardCornerRadius="@dimen/_12sdp"
+    app:cardElevation="@dimen/_6sdp"
+    app:cardUseCompatPadding="true"
+    tools:context=".Adapter.Home_Adapter">
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center|left"
+        android:gravity="center|left"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_20sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:paddingTop="@dimen/_20sdp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:padding="@dimen/_8sdp"
+                android:tint="@color/white"
+                android:src="@drawable/ic_plus">
+
+            </ImageView>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:paddingTop="@dimen/_7sdp"
+            android:text="Gallery"
+            android:textColor="@color/white"
+            android:textSize="18sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/subname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/medium"
+            android:padding="@dimen/_2sdp"
+            android:text="Hidden Gallery"
+            android:textColor="#455A64"
+            android:textSize="14sp">
+
+        </TextView>
+
+        <View
+            android:id="@+id/progrssimage"
+            android:layout_width="@dimen/_63sdp"
+            android:layout_height="3dp"
+            android:background="@drawable/p1"></View>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
