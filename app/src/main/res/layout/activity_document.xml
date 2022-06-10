@@ -29,7 +29,8 @@
             android:gravity="center"
             android:text="Document"
             android:textColor="@color/white"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp">
+        </TextView>
 
         <CheckBox
             android:id="@+id/check"
@@ -106,3 +107,5 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
+

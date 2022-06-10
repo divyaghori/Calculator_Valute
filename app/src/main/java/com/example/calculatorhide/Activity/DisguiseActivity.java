@@ -13,10 +13,18 @@ import com.example.calculatorhide.R;
 public class DisguiseActivity extends AppCompatActivity {
     private static final String disguise = "com.example.calculatorhide.icon.icon_disguise";
     ImageView i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11;
+    ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disguise);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         i1 = findViewById(R.id.i1);
         i2 = findViewById(R.id.i2);
         i3 = findViewById(R.id.i3);

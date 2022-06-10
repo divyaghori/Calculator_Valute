@@ -3,14 +3,15 @@
     package="com.example.calculatorhide">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,426 +19,395 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.CalculatorHide">
+        android:theme="@style/Theme.CalculatorHide"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Activity.GetAudioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.NoteActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.DisguiseActvity"
             android:exported="false" />
         <activity
             android:name=".Activity.DisguiseActivity"
             android:exported="false" />
-
+        <activity android:name=".toDoList.MainActivity"></activity>
+        <activity android:name=".toDoList.AddEditNoteActivity"></activity>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
         <activity
-            android:name="com.example.calculatorhide.Activity.HomeActivity"
+            android:name=".Activity.HomeActivity"
             android:clearTaskOnLaunch="true"
             android:finishOnCloseSystemDialogs="true"
             android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait"
-             />
-
-<!--        <activity-alias-->
-<!--            android:name="com.example.vault.icon.icon_disguise0"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="true"-->
-<!--            android:icon="@drawable/i1"-->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="0" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:name="com.example.vault.icon.icon_disguise1"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i2"-->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="2" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:name="com.example.vault.icon.icon_disguise2"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:exported="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i3"-->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="1" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise3"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i4"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="3" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise4"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i5"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="4" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise5"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i6"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="5" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise6"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i7"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="6" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise7"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i8"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="7" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise8"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i9"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="8" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise9"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i10"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="9" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise10"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i11"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="10" />-->
-<!--        </activity-alias>-->
-<!--        <activity-alias-->
-<!--            android:exported="true"-->
-<!--            android:name="com.example.vault.icon.icon_disguise11"-->
-<!--            android:clearTaskOnLaunch="true"-->
-<!--            android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize"-->
-<!--            android:enabled="false"-->
-<!--            android:icon="@drawable/i12"-->
-<!--            -->
-<!--            android:launchMode="singleTask"-->
-<!--            android:resizeableActivity="true"-->
-<!--            android:resumeWhilePausing="true"-->
-<!--            android:screenOrientation="unspecified"-->
-<!--            android:stateNotNeeded="true"-->
-<!--            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity"-->
-<!--            android:windowSoftInputMode="adjustPan">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />-->
-<!--            </intent-filter>-->
-<!--            <intent-filter>-->
-<!--                <data android:scheme="yourapp" />-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            </intent-filter>-->
-
-<!--            <meta-data-->
-<!--                android:name="vault_entry_order"-->
-<!--                android:value="11" />-->
-<!--        </activity-alias>-->
+            android:screenOrientation="portrait" />
+        <!-- <activity-alias -->
+        <!-- android:name="com.example.vault.icon.icon_disguise0" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="true" -->
+        <!-- android:icon="@drawable/i1" -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="0" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:name="com.example.vault.icon.icon_disguise1" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i2" -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="2" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:name="com.example.vault.icon.icon_disguise2" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:exported="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i3" -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="1" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise3" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i4" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="3" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise4" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i5" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="4" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise5" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i6" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="5" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise6" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i7" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="6" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise7" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i8" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="7" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise8" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i9" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="8" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise9" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i10" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="9" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise10" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i11" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="10" /> -->
+        <!-- </activity-alias> -->
+        <!-- <activity-alias -->
+        <!-- android:exported="true" -->
+        <!-- android:name="com.example.vault.icon.icon_disguise11" -->
+        <!-- android:clearTaskOnLaunch="true" -->
+        <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
+        <!-- android:enabled="false" -->
+        <!-- android:icon="@drawable/i12" -->
+        <!--  -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:resizeableActivity="true" -->
+        <!-- android:resumeWhilePausing="true" -->
+        <!-- android:screenOrientation="unspecified" -->
+        <!-- android:stateNotNeeded="true" -->
+        <!-- android:targetActivity="com.example.calculatorhide.Activity.HomeActivity" -->
+        <!-- android:windowSoftInputMode="adjustPan"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" /> -->
+        <!-- </intent-filter> -->
+        <!-- <intent-filter> -->
+        <!-- <data android:scheme="yourapp" /> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+        <!-- </intent-filter> -->
+        <!-- <meta-data -->
+        <!-- android:name="vault_entry_order" -->
+        <!-- android:value="11" /> -->
+        <!-- </activity-alias> -->
         <activity-alias
             android:name=".Moon1"
             android:enabled="true"
             android:exported="true"
             android:icon="@drawable/i1"
             android:label="Moon 1"
-            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity">
+            android:targetActivity=".Activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -446,6 +416,7 @@
             </intent-filter>
             <intent-filter>
                 <data android:scheme="yourapp" />
+
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -456,14 +427,13 @@
                 android:name="vault_entry_order"
                 android:value="0" />
         </activity-alias>
-
         <activity-alias
             android:name=".Moon2"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/i2"
             android:label="Moon 2"
-            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity">
+            android:targetActivity=".Activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -472,6 +442,7 @@
             </intent-filter>
             <intent-filter>
                 <data android:scheme="yourapp" />
+
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -482,14 +453,13 @@
                 android:name="vault_entry_order"
                 android:value="0" />
         </activity-alias>
-
         <activity-alias
             android:name=".Moon3"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/i3"
             android:label="Moon 3"
-            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity">
+            android:targetActivity=".Activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -498,6 +468,7 @@
             </intent-filter>
             <intent-filter>
                 <data android:scheme="yourapp" />
+
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -508,14 +479,13 @@
                 android:name="vault_entry_order"
                 android:value="0" />
         </activity-alias>
-
         <activity-alias
             android:name=".Moon4"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/i4"
             android:label="Moon 4"
-            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity">
+            android:targetActivity=".Activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -524,6 +494,7 @@
             </intent-filter>
             <intent-filter>
                 <data android:scheme="yourapp" />
+
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -534,14 +505,13 @@
                 android:name="vault_entry_order"
                 android:value="0" />
         </activity-alias>
-
         <activity-alias
             android:name=".Moon5"
             android:enabled="false"
             android:exported="true"
             android:icon="@drawable/i5"
             android:label="Moon 5"
-            android:targetActivity="com.example.calculatorhide.Activity.HomeActivity">
+            android:targetActivity=".Activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -550,6 +520,7 @@
             </intent-filter>
             <intent-filter>
                 <data android:scheme="yourapp" />
+
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -606,25 +577,31 @@
         <activity
             android:name=".Activity.SettingActivity"
             android:exported="false" />
-        <activity android:name=".Activity.MultiAudioSelectActivity">
-
-        </activity>
+        <activity android:name=".Activity.MultiAudioSelectActivity" />
         <activity
             android:name=".Activity.FilemanagerActivity"
-            android:exported="false" />
-        <!--        <activity-->
-        <!--            android:name=".Activity.HomeActivity"-->
-        <!--            android:exported="true">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
-
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
-
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".Activity.HomeActivity" -->
+        <!-- android:exported="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.calculatorhide"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
     </application>
 
 </manifest>

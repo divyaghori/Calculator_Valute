@@ -73,12 +73,9 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
         this.itemsList = arrayList;
         this.tempList = arrayList;
     }
-
     public static String getMimeType(Context context, String str) {
         return MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(str)).toString());
     }
-
-
     @Override
     public int getItemCount() {
         return this.itemsList.size();
@@ -94,7 +91,6 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
         String time = formatDate[3];
         String[] formatTime = time.split(":");
         String date = formatTime[0] + ":" + formatTime[1];
-
         return formatDate[0] + ", " + formatDate[1] + " " + formatDate[2] + " at " + date;
     }
 
@@ -241,19 +237,7 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
                 }
                 break;
         }
-
-
-
     }
-
-    private void setCheckBoxTintColor(CheckBox checkBox, int i) {
-        if (Build.VERSION.SDK_INT < 21) {
-            CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(i));
-        } else {
-            checkBox.setButtonTintList(ColorStateList.valueOf(i));
-        }
-    }
-
 
     public String getFileSize(File file) {
         if (!file.isFile()) {
@@ -270,7 +254,6 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
         return String.valueOf(Math.round((length / 1024.0d) * 100.0d) / 100.0d).concat("KB");
     }
 
-
     @Override // android.widget.Filterable
     public Filter getFilter() {
         return this.MyFilesFilter;
@@ -282,6 +265,7 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
         TextView fileSizeTv;
         ImageView imageView;
         TextView time;
+        CheckBox checkBox1;
 
         public AdapterViewHolder(View view) {
             super(view);
@@ -289,6 +273,7 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
             this.fileNameTv = (TextView) view.findViewById(R.id.itemView_acFilesHolder_FileNameTV);
             this.fileSizeTv = (TextView) view.findViewById(R.id.itemView_acFilesHolder_FileSizeTV);
             this.time = (TextView) view.findViewById(R.id.time);
+            checkBox1 = view.findViewById(R.id.checkBox1);
         }
     }
 }

@@ -10,15 +10,12 @@ import android.view.View;
 
 import com.example.calculatorhide.BuildConfig;
 import com.example.calculatorhide.R;
-
 public class DisguiseActvity  extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disguise_actvity);
     }
-
     public void onMoonClick(View view) {
         String moon = (String)view.getTag();
         findViewById(R.id.moon1).setBackgroundColor(Color.TRANSPARENT);

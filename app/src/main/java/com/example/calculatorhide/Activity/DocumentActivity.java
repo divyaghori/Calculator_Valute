@@ -15,7 +15,6 @@ public class DocumentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_document);
         findId();
     }
-    ////dhrubi d_sabhadiya
     private void findId() {
         icback = findViewById(R.id.back);
         icback.setOnClickListener(new View.OnClickListener() {

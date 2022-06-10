@@ -37,8 +37,9 @@ public class ImportDocument extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        File file = new File(String.valueOf(Environment.getExternalStorageDirectory()));
-        allDocsFiles(file);
+        getDocumentFiles();
+//        File file = new File(String.valueOf(Environment.getExternalStorageDirectory()));
+//        allDocsFiles(file);
     }
 
     public void getDocumentFiles() {
@@ -90,8 +91,8 @@ public class ImportDocument extends AppCompatActivity {
                 }
             }
         }
-        adapterFilesHolder = new AdapterFilesHolder(getApplicationContext(), ImportDocument.this, itemsList);
-        recyclerView.setAdapter(adapterFilesHolder);
+//        adapterFilesHolder = new AdapterFilesHolder(getApplicationContext(), ImportDocument.this, itemsList);
+//        recyclerView.setAdapter(adapterFilesHolder);
     }
 
 }

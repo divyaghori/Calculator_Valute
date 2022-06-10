@@ -35,7 +35,7 @@ public class AdioActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                startActivityForResult(getFileChooser(),
 //                        INTENT_REQUEST_PICK_FILE_CODE);
-                Intent i = new Intent(AdioActivity.this,MultiAudioSelectActivity.class);
+                Intent i = new Intent(AdioActivity.this,GetAudioActivity.class);
                 startActivity(i);
 //                Intent i = new Intent(AdioActivity.this,FileListActivity.class);
 //                String path = Environment.getExternalStorageDirectory().getPath();

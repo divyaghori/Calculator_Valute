@@ -1,15 +1,18 @@
 package com.example.calculatorhide.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +22,15 @@ import android.widget.Toast;
 import com.example.calculatorhide.Adapter.Home_Adapter;
 import com.example.calculatorhide.Model.HomeModel;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.toDoList.MainActivity;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
     RecyclerView listhome;
@@ -42,12 +48,16 @@ public class HomeActivity extends AppCompatActivity {
             new HomeModel(R.drawable.ic_disguise, "Disguise Icon", "App Icon", R.drawable.picon,Color.rgb(121,85,72))
     };
     ImageView more;
+    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private static final int PERMISSION_REQUEST_CODE = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        requestPermission();
+//        requestPermission();
+        if (Build.VERSION.SDK_INT >= 23) {
+            checkMultiplePermissions();
+        }
         findID();
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -88,6 +98,14 @@ public class HomeActivity extends AppCompatActivity {
                     Intent i = new Intent(HomeActivity.this,FilemanagerActivity.class);
                     startActivity(i);
                 }
+                if(click == 8){
+                    Intent i = new Intent(HomeActivity.this,SettingActivity.class);
+                    startActivity(i);
+                }
+                if(click == 6){
+                    Intent i = new Intent(HomeActivity.this, MainActivity.class);
+                    startActivity(i);
+                }
                 if(click == 9){
                     Intent i = new Intent(HomeActivity.this,DisguiseActivity.class);
                     startActivity(i);
@@ -106,27 +124,93 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         }
     }
-    private void requestPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(HomeActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(HomeActivity.this, "Write External Storage permission allows us to save files. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
-        } else {
-            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+//    private void requestPermission() {
+//        if (ActivityCompat.shouldShowRequestPermissionRationale(HomeActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//            Toast.makeText(HomeActivity.this, "Write External Storage permission allows us to save files. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+//        } else {
+//            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+//        }
+//    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        switch (requestCode) {
+//            case PERMISSION_REQUEST_CODE:
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                Log.e("value", "Permission Granted, Now you can use local drive .");
+//            } else{
+//                Log.e("value", "Permission Denied, You cannot use local drive .");
+//            }
+//            break;
+//        }
+//    }
+    private void checkMultiplePermissions() {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            List<String> permissionsNeeded = new ArrayList<String>();
+            List<String> permissionsList = new ArrayList<String>();
+
+            if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                permissionsNeeded.add("Write Storage");
+            }
+
+            if (!addPermission(permissionsList, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                permissionsNeeded.add("Read Storage");
+            }
+//            if (!addPermission(permissionsList, Manifest.permission.MANAGE_EXTERNAL_STORAGE)) {
+//                permissionsNeeded.add("manage external  Storage");
+//            }
+            if (permissionsList.size() > 0) {
+                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                        REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+                return;
+            }
         }
     }
+
+
+
+    private boolean addPermission(List<String> permissionsList, String permission) {
+        if (Build.VERSION.SDK_INT >= 23)
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsList.add(permission);
+                if (!shouldShowRequestPermissionRationale(permission))
+                    return false;
+            }
+        return true;
+    }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         switch (requestCode) {
-            case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Log.e("value", "Permission Granted, Now you can use local drive .");
-            } else{
-                Log.e("value", "Permission Denied, You cannot use local drive .");
+            case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+                Map<String, Integer> perms = new HashMap<String, Integer>();
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+//                perms.put(Manifest.permission.MANAGE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(android.Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                for (int i = 0; i < permissions.length; i++)
+                    perms.put(permissions[i], grantResults[i]);
+                if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+//                        perms.get(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    return;
+                } else {
+                    if (Build.VERSION.SDK_INT >= 23) {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "My App cannot run without Location and Storage " +
+                                        "Permissions.\nRelaunch My App or allow permissions" +
+                                        " in Applications Settings",
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }
             }
             break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
-
-
 }
+
+

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_45sdp"
@@ -53,8 +54,11 @@
                 android:fontFamily="@font/medium"
                 android:gravity="center|left"
                 android:maxLines="1"
+                android:text="bottom_sheet_behavior"
                 android:textColor="@color/white"
-                android:textSize="14sp"></TextView>
+                android:textSize="14sp">
+
+            </TextView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,7 +74,8 @@
                     android:fontFamily="@font/light"
                     android:gravity="center|left"
                     android:textColor="@color/white"
-                    android:textSize="12sp"></TextView>
+                    android:textSize="12sp">
+                </TextView>
 
                 <TextView
                     android:id="@+id/time"
@@ -79,7 +84,8 @@
                     android:layout_marginLeft="8dp"
                     android:fontFamily="@font/light"
                     android:textColor="@color/white"
-                    android:textSize="12sp"></TextView>
+                    android:textSize="12sp">
+                </TextView>
             </LinearLayout>
 
         </LinearLayout>
@@ -90,7 +96,6 @@
             android:layout_alignParentRight="true"
             android:buttonTint="@color/white"
             android:layout_height="wrap_content">
-
         </CheckBox>
 
 

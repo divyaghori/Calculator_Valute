@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Calculator Hide</string>
     <string name="name">Calculator</string>
-
+    <string name="security">Set security question</string>
+    <string name="important">Very Important</string>
+    <string name="langugae">Language</string>
+    <string name="block">Block Ads</string>
+    <string name="icon">Disguise Icon</string>
+    <string name="password">Change password</string>
+    <string name="rateus">Rate Us</string>
+    <string name="shareapp">Share app</string>
+    <string name="recyclebin">Recycle Bin</string>
+    <string name="update">Check Update</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="aboutus">About Us</string>
 </resources>
