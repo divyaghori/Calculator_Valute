@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_margin="@dimen/_5sdp"
+    tools:context=".Activity.AdsBlockActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Ads Block"
+            android:fontFamily="@font/medium"
+            android:textColor="@color/white"
+            android:textSize="20sp">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+             android:layout_marginLeft="@dimen/_35sdp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel">
+
+        </ImageView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#F0AF4E"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/_7sdp"
+            android:fontFamily="@font/bold"
+            android:text="36% oFF">
+
+        </TextView>
+
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:src="@drawable/blockad">
+
+    </ImageView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:padding="@dimen/_7sdp"
+        android:textSize="22sp"
+        android:fontFamily="@font/bold"
+        android:text="No-Ads">
+
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:padding="@dimen/_7sdp"
+        android:fontFamily="@font/bold"
+        android:text="Turn off ads \n and have fun while \n using application">
+
+    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#F0AF4E"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/_7sdp"
+            android:fontFamily="@font/bold"
+            android:text="CONTINUE">
+
+        </TextView>
+
+
+    </LinearLayout>
+</LinearLayout>

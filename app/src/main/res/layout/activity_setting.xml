@@ -53,6 +53,7 @@
 
 
             <LinearLayout
+                android:id="@+id/security"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -84,11 +85,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/important"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -120,11 +122,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/language"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -154,11 +157,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/block"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -188,11 +192,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/disguise"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -222,11 +227,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/changepassword"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -256,11 +262,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/rateus"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -291,11 +298,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/share"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -325,11 +333,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -359,11 +368,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/update"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -393,11 +403,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/privacy"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -427,11 +438,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -459,8 +471,5 @@
                 </TextView>
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
-
-
 </LinearLayout>
