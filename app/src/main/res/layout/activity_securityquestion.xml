@@ -83,7 +83,8 @@
         </TextView>
 
 
-        <EditText
+        <Spinner
+            android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_25sdp"
@@ -94,9 +95,9 @@
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:text="Code..."
-            android:textColor="#686666">
+            android:textColor="@color/white">
 
-        </EditText>
+        </Spinner>
 
         <TextView
             android:layout_width="wrap_content"

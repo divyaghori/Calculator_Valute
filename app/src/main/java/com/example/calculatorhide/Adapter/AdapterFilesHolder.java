@@ -7,12 +7,14 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -62,6 +64,7 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
             AdapterFilesHolder.this.notifyDataSetChanged();
         }
     };
+    SparseBooleanArray mSparseBooleanArray;
     ImportDocument activityFilesHolder;
     Context context;
     ArrayList<ModelFilesHolder> itemsList;
@@ -72,6 +75,17 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
         this.activityFilesHolder = activityFilesHolder;
         this.itemsList = arrayList;
         this.tempList = arrayList;
+        mSparseBooleanArray = new SparseBooleanArray();
+
+    }
+    public ArrayList<String> getCheckedItems() {
+        ArrayList<String> mTempArry = new ArrayList<String>();
+        for (int i = 0; i < itemsList.size(); i++) {
+            if (mSparseBooleanArray.get(i)) {
+                mTempArry.add(itemsList.get(i).getFileName());
+            }
+        }
+        return mTempArry;
     }
     public static String getMimeType(Context context, String str) {
         return MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(str)).toString());
@@ -237,8 +251,16 @@ public class AdapterFilesHolder extends RecyclerView.Adapter<AdapterFilesHolder.
                 }
                 break;
         }
+        adapterViewHolder.checkBox1.setTag(i);
+        adapterViewHolder.checkBox1.setChecked(mSparseBooleanArray.get(i));
+        adapterViewHolder.checkBox1.setOnCheckedChangeListener(mCheckedChangeListener);
     }
-
+    CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+        }
+    };
     public String getFileSize(File file) {
         if (!file.isFile()) {
             return null;

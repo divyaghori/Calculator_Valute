@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,18 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainnote);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(this.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setTitle("Create Note");
-        this.toolbar.setNavigationIcon(R.drawable.back1);
-        this.toolbar.setNavigationOnClickListener(new View.OnClickListener() { // from class: example.own.allofficefilereader.activities.ActivityFilesHolder.4
-            @Override // android.view.View.OnClickListener
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_node);
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +45,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setHasFixedSize(true);
-
         final NoteAdapter adapter = new NoteAdapter();
         recyclerView.setAdapter(adapter);
-
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
@@ -83,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Note deleted!", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+
+
 
         adapter.SetOnClickListner(new NoteAdapter.OnItemClickListner() {
             @Override
@@ -120,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
             String title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
             int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
-
             Note note = new Note(title, description, priority);
             note.setId(id);
             noteViewModel.update(note);

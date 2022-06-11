@@ -4,19 +4,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.calculatorhide.Adapter.AdapterFilesHolder;
+import com.example.calculatorhide.Adapter.MainConstant;
 import com.example.calculatorhide.Model.ModelFilesHolder;
 import com.example.calculatorhide.R;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ImportDocument extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -24,12 +43,14 @@ public class ImportDocument extends AppCompatActivity {
     String checkFileFormat;
     AdapterFilesHolder adapterFilesHolder;
     ProgressBar loadingbar;
+    TextView count;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_document);
+        count = findViewById(R.id.count);
         checkFileFormat = "All Docs";
         itemsList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.acFilesHolder_RecyclerView);
@@ -38,8 +59,26 @@ public class ImportDocument extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         getDocumentFiles();
-//        File file = new File(String.valueOf(Environment.getExternalStorageDirectory()));
-//        allDocsFiles(file);
+        Timer T = new Timer();
+        T.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnChoosePhotosClick();
+                    }
+                });
+            }
+        }, 1000, 1000);
+    }
+
+    public void btnChoosePhotosClick() {
+        if (adapterFilesHolder.getCheckedItems().size() == 0) {
+            count.setText("0");
+        } else {
+            count.setText(String.valueOf(adapterFilesHolder.getCheckedItems().size()));
+        }
     }
 
     public void getDocumentFiles() {
@@ -91,8 +130,7 @@ public class ImportDocument extends AppCompatActivity {
                 }
             }
         }
-//        adapterFilesHolder = new AdapterFilesHolder(getApplicationContext(), ImportDocument.this, itemsList);
-//        recyclerView.setAdapter(adapterFilesHolder);
     }
+
 
 }

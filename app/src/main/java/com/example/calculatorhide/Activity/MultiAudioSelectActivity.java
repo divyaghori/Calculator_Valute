@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.calculatorhide.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;

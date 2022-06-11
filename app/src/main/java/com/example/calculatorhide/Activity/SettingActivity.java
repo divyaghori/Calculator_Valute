@@ -9,9 +9,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +23,12 @@ import com.example.calculatorhide.R;
 
 import java.io.File;
 
-public class SettingActivity extends AppCompatActivity {
-
-
+public class SettingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
     ImageView back;
     LinearLayout security,important,langugae,blockads,disguiseicon,
             changepassword,rateus,shareapp,recyclebin,update,privacypolicy,about;
+    Spinner selectlangugae;
+    String[] language = {"English","Hindi"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,11 @@ public class SettingActivity extends AppCompatActivity {
         update = findViewById(R.id.update);
         privacypolicy = findViewById(R.id.privacy);
         about = findViewById(R.id.about);
-
+        selectlangugae = findViewById(R.id.selectlangugae);
+        selectlangugae.setOnItemSelectedListener(this);
+        ArrayAdapter ad = new ArrayAdapter(this, android.R.layout.simple_spinner_item, language);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectlangugae.setAdapter(ad);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,8 +153,6 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
-
-
     public void adblcok() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(1);
@@ -165,8 +170,16 @@ public class SettingActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String item = parent.getItemAtPosition(position).toString();
+        ((TextView) parent.getChildAt(0)).setTextColor(0xdedede);
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+    }
 
+    public void onNothingSelected(AdapterView<?> arg0) {
 
+    }
 
 }
 
