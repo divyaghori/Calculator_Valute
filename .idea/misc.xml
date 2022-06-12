@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/edt_back.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/ac_image_grid.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_calculator.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_home_adapter.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_image_full_view.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_note.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_recycle_bin.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_security_ques.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_video.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/custom_progress.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/file_info.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/long_ubhide_popup.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/recycle_ticket.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/restore_file_layout.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/row_media_item.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/row_multiphoto_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/unhide_recycle_popup.xml" value="0.2125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 32 Platform" project-jdk-type="Android SDK" />
+</project>
