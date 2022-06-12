@@ -17,6 +17,7 @@
         android:verticalSpacing="2dp" />
 
     <LinearLayout
+        android:id="@+id/llCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"

@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.example.calculatorhide.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +37,8 @@ public class MultVideoSelectActivity extends BaseActivity {
     private ImageAdapter imageAdapter;
     TextView count;
     private GridView gridView;
+    private LinearLayout llCount;
+    ArrayList<String> selectedItems=new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,7 @@ public class MultVideoSelectActivity extends BaseActivity {
         final String orderBy = MediaStore.Video.Media.DATE_TAKEN;
         Cursor imagecursor = managedQuery(
                 MediaStore.Video.Media.EXTERNAL_CONTENT_URI, columns, null,
-                null, orderBy + " DESC");
+                null, orderBy + " ASC");
         imageUrls = new ArrayList<String>();
         for (int i = 0; i < imagecursor.getCount(); i++) {
             imagecursor.moveToPosition(i);
@@ -53,6 +57,7 @@ public class MultVideoSelectActivity extends BaseActivity {
         }
         imageAdapter = new ImageAdapter(this, imageUrls);
         gridView = (GridView) findViewById(R.id.gridview);
+        llCount=findViewById(R.id.llCount);
         count =  findViewById(R.id.count);
         Timer T=new Timer();
         T.scheduleAtFixedRate(new TimerTask() {
@@ -69,6 +74,17 @@ public class MultVideoSelectActivity extends BaseActivity {
             }
         }, 1000, 1000);
         gridView.setAdapter(imageAdapter);
+        llCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selectedItems.size()!=0) {
+                    Intent intent = new Intent();
+                    intent.putExtra("files", (Serializable) selectedItems);
+                    setResult(2, intent);
+                    finish();
+                }
+            }
+        });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
@@ -89,7 +105,7 @@ public class MultVideoSelectActivity extends BaseActivity {
         super.onStop();
     }
     public void btnChoosePhotosClick() {
-        ArrayList<String> selectedItems = imageAdapter.getCheckedItems();
+         selectedItems = imageAdapter.getCheckedItems();
         if(imageAdapter.getCheckedItems().size() == 0){
             count.setText("0");
         }else{

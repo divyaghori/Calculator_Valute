@@ -8,4 +8,12 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="home_item">#24272e</color>
+    //
+    <color name="cal_display">#1d212d</color>
+    <color name="cal_no_button">#010101</color>
+    <color name="cal_op_button">#111520</color>
+    <color name="cal_text">#e1e6f4</color>
+    <color name="line_color">#60FFFFFF</color>
+
+    <color name="cal_blue">#2196f3</color>
 </resources>

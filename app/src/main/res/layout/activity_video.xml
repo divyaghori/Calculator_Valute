@@ -43,49 +43,49 @@
         </CheckBox>
     </RelativeLayout>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/adLAyout"
-        android:layout_below="@+id/topbar">
-        <ScrollView
+        android:layout_below="@+id/topbar"
+        android:layout_above="@id/adLAyout"
+        android:layout_height="wrap_content">
+        <GridView
+            android:id="@+id/gvGallery"
+            android:numColumns="3"
+            android:background="@color/black"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/purple_700"
-            android:scrollbars="none">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listitem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </androidx.recyclerview.widget.RecyclerView>
-
-
-        </ScrollView>
-
+            android:layout_height="match_parent"/>
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:fontFamily="@font/bold"
             android:gravity="center"
+            android:id="@+id/tvNodata"
             android:text="File Not Found"
             android:textColor="@color/white"
-            android:textSize="20sp">
-        </TextView>
+            android:textSize="20sp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/getimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_margin="@dimen/_8sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
             android:src="@drawable/ic_plus"
             app:backgroundTint="@color/teal_700"
             app:tint="@color/white">
+
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
-    </FrameLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/adLAyout"

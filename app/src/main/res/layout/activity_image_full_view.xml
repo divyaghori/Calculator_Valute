@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.example.calculatorhide.Activity.ImageFullViewActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"/>
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <ImageView
+            android:id="@+id/ivImg"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_400sdp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:padding="@dimen/_6sdp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivInfo"
+            android:layout_width="@dimen/_20sdp"
+            android:src="@drawable/info"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_20sdp"
+            app:tint="@color/white" />
+        <ImageView
+            android:id="@+id/ivUnHide"
+            android:layout_width="@dimen/_20sdp"
+            android:src="@drawable/unlock"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_20sdp"
+            app:tint="@color/white" />
+        <ImageView
+            android:id="@+id/ivRecycle"
+            android:layout_width="@dimen/_20sdp"
+            android:src="@drawable/delete"
+            android:layout_weight="1"
+            android:layout_height="@dimen/_20sdp"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

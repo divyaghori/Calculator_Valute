@@ -1,5 +1,7 @@
 package com.example.calculatorhide.Activity;
 
+import static android.os.Build.VERSION.SDK_INT;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,11 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +33,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +41,7 @@ import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
     RecyclerView listhome;
+    private Context context=this;
     Home_Adapter home_adapter;
     HomeModel[] homeModelList = new HomeModel[]{
             new HomeModel(R.drawable.ic_photo_gallery, "Gallery", "Hidden Gallery", R.drawable.p1, Color.rgb(186, 104, 200)),
@@ -55,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 //        requestPermission();
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (SDK_INT >= 23) {
             checkMultiplePermissions();
         }
         findID();
@@ -106,6 +114,10 @@ public class HomeActivity extends AppCompatActivity {
                     Intent i = new Intent(HomeActivity.this, MainActivity.class);
                     startActivity(i);
                 }
+                if(click == 7){
+                    Intent i = new Intent(HomeActivity.this, RecycleBinActivity.class);
+                    startActivity(i);
+                }
                 if(click == 9){
                     Intent i = new Intent(HomeActivity.this,DisguiseActivity.class);
                     startActivity(i);
@@ -145,8 +157,18 @@ public class HomeActivity extends AppCompatActivity {
 //        }
 //    }
     private void checkMultiplePermissions() {
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            if (Environment.isExternalStorageManager()) {
+                createAppFolder();
 
-        if (Build.VERSION.SDK_INT >= 23) {
+            } else { //request for the permission
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        }
+        if (SDK_INT >= 23) {
             List<String> permissionsNeeded = new ArrayList<String>();
             List<String> permissionsList = new ArrayList<String>();
 
@@ -171,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private boolean addPermission(List<String> permissionsList, String permission) {
-        if (Build.VERSION.SDK_INT >= 23)
+        if (SDK_INT >= 23)
             if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                 permissionsList.add(permission);
                 if (!shouldShowRequestPermissionRationale(permission))
@@ -193,9 +215,10 @@ public class HomeActivity extends AppCompatActivity {
                 if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 //                        perms.get(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                         && perms.get(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    createAppFolder();
                     return;
                 } else {
-                    if (Build.VERSION.SDK_INT >= 23) {
+                    if (SDK_INT >= 23) {
                         Toast.makeText(
                                 getApplicationContext(),
                                 "My App cannot run without Location and Storage " +
@@ -210,6 +233,34 @@ public class HomeActivity extends AppCompatActivity {
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    private void createAppFolder() {
+        String rootPath="";
+        String path="CalculatorVault";
+        File file = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+              rootPath=Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+path+"/"+"files"+"/"+".vault";
+              file= new File(rootPath);
+        } else {
+            rootPath=context.getExternalFilesDir(null).getAbsoluteFile()+"/"+path+"/"+"files"+"/"+".vault";
+            file= new File(rootPath);
+        }
+
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            if(Environment.isExternalStorageManager())
+            {
+                createAppFolder();
+            }
+        }
+        super.onResume();
     }
 }
 
