@@ -2,6 +2,7 @@ package com.example.calculatorhide.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,18 +17,31 @@ public class securityquestionActivity extends AppCompatActivity implements Adapt
 
     Spinner question;
     String[] security = {
-            "Where were your born?",
-            "When is your birthday?",
-            "Who is your mother/father?",
-            "Who is your brother/sister?",
-            "Who is your girlfriend/boyfriend?"
+            SplashActivity.resources.getString(R.string.Where_were_your_born),
+            SplashActivity.resources.getString(R.string.When_is_your_birthday),
+            SplashActivity.resources.getString(R.string.Who_is_your_motherfather),
+            SplashActivity.resources.getString(R.string.Who_is_your_brothersister),
+            SplashActivity.resources.getString(R.string.Who_is_your_girlfriendboyfriend),
     };
+    TextView maintext,oldsecurity,selectquestion,enteryourans,confirm,hinit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_securityquestion);
         question = findViewById(R.id.question);
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Set_security_question));
+        oldsecurity = findViewById(R.id.oldsecurity);
+        oldsecurity.setText(SplashActivity.resources.getString(R.string.Your_old_security_question));
+        selectquestion = findViewById(R.id.selectquestion);
+        selectquestion.setText(SplashActivity.resources.getString(R.string.Select_security_question));
+        enteryourans = findViewById(R.id.enteryouranswer);
+        enteryourans.setText(SplashActivity.resources.getString(R.string.Enter_your_answer));
+        confirm = findViewById(R.id.confirm);
+        confirm.setText(SplashActivity.resources.getString(R.string.Confirm));
+        hinit = findViewById(R.id.hinit);
+        hinit.setText(SplashActivity.resources.getString(R.string.Press_112));
         question.setOnItemSelectedListener(this);
         ArrayAdapter ad
                 = new ArrayAdapter(
@@ -43,7 +57,7 @@ public class securityquestionActivity extends AppCompatActivity implements Adapt
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
-        ((TextView) parent.getChildAt(0)).setTextColor(0xdedede);
+        ((TextView) view).setTextColor(Color.WHITE);
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
     }

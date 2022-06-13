@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.calculatorhide.R;
 
 public class VideoActivity extends AppCompatActivity {
     ImageView icback,getimage;
+    TextView maintext,filenotfound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +35,9 @@ public class VideoActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Video));
+        filenotfound = findViewById(R.id.filenotfound);
+        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
     }
 }

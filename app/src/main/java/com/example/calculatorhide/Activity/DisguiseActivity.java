@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.calculatorhide.R;
 
@@ -17,10 +18,13 @@ public class DisguiseActivity extends AppCompatActivity {
     ImageView i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17;
     ImageView back;
     AlertDialog.Builder builder;
+    TextView maintext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disguise);
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Disguise_Icon));
         back = findViewById(R.id.back);
         builder = new AlertDialog.Builder(this);
         back.setOnClickListener(new View.OnClickListener() {

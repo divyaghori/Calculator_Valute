@@ -1,10 +1,22 @@
 package com.example.calculatorhide.Activity;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -15,6 +27,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.calculatorhide.R;
 
@@ -30,6 +43,7 @@ public class GetAudioActivity extends AppCompatActivity {
     String[] items;
     ImageAdapter ImageAdapter;
     TextView count;
+    ActivityResultLauncher<String> storagePermissionLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +51,42 @@ public class GetAudioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_get_audio);
         gridview = findViewById(R.id.gridview);
         displaysong();
+        storagePermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+            if (result){
+                displaysong();
+            }
+            else {
+                respondOnUserPermissionActs();
+            }
+        });
+        storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void respondOnUserPermissionActs() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            displaysong();
+        }
+        else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(this)
+                    .setTitle("Requesting Permission")
+                    .setMessage("Allow us to fetch & show songs on your device")
+                    .setPositiveButton("Allow ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                        }
+                    }).setNegativeButton("Don't Allow", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(getApplicationContext()," You denied to fetch songs", Toast.LENGTH_LONG).show();
+                    dialogInterface.dismiss();
+                }
+            })
+                    .show();
+        }
+        else{
+            Toast.makeText(this, "You denied to fetch songs", Toast.LENGTH_LONG).show();
+        }
     }
     ArrayList<File> findsong(File getfile) {
         ArrayList<File> files = new ArrayList<>();

@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,8 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calculatorhide.Activity.HomeActivity;
+import com.example.calculatorhide.Activity.SplashActivity;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.toDoList.Adapter.NoteAdapter;
 import com.example.calculatorhide.toDoList.Model.Note;
@@ -31,11 +35,21 @@ public class MainActivity extends AppCompatActivity {
     public static final int ADD_NODE_REQUEST = 1;
     public static final int EDIT_NODE_REQUEST = 2;
     private NoteViewModel noteViewModel;
+    TextView maintext;
     Toolbar toolbar;
+    ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainnote);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Notes));
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_node);
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override

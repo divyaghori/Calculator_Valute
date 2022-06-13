@@ -43,9 +43,9 @@ public abstract class NoteDatabase extends RoomDatabase {
 
          @Override
          protected Void doInBackground(Void... voids) {
-             noteDao.insert(new Note("Title 1", "Description 1", 9)) ;
-             noteDao.insert(new Note("Title 2", "Description 2", 8)) ;
-             noteDao.insert(new Note("Title 3", "Description 3", 7)) ;
+//             noteDao.insert(new Note("Title 1", "Description 1", 9)) ;
+//             noteDao.insert(new Note("Title 2", "Description 2", 8)) ;
+//             noteDao.insert(new Note("Title 3", "Description 3", 7)) ;
              return null;
          }
      }

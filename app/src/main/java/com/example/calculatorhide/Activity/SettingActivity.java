@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.calculatorhide.BuildConfig;
+import com.example.calculatorhide.LOCALIZATION.LocaleHelper;
 import com.example.calculatorhide.R;
 
 import java.io.File;
@@ -28,11 +32,42 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     LinearLayout security,important,langugae,blockads,disguiseicon,
             changepassword,rateus,shareapp,recyclebin,update,privacypolicy,about;
     Spinner selectlangugae;
-    String[] language = {"English","Hindi"};
+    String[] language = {"Select Language","English","Spanish"};
+    Context context;
+    int lang_selected;
+    public static Resources resources;
+    TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12;
+    TextView searchtext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        t1 = findViewById(R.id.t1);
+        t2 = findViewById(R.id.t2);
+        t3 = findViewById(R.id.t3);
+        t4 = findViewById(R.id.t4);
+        t5 = findViewById(R.id.t5);
+        t6 = findViewById(R.id.t6);
+        t7 = findViewById(R.id.t7);
+        t8 = findViewById(R.id.t8);
+        t9 = findViewById(R.id.t9);
+        t10 = findViewById(R.id.t10);
+        t11 = findViewById(R.id.t11);
+        t12 = findViewById(R.id.t12);
+        searchtext = findViewById(R.id.searchtext);
+        searchtext.setText(SplashActivity.resources.getString(R.string.Settings));
+        t1.setText(SplashActivity.resources.getString(R.string.Set_security_question));
+        t2.setText(SplashActivity.resources.getString(R.string.Very_Important));
+        t3.setText(SplashActivity.resources.getString(R.string.Language));
+        t4.setText(SplashActivity.resources.getString(R.string.Ads_Block));
+        t5.setText(SplashActivity.resources.getString(R.string.Disguise_Icon));
+        t6.setText(SplashActivity.resources.getString(R.string.Change_password));
+        t7.setText(SplashActivity.resources.getString(R.string.Rate_Us));
+        t8.setText(SplashActivity.resources.getString(R.string.Share_app));
+        t9.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
+        t10.setText(SplashActivity.resources.getString(R.string.Check_Update));
+        t11.setText(SplashActivity.resources.getString(R.string.Privacy_Policy));
+        t12.setText(SplashActivity.resources.getString(R.string.About_Us));
         back = findViewById(R.id.back);
         security = findViewById(R.id.security);
         important = findViewById(R.id.important);
@@ -93,8 +128,8 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(SettingActivity.this,DisguiseActivity.class);
-                startActivity(browserIntent);
+                Intent i = new Intent(SettingActivity.this,NewPasswordActivity.class);
+                startActivity(i);
             }
         });
         rateus.setOnClickListener(new View.OnClickListener() {
@@ -173,8 +208,23 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
-        ((TextView) parent.getChildAt(0)).setTextColor(0xdedede);
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        ((TextView) view).setTextColor(Color.WHITE);
+        if(position == 0){
+            context = LocaleHelper.setLocale(SettingActivity.this, "en");
+            resources = context.getResources();
+        }else if(position == 1){
+            context = LocaleHelper.setLocale(SettingActivity.this, "en");
+            resources = context.getResources();
+            finishAffinity();
+        }else if(position == 2){
+            context = LocaleHelper.setLocale(SettingActivity.this, "es");
+            resources = context.getResources();
+            finishAffinity();
+        }else{
+            context = LocaleHelper.setLocale(SettingActivity.this, "en");
+            resources = context.getResources();
+        }
+
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {

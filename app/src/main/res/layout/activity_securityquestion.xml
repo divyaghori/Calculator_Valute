@@ -46,6 +46,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/oldsecurity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -70,6 +71,7 @@
 
         </TextView>
         <TextView
+            android:id="@+id/selectquestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -100,6 +102,7 @@
         </Spinner>
 
         <TextView
+            android:id="@+id/enteryouranswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -130,6 +133,7 @@
         </EditText>
 
         <TextView
+            android:id="@+id/hinit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
@@ -145,6 +149,7 @@
         </TextView>
 
         <TextView
+            android:id="@+id/confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"

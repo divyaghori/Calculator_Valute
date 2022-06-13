@@ -16,10 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,14 +40,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ImportDocument extends AppCompatActivity {
-    RecyclerView recyclerView;
+    GridView recyclerView;
     ArrayList<ModelFilesHolder> itemsList;
     String checkFileFormat;
     AdapterFilesHolder adapterFilesHolder;
     ProgressBar loadingbar;
+    ImageAdapter imageAdapter;
+    ImageView back;
     TextView count;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,34 +55,31 @@ public class ImportDocument extends AppCompatActivity {
         count = findViewById(R.id.count);
         checkFileFormat = "All Docs";
         itemsList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.acFilesHolder_RecyclerView);
+        recyclerView = (GridView) findViewById(R.id.acFilesHolder_RecyclerView);
         loadingbar = (ProgressBar) findViewById(R.id.acFilesHolder_loadingBar);
-        recyclerView.setHasFixedSize(true);
+//        recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.setLayoutManager(linearLayoutManager);
         getDocumentFiles();
-        Timer T = new Timer();
-        T.scheduleAtFixedRate(new TimerTask() {
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnChoosePhotosClick();
-                    }
-                });
+            public void onClick(View view) {
+                onBackPressed();
             }
-        }, 1000, 1000);
+        });
+
     }
 
     public void btnChoosePhotosClick() {
-        if (adapterFilesHolder.getCheckedItems().size() == 0) {
+        ArrayList<String> selectedItems = imageAdapter.getCheckedItems();
+        if(imageAdapter.getCheckedItems().size() == 0){
             count.setText("0");
-        } else {
-            count.setText(String.valueOf(adapterFilesHolder.getCheckedItems().size()));
+        }else{
+            count.setText(String.valueOf(imageAdapter.getCheckedItems().size()));
         }
+        Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
     }
-
     public void getDocumentFiles() {
         new AsyncTask<Void, Void, Void>() { // from class: example.own.allofficefilereader.activities.ActivityFilesHolder.10
             @Override
@@ -92,7 +91,6 @@ public class ImportDocument extends AppCompatActivity {
                     itemsList.clear();
                 }
             }
-
             public Void doInBackground(Void... voidArr) {
                 File file = new File(String.valueOf(Environment.getExternalStorageDirectory()));
                 if (checkFileFormat.equals("All Docs")) {
@@ -111,8 +109,21 @@ public class ImportDocument extends AppCompatActivity {
                     public void run() {
                         loadingbar.setVisibility(4);
                         recyclerView.setVisibility(0);
+                        imageAdapter = new ImageAdapter(getApplicationContext(), itemsList);
                         adapterFilesHolder = new AdapterFilesHolder(getApplicationContext(), ImportDocument.this, itemsList);
-                        recyclerView.setAdapter(adapterFilesHolder);
+                        recyclerView.setAdapter(imageAdapter);
+                        Timer T = new Timer();
+                        T.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        btnChoosePhotosClick();
+                                    }
+                                });
+                            }
+                        }, 1000, 1000);
                     }
                 }, 100);
             }
@@ -131,6 +142,72 @@ public class ImportDocument extends AppCompatActivity {
             }
         }
     }
+    public  class ImageAdapter extends BaseAdapter {
+         List<ModelFilesHolder> mList;
+        LayoutInflater mInflater;
+        Context mContext;
+         SparseBooleanArray mSparseBooleanArray;
+        String title;
 
+        public ImageAdapter(Context context, List<ModelFilesHolder> imageList) {
+            mContext = context;
+            mInflater = LayoutInflater.from(mContext);
+            mSparseBooleanArray = new SparseBooleanArray();
+            mList = new ArrayList<ModelFilesHolder>();
+            this.mList = imageList;
+            this.title = title;
+        }
+
+        public  ArrayList<String> getCheckedItems() {
+            ArrayList<String> mTempArry = new ArrayList<String>();
+            for (int i = 0; i < mList.size(); i++) {
+                if (mSparseBooleanArray.get(i)) {
+                    mTempArry.add(mList.get(i).getFileName());
+                }
+            }
+            return mTempArry;
+        }
+
+        @Override
+        public int getCount() {
+            return mList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.item_audio_holder, null);
+            }
+            TextView textView = (TextView) convertView.findViewById(R.id.itemView_acFilesHolder_FileNameTV);
+            textView.setText(mList.get(position).getFileName());
+
+            CheckBox mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox1);
+//            final ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
+//            Glide.with(getApplicationContext()).load(imageUrls.get(position))
+//                    .placeholder(R.drawable.ic_launcher_background).centerCrop()
+//                    .into(imageView);
+            mCheckBox.setTag(position);
+            mCheckBox.setChecked(mSparseBooleanArray.get(position));
+            mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
+            return convertView;
+        }
+        CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+            }
+        };
+    }
 
 }

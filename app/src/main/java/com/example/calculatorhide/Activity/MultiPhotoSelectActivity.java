@@ -37,6 +37,8 @@ public class MultiPhotoSelectActivity extends BaseActivity {
     private ImageAdapter imageAdapter;
     TextView count;
     private GridView gridView;
+    TextView selectBtn;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class MultiPhotoSelectActivity extends BaseActivity {
         imageAdapter = new ImageAdapter(this, imageUrls);
         gridView = (GridView) findViewById(R.id.gridview);
         count =  findViewById(R.id.count);
+        selectBtn = findViewById(R.id.selectBtn);
+        selectBtn.setText(SplashActivity.resources.getString(R.string.Hide_files));
         Timer T=new Timer();
         T.scheduleAtFixedRate(new TimerTask() {
             @Override

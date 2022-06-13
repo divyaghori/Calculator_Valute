@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import com.example.calculatorhide.R;
 public class AdioActivity extends AppCompatActivity {
     private static final int INTENT_REQUEST_PICK_FILE_CODE = 3;
     ImageView icback,getimage;
+    TextView maintext,filenotfound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class AdioActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                startActivityForResult(getFileChooser(),
 //                        INTENT_REQUEST_PICK_FILE_CODE);
-                Intent i = new Intent(AdioActivity.this,GetAudioActivity.class);
+                Intent i = new Intent(AdioActivity.this,AudioActivity.class);
                 startActivity(i);
 //                Intent i = new Intent(AdioActivity.this,FileListActivity.class);
 //                String path = Environment.getExternalStorageDirectory().getPath();
@@ -43,6 +45,10 @@ public class AdioActivity extends AppCompatActivity {
 //                startActivity(i);
             }
         });
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Audio));
+        filenotfound = findViewById(R.id.filenotfound);
+        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
     }
     public Intent getFileChooser() {
         String folderPath = Environment.getExternalStorageDirectory() + "/";
