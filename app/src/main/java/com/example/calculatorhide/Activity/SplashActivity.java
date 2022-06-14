@@ -16,6 +16,21 @@ import com.example.calculatorhide.databinding.ActivitySplashBinding;
 public class SplashActivity extends AppCompatActivity {
     private Activity activity=this;
     private ActivitySplashBinding binding;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.os.Handler;
+
+import com.example.calculatorhide.LOCALIZATION.LocaleHelper;
+import com.example.calculatorhide.R;
+
+public class SplashActivity extends AppCompatActivity {
+
+    Context context;
+    public static Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +57,30 @@ public class SplashActivity extends AppCompatActivity {
 //        }
 
 
+//        new Handler().postDelayed(new Runnable(){
+//            @Override
+//            public void run() {
+//              startActivity(new Intent(activity, CalculatorActivity.class));
+//              finish();
+//            }
+//        }, 3000);
+        if (LocaleHelper.getLanguage(SplashActivity.this).equalsIgnoreCase("en")) {
+            context = LocaleHelper.setLocale(SplashActivity.this, "en");
+            resources = context.getResources();
+        } else if (LocaleHelper.getLanguage(SplashActivity.this).equalsIgnoreCase("es")) {
+            context = LocaleHelper.setLocale(SplashActivity.this, "es");
+            resources = context.getResources();
+        } else {
+            context = LocaleHelper.setLocale(SplashActivity.this, "en");
+            resources = context.getResources();
+        }
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-              startActivity(new Intent(activity, CalculatorActivity.class));
-              finish();
+
+                    Intent mainIntent1 = new Intent(SplashActivity.this,HomeActivity.class);
+                    startActivity(mainIntent1);
             }
-        }, 3000);
+        }, 2000);
     }
 }

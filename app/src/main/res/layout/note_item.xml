@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_5sdp"
-    android:clickable="true"
-    android:focusable="true"
+    android:layout_gravity="center"
     app:cardBackgroundColor="@color/home_item"
-    android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/_4sdp">
+    app:cardCornerRadius="@dimen/_12sdp"
+    app:cardElevation="@dimen/_6sdp"
+    app:cardUseCompatPadding="true"
+    tools:context=".Adapter.Home_Adapter">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
         android:elevation="@dimen/_2sdp"
-        android:padding="8dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
 
         <TextView
             android:id="@+id/text_view_priority"
@@ -40,9 +44,8 @@
             android:layout_marginRight="5sp"
             android:layout_toStartOf="@id/text_view_priority"
             android:ellipsize="end"
-            android:maxLines="1"
             android:textColor="@color/white"
-            android:text="Title"
+            android:text="rererererer"
             android:fontFamily="@font/medium"
             android:textStyle="bold"
             android:textSize="16sp" />
@@ -56,6 +59,7 @@
             android:layout_marginTop="9dp"
             android:textColor="@color/white"
             android:fontFamily="@font/medium"
+            android:visibility="gone"
             android:layout_marginBottom="10dp"
             android:text="Description"
             android:textSize="12sp" />

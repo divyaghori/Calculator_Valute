@@ -62,6 +62,7 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -88,6 +89,7 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -114,6 +116,7 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/audio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -140,6 +143,7 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/document"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -166,6 +170,7 @@
             </ImageView>
 
             <TextView
+                android:id="@+id/note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

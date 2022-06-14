@@ -191,8 +191,9 @@ public class VideoActivity extends AppCompatActivity {
         });
 
         alertDialog.show();
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Video));
+        filenotfound = findViewById(R.id.filenotfound);
+        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
     }
-
-
-
 }

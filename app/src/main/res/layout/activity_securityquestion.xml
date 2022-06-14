@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_700"
+    android:orientation="vertical"
+    tools:context=".Activity.NewPasswordActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/purple_700">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/back">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/maintext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/medium"
+            android:gravity="center"
+            android:text="Set Your Security Question"
+            android:textColor="@color/white"
+            android:textSize="20sp"></TextView>
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/oldsecurity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/medium"
+            android:text="Your old security question:"
+            android:textColor="#838080"
+            android:textSize="15sp">
+
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/medium"
+            android:text="None"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/selectquestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/medium"
+            android:text="Select Security Question:"
+            android:textColor="#838080"
+            android:textSize="15sp">
+
+        </TextView>
+
+
+        <Spinner
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:background="@drawable/whitecorner"
+            android:fontFamily="@font/medium"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Code..."
+            android:textColor="@color/white">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/enteryouranswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/medium"
+            android:text="Enter Your answer"
+            android:textColor="#838080"
+            android:textSize="15sp">
+
+        </TextView>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:background="@drawable/whitecorner"
+            android:fontFamily="@font/medium"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Code..."
+            android:textColor="#686666">
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/hinit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/medium"
+            android:paddingLeft="@dimen/_13sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_13sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Press 11223344=  in the calculator page\nto reset password"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="16sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/home_item"
+            android:fontFamily="@font/medium"
+            android:paddingLeft="@dimen/_13sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_13sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Confirm"
+            android:textColor="@color/white"
+            android:textSize="16sp">
+
+        </TextView>
+
+    </LinearLayout>
+</LinearLayout>

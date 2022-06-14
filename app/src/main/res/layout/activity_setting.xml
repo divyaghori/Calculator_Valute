@@ -53,6 +53,7 @@
 
 
             <LinearLayout
+                android:id="@+id/security"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -68,6 +69,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/security"
@@ -75,7 +77,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
@@ -84,11 +86,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/important"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -104,6 +107,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/important"
@@ -111,7 +115,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
@@ -120,11 +124,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/language"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -140,6 +145,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/langugae"
@@ -147,18 +153,27 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
+                <Spinner
+                    android:id="@+id/selectlangugae"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_height="match_parent">
+                </Spinner>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/block"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -174,6 +189,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/block"
@@ -181,18 +197,19 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/disguise"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -208,6 +225,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/icon"
@@ -215,18 +233,19 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/changepassword"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -242,6 +261,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/password"
@@ -249,18 +269,19 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/rateus"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -276,6 +297,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/rateus"
@@ -283,7 +305,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
@@ -291,11 +313,12 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/share"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -311,6 +334,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/shareapp"
@@ -318,18 +342,19 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -345,6 +370,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/recyclebin"
@@ -352,18 +378,19 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/update"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -379,6 +406,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/update"
@@ -386,18 +414,19 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/privacy"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -413,6 +442,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/privacy"
@@ -420,18 +450,19 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
 
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#9F9D9D">
+                android:layout_height="0.5dp"
+                android:background="#737272">
 
             </View>
             <LinearLayout
+                android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_7sdp"
@@ -447,6 +478,7 @@
                 </ImageView>
 
                 <TextView
+                    android:id="@+id/t12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/aboutus"
@@ -454,13 +486,10 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/medium"
                     android:paddingLeft="@dimen/_15sdp"
-                    android:textSize="18sp">
+                    android:textSize="16sp">
 
                 </TextView>
             </LinearLayout>
         </LinearLayout>
-
     </ScrollView>
-
-
 </LinearLayout>

@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.calculatorhide.Adapter.GalleryAdapter;
@@ -51,6 +52,7 @@ public class GalleryActivity extends AppCompatActivity {
     private List<String>file_uris=new ArrayList<>();
     private List<MediaItem>mediaItems=new ArrayList<>();
     private GalleryAdapter adapter;
+    TextView maintext,filenotfound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -203,6 +205,10 @@ public class GalleryActivity extends AppCompatActivity {
         });
 
         alertDialog.show();
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Gallery));
+        filenotfound = findViewById(R.id.filenotfound);
+        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
     }
 
 

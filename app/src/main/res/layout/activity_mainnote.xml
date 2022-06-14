@@ -7,21 +7,48 @@
     android:background="@color/purple_700"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
+        android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:background="@color/purple_700"
-        app:titleTextColor="@color/white"
-        app:title="Note"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/purple_700">
 
-        android:layout_height="wrap_content">
-    </androidx.appcompat.widget.Toolbar>
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/back">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/maintext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/medium"
+            android:gravity="center"
+            android:text="Notes"
+            android:textColor="@color/white"
+            android:textSize="20sp">
+
+        </TextView>
+
+
+
+    </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_marginTop="60dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_15sdp"
         tools:listitem="@layout/note_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,7 +58,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="32dp"
         app:tint="@color/white"
-        app:backgroundTint="@color/purple_700"
+        app:backgroundTint="@color/teal_700"
         android:src="@android:drawable/ic_input_add" />
 
     <ImageView
