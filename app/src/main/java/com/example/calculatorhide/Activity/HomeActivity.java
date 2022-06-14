@@ -29,9 +29,13 @@ import com.example.calculatorhide.Adapter.Home_Adapter;
 import com.example.calculatorhide.Model.HomeModel;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.toDoList.MainActivity;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,11 +62,11 @@ public class HomeActivity extends AppCompatActivity {
     ImageView more;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private static final int PERMISSION_REQUEST_CODE = 100;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        requestPermission();
         if (SDK_INT >= 23) {
             checkMultiplePermissions();
         }
@@ -72,6 +76,10 @@ public class HomeActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
     private void findID() {
         more = findViewById(R.id.more);
@@ -189,9 +197,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
     private boolean addPermission(List<String> permissionsList, String permission) {
         if (SDK_INT >= 23)
             if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
@@ -201,7 +206,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         return true;
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         switch (requestCode) {
@@ -234,7 +238,6 @@ public class HomeActivity extends AppCompatActivity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
     private void createAppFolder() {
         String rootPath="";
         String path="CalculatorVault";
@@ -251,7 +254,6 @@ public class HomeActivity extends AppCompatActivity {
             file.mkdirs();
         }
     }
-
     @Override
     protected void onResume() {
         if (SDK_INT >= Build.VERSION_CODES.R) {

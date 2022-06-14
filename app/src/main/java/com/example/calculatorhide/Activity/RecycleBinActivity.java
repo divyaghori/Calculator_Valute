@@ -13,6 +13,12 @@ import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.HideFiles;
 import com.example.calculatorhide.databinding.ActivityRecycleBinBinding;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +31,7 @@ public class RecycleBinActivity extends AppCompatActivity {
     private List<MediaItem>dataList=new ArrayList<>();
     private RecycleBinAdapter adapter;
     private HideFiles hideFiles;
+    AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,14 @@ public class RecycleBinActivity extends AppCompatActivity {
         binding=ActivityRecycleBinBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
     public void initUi()
     {

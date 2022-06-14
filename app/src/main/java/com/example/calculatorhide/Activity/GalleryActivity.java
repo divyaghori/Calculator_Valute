@@ -34,6 +34,11 @@ import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
 import com.example.calculatorhide.Utils.HideFiles;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
@@ -53,6 +58,7 @@ public class GalleryActivity extends AppCompatActivity {
     private List<MediaItem>mediaItems=new ArrayList<>();
     private GalleryAdapter adapter;
     TextView maintext,filenotfound;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,14 @@ public class GalleryActivity extends AppCompatActivity {
         hidedDatabase=HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         findId();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void findId() {
@@ -206,9 +220,9 @@ public class GalleryActivity extends AppCompatActivity {
 
         alertDialog.show();
         maintext = findViewById(R.id.maintext);
-        maintext.setText(SplashActivity.resources.getString(R.string.Gallery));
+        maintext.setText("Gallery");
         filenotfound = findViewById(R.id.filenotfound);
-        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
+        filenotfound.setText(getString(R.string.No_files_added));
     }
 
 

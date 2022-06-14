@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Activity.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:largeHeap="true"
@@ -26,9 +27,7 @@
         android:hardwareAccelerated="true"
         android:theme="@style/Theme.CalculatorHide"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".VideoViewActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Activity.HomeActivity"
             android:exported="false" />
@@ -62,12 +61,6 @@
         <activity
             android:name=".Activity.DisguiseActivity"
             android:exported="false" />
-        <activity android:name=".toDoList.MainActivity"></activity>
-        <activity android:name=".toDoList.AddEditNoteActivity"></activity>
-
-        <activity android:name=".toDoList.MainActivity" />
-        <activity android:name=".toDoList.AddEditNoteActivity" />
-
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -77,7 +70,8 @@
             android:clearTaskOnLaunch="true"
             android:finishOnCloseSystemDialogs="true"
             android:finishOnTaskLaunch="true"
-            android:screenOrientation="portrait" /> <!-- <activity-alias -->
+            android:screenOrientation="portrait" />
+        <!-- <activity-alias -->
         <!-- android:name="com.example.vault.icon.icon_disguise0" -->
         <!-- android:clearTaskOnLaunch="true" -->
         <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
@@ -1071,9 +1065,6 @@
             android:name=".Activity.SettingsActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".Activity.SplashActivity"
-            android:exported="false"></activity>
-        <activity
             android:name=".Activity.ImageFullViewActivity"
             android:exported="false" />
         <activity
@@ -1100,6 +1091,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".toDoList.MainActivity">
+        </activity>
+        <activity android:name=".toDoList.AddEditNoteActivity">
+        </activity>
 
     </application>
 

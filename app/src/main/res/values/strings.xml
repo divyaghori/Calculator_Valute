@@ -41,14 +41,13 @@
     <string name="restore">Restore</string>
     <string name="Calculator">Calculator</string>
 
-    <string name="yes">"Yes"</string>
-    <string name="no"> "No"</string>
-    <string name="delete"> "Delete"</string>
-    <string name="restore"> "Restore"</string>
+
+
+
+
     <string name="addFromFolder"> "Add From Folder"</string>
     <string name="unhideSelected"> "Do you want to unhide the selected files"</string>
     <string name="recycleSelected"> "Do you want to send the selected files to Recycle Bin"</string>
-    <string name="unhide"> "Do you want to unhide this file?"</string>
     <string name="recycle"> "Do you want to send this file to Recyle Bin?"</string>
     <string name="restore_delete"> "Do you want to delete or restore this file?"</string>
     <string name="unhide_recycle"> "Do you want to unhide this file or send it to Recycle Bin?"</string>
@@ -98,7 +97,6 @@
     <string name="Imp_3"> "The storage path for encrypted is  located in .CalculatorVault folder of  your device's root directory. Its a  hidden folder and you need to  enable the option to see hidden  files to be able to see it.  Please do not delete any files  under that folder."</string>
     <string name="Imp_4"> "Your files are stored only on  your device, so please make sure  to backup your files before factory  resetting or changing to a new  device. Do not clean any files  in our app when using clean tools."</string>
     <string name="Enter_your_Password"> "Enter your Password"</string>
-    <string name="code"> "code"</string>
     <string name="Press_112"> "Press 11223344=  in the calculator page to reset password"</string>
     <string name="answer"> "answer"</string>
     <string name="Pyf"> "Pick your files"</string>
@@ -109,7 +107,6 @@
     <string name="wynh"> "write your notes here..."</string>
     <string name="Change_Icon"> "Change Icon"</string>
     <string name="SureIcon"> "Are you sure you want to change your icon?"</string>
-    <string name="file_info"> "File Info"</string>
     <string name="Name"> "Name"</string>
     <string name="Current_Path"> "Current Path"</string>
     <string name="Original_Path"> "Original Path"</string>
