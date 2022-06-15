@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -28,10 +29,13 @@ import android.widget.Toast;
 import com.example.calculatorhide.Adapter.Home_Adapter;
 import com.example.calculatorhide.Model.HomeModel;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.toDoList.MainActivity;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -44,6 +48,10 @@ import java.util.List;
 import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
+
+  //  private InterstitialAd mInterstitialAd;
+
+
     RecyclerView listhome;
     private Context context=this;
     Home_Adapter home_adapter;
@@ -61,8 +69,8 @@ public class HomeActivity extends AppCompatActivity {
     };
     ImageView more;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-    private static final int PERMISSION_REQUEST_CODE = 100;
-    private AdView mAdView;
+  //  private AdView mAdView;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,15 +79,26 @@ public class HomeActivity extends AppCompatActivity {
             checkMultiplePermissions();
         }
         findID();
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        activity = this;
+//        GoogleAds.bannerAdLoadGoogle(activity,findViewById(R.id.Ad_Contianer));
+        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+        if (interstitialAd != null) {
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    GoogleAds.loadpreloadFullAds(activity);
+                }
 
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.e("Home : " ,"Error : " + adError);
+                }
+            });
+            interstitialAd.show(activity);
+        }else {
+            Log.e("Home : " ,"in Else part");
+        }
     }
     private void findID() {
         more = findViewById(R.id.more);
@@ -94,6 +113,7 @@ public class HomeActivity extends AppCompatActivity {
         home_adapter = new Home_Adapter(getApplicationContext(),homeModelList, new Home_Adapter.HomeAdapterInterface() {
             @Override
             public void onRowClick(int click) {
+
                 if(click == 0){
                     Intent i = new Intent(HomeActivity.this,GalleryActivity.class);
                     startActivity(i);
@@ -263,6 +283,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
         super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 }
 

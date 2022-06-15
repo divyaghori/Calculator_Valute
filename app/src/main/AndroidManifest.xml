@@ -19,21 +19,21 @@
     <application
         android:name=".Activity.MyApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/Theme.CalculatorHide"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".Activity.GuideActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
             android:exported="false" />
-        <activity android:name=".Activity.AudioActivity">
-
-        </activity>
+        <activity android:name=".Activity.AudioActivity"></activity>
         <activity
             android:name=".Activity.ChanepasswordActivity"
             android:exported="false" />
@@ -61,6 +61,7 @@
         <activity
             android:name=".Activity.DisguiseActivity"
             android:exported="false" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -71,7 +72,551 @@
             android:finishOnCloseSystemDialogs="true"
             android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait" />
-        <!-- <activity-alias -->
+
+        <activity-alias
+            android:name=".icon.icon_disguise0"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/app_icon_0"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="0" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise1"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_1"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="2" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise2"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_2"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="1" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise3"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_3"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="3" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise4"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_4"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="4" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise5"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_5"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="5" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise6"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_6"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="6" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise7"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_7"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="7" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise8"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_8"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="8" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise9"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_9"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="9" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise10"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_10"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="10" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise11"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_11"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="11" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise12"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_12"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="11" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise13"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_13"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="11" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise14"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_14"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="11" />
+        </activity-alias>
+        <activity-alias
+            android:name=".icon.icon_disguise15"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/app_icon_15"
+            android:label="@string/vault_name_cal"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:resumeWhilePausing="true"
+            android:screenOrientation="unspecified"
+            android:stateNotNeeded="true"
+            android:targetActivity=".Activity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yourapp" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="vault_entry_order"
+                android:value="11" />
+        </activity-alias> <!-- <activity-alias -->
         <!-- android:name="com.example.vault.icon.icon_disguise0" -->
         <!-- android:clearTaskOnLaunch="true" -->
         <!-- android:configChanges="mcc|mnc|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize" -->
@@ -428,8 +973,6 @@
         <!-- android:name="vault_entry_order" -->
         <!-- android:value="11" /> -->
         <!-- </activity-alias> -->
-            android:screenOrientation="portrait" />
-
         <activity-alias
             android:name=".icon.icon_disguise16"
             android:clearTaskOnLaunch="true"
@@ -463,550 +1006,6 @@
             <meta-data
                 android:name="vault_entry_order"
                 android:value="11" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise15"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_15"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="11" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise14"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_14"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="11" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise13"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_13"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="11" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise12"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_12"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="11" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise11"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_11"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="11" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise10"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_10"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="10" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise9"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_9"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="9" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise8"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_8"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="8" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise7"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_7"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="7" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise6"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_6"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="6" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise5"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_5"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="5" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise4"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_4"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="4" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise3"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_3"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="3" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise2"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_2"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="1" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise1"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@drawable/app_icon_1"
-            android:label="@string/vault_name_cal"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="2" />
-        </activity-alias>
-        <activity-alias
-            android:name=".icon.icon_disguise0"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden|keyboard|mnc|mcc"
-            android:enabled="true"
-            android:exported="true"
-            android:icon="@drawable/app_icon_0"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:resizeableActivity="true"
-            android:resumeWhilePausing="true"
-            android:screenOrientation="unspecified"
-            android:stateNotNeeded="true"
-            android:targetActivity=".Activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="com.prism.hider.vault.CATEGORY_VAULT_ENTRY" />
-            </intent-filter>
-            <intent-filter>
-                <data android:scheme="yourapp" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="vault_entry_order"
-                android:value="0" />
         </activity-alias>
 
         <activity
@@ -1057,23 +1056,22 @@
         <activity android:name=".Activity.MultiAudioSelectActivity" />
         <activity
             android:name=".Activity.CalculatorActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Activity.SecurityQuesActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Activity.SettingsActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Activity.ImageFullViewActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.RecycleBinActivity"
             android:exported="false" />
-        <activity android:name=".Activity.VideoViewActivity"
-            android:exported="false">
-
-        </activity>
+        <activity
+            android:name=".Activity.VideoViewActivity"
+            android:exported="false"></activity>
         <activity
             android:name=".Activity.FilemanagerActivity"
             android:exported="false" />
@@ -1092,11 +1090,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".toDoList.MainActivity">
-        </activity>
-        <activity android:name=".toDoList.AddEditNoteActivity">
-        </activity>
-
+        <activity android:name=".toDoList.MainActivity"></activity>
+        <activity android:name=".toDoList.AddEditNoteActivity"></activity>
     </application>
 
 </manifest>

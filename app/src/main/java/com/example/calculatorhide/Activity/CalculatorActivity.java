@@ -369,12 +369,12 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             result = result.replaceAll("\\.?0*$", "");
             binding.textViewInputNumbers.setText(result);
         }
-        if(PreferenceManager.getInstance().getPass(activity).equalsIgnoreCase(""))
+        if(PreferenceManager.getInstance(getApplicationContext()).getPass(activity).equalsIgnoreCase(""))
         {
-            PreferenceManager.getInstance().setPass(activity,result);
+            PreferenceManager.getInstance(getApplicationContext()).setPass(activity,result);
             startActivity(new Intent(activity,HomeActivity.class));
         }
-        else  if(!PreferenceManager.getInstance().getPass(activity).equalsIgnoreCase("")&&PreferenceManager.getInstance().getPass(activity).equalsIgnoreCase(result))
+        else  if(!PreferenceManager.getInstance(getApplicationContext()).getPass(activity).equalsIgnoreCase("")&&PreferenceManager.getInstance(getApplicationContext()).getPass(activity).equalsIgnoreCase(result))
         {
             startActivity(new Intent(activity,HomeActivity.class));
         }
@@ -457,7 +457,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
         if (lastCharacter.equals("."))
             return IS_DOT;
-
         return -1;
     }
 

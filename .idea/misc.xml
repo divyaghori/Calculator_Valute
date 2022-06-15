@@ -3,16 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_authentication.xml" value="0.115" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/ac_image_grid.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_audio.xml" value="0.17314814814814813" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_calculator.xml" value="0.16" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_disguise.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_document.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_document.xml" value="0.16" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_file_manager.xml" value="0.17314814814814813" />
-        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_gallery.xml" value="0.16" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_gallery.xml" value="0.14" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_guide.xml" value="0.12" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_image_full_view.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_import_document.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_import_item_adapter.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_main_audio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_mainnote.xml" value="0.17314814814814813" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_recycle_bin.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_setting.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_splash.xml" value="0.17314814814814813" />
-        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_video.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_video.xml" value="0.16" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_video_view.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/restore_file_layout.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/edt_back.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ac_image_grid.xml" value="0.2125" />

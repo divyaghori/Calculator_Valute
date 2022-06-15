@@ -1,17 +1,24 @@
 package com.example.calculatorhide.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.GoogleAds;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 public class DisguiseActivity extends AppCompatActivity {
     private static final String disguise = "com.example.calculatorhide.icon.icon_disguise";
@@ -19,10 +26,30 @@ public class DisguiseActivity extends AppCompatActivity {
     ImageView back;
     AlertDialog.Builder builder;
     TextView maintext;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disguise);
+        activity = this;
+        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+        if (interstitialAd != null) {
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    GoogleAds.loadpreloadFullAds(activity);
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.e("Home : ", "Error : " + adError);
+                }
+            });
+            interstitialAd.show(activity);
+        } else {
+            Log.e("Home : ", "in Else part");
+        }
         maintext = findViewById(R.id.maintext);
         maintext.setText(SplashActivity.resources.getString(R.string.Disguise_Icon));
         back = findViewById(R.id.back);

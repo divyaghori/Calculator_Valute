@@ -1,5 +1,6 @@
 package com.example.calculatorhide.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,8 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.GoogleAds;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -39,11 +46,29 @@ public class MultVideoSelectActivity extends BaseActivity {
     private GridView gridView;
     private LinearLayout llCount;
     ArrayList<String> selectedItems=new ArrayList<>();
-
+    Activity activity;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_image_grid);
+        activity = this;
+        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+        if (interstitialAd != null) {
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    GoogleAds.loadpreloadFullAds(activity);
+                }
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.e("Home : ", "Error : " + adError);
+                }
+            });
+            interstitialAd.show(activity);
+        } else {
+            Log.e("Home : ", "in Else part");
+        }
         final String[] columns = {MediaStore.Video.Media.DATA, MediaStore.Video.Media._ID};
         final String orderBy = MediaStore.Video.Media.DATE_TAKEN;
         Cursor imagecursor = managedQuery(
@@ -78,6 +103,23 @@ public class MultVideoSelectActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(selectedItems.size()!=0) {
+                    InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+                    if (interstitialAd != null) {
+                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                GoogleAds.loadpreloadFullAds(activity);
+                            }
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                super.onAdFailedToShowFullScreenContent(adError);
+                                Log.e("Home : ", "Error : " + adError);
+                            }
+                        });
+                        interstitialAd.show(activity);
+                    } else {
+                        Log.e("Home : ", "in Else part");
+                    }
                     Intent intent = new Intent();
                     intent.putExtra("files", (Serializable) selectedItems);
                     setResult(2, intent);

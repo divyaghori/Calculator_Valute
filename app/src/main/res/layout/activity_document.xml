@@ -29,8 +29,7 @@
             android:gravity="center"
             android:text="Document"
             android:textColor="@color/white"
-            android:textSize="20sp">
-        </TextView>
+            android:textSize="20sp"></TextView>
 
         <CheckBox
             android:id="@+id/check"
@@ -93,6 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
         android:background="@color/purple_700"
         android:orientation="vertical">
 

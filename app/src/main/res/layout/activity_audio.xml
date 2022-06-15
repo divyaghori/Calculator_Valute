@@ -93,6 +93,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@color/purple_700"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <com.google.android.gms.ads.AdView

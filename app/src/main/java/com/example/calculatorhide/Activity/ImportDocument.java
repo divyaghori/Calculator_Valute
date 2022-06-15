@@ -1,9 +1,11 @@
 package com.example.calculatorhide.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -30,6 +32,10 @@ import com.example.calculatorhide.Adapter.AdapterFilesHolder;
 import com.example.calculatorhide.Adapter.MainConstant;
 import com.example.calculatorhide.Model.ModelFilesHolder;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.GoogleAds;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,10 +54,30 @@ public class ImportDocument extends AppCompatActivity {
     ImageAdapter imageAdapter;
     ImageView back;
     TextView count;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_document);
+        activity=this;
+        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+        if (interstitialAd != null) {
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    GoogleAds.loadpreloadFullAds(activity);
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.e("Home : ", "Error : " + adError);
+                }
+            });
+            interstitialAd.show(activity);
+        } else {
+            Log.e("Home : ", "in Else part");
+        }
         count = findViewById(R.id.count);
         checkFileFormat = "All Docs";
         itemsList = new ArrayList<>();

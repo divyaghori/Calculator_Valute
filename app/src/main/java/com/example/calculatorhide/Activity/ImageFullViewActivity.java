@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -17,8 +19,12 @@ import com.bumptech.glide.Glide;
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.HideFiles;
 import com.example.calculatorhide.databinding.ActivityImageFullViewBinding;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,10 +32,8 @@ import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
-
-
 public class ImageFullViewActivity extends AppCompatActivity {
-    private Activity activity=this;
+    private Activity activity;
     private ActivityImageFullViewBinding binding;
     private MediaItem media;
     HidedDatabase hidedDatabase;
@@ -40,6 +44,7 @@ public class ImageFullViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityImageFullViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        activity=this;
         hidedDatabase=HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         if(getIntent()!=null)
@@ -70,6 +75,24 @@ public class ImageFullViewActivity extends AppCompatActivity {
         binding.ivUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+                if (interstitialAd != null) {
+                    interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            GoogleAds.loadpreloadFullAds(activity);
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                            super.onAdFailedToShowFullScreenContent(adError);
+                            Log.e("Home : ", "Error : " + adError);
+                        }
+                    });
+                    interstitialAd.show(activity);
+                } else {
+                    Log.e("Home : ", "in Else part");
+                }
                 showUnHideRcyclePopup(media);
             }
         });

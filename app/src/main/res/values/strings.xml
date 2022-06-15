@@ -42,9 +42,6 @@
     <string name="Calculator">Calculator</string>
 
 
-
-
-
     <string name="addFromFolder"> "Add From Folder"</string>
     <string name="unhideSelected"> "Do you want to unhide the selected files"</string>
     <string name="recycleSelected"> "Do you want to send the selected files to Recycle Bin"</string>

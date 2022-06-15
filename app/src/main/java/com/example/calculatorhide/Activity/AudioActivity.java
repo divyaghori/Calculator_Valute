@@ -2,6 +2,7 @@ package com.example.calculatorhide.Activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -41,6 +43,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.GoogleAds;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -58,13 +64,32 @@ public class AudioActivity extends AppCompatActivity {
     SharedViewModel sharedViewModel;
     ImageAdapter imageAdapter;
     TextView count;
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_audio);
         count = findViewById(R.id.count);
+        activity=this;
+        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+        if (interstitialAd != null) {
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    GoogleAds.loadpreloadFullAds(activity);
+                }
 
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.e("Home : ", "Error : " + adError);
+                }
+            });
+            interstitialAd.show(activity);
+        } else {
+            Log.e("Home : ", "in Else part");
+        }
         recyclerview = findViewById(R.id.recyclerview);
         storagePermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
            if (result){

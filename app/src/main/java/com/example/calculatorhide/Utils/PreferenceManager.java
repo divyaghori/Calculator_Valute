@@ -8,14 +8,22 @@ public class PreferenceManager {
     private static PreferenceManager instance;
     private static SharedPreferences settings;
 
-    public static PreferenceManager getInstance()
+    public static PreferenceManager getInstance(Context context)
     {
 
         if(instance==null)
         {
-            instance=new PreferenceManager();
+            instance=new PreferenceManager(context);
         }
         return instance;
+    }
+
+
+    private static Context ctx;
+    private String json;
+
+    public PreferenceManager(Context context) {
+        ctx = context;
     }
     public void clearPrefs(Context context) {
         settings = context.getSharedPreferences(context.getPackageName(), context.MODE_PRIVATE);
@@ -38,6 +46,22 @@ public class PreferenceManager {
         return prefs.getString("password","");
 
     }
+
+    public void setPreferenceBolean(Boolean login, String key) {
+        SharedPreferences prefs = android.preference.PreferenceManager.getDefaultSharedPreferences(ctx.getApplicationContext());
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(key, login);
+        prefsEditor.commit();
+    }
+
+    public Boolean getpreferenceboolean(String key) {
+        SharedPreferences appSharedPrefs = android.preference.PreferenceManager.getDefaultSharedPreferences(
+                ctx.getApplicationContext());
+        Boolean json = appSharedPrefs.getBoolean(key, false);
+        return json;
+    }
+
+
 
 
 }

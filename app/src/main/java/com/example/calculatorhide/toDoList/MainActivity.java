@@ -1,7 +1,9 @@
 package com.example.calculatorhide.toDoList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,14 +26,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.calculatorhide.Activity.HomeActivity;
 import com.example.calculatorhide.Activity.SplashActivity;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.toDoList.Adapter.NoteAdapter;
 import com.example.calculatorhide.toDoList.Model.Note;
 import com.example.calculatorhide.toDoList.ViewModel.NoteViewModel;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -44,15 +50,30 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageView back;
     AdView mAdView;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainnote);
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+        activity = this;
+        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+        if (interstitialAd != null) {
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    GoogleAds.loadpreloadFullAds(activity);
+                }
+
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.e("Home : ", "Error : " + adError);
+                }
+            });
+            interstitialAd.show(activity);
+        } else {
+            Log.e("Home : ", "in Else part");
+        }
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);

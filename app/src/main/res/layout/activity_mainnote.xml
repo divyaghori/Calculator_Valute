@@ -40,6 +40,7 @@
         android:id="@+id/adLAyout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:background="@color/purple_700"
         android:orientation="vertical">
@@ -58,24 +59,37 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:layout_height="wrap_content">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            tools:listitem="@layout/note_item" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_add_node"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="32dp"
-            app:tint="@color/white"
-            app:backgroundTint="@color/teal_700"
-            android:src="@android:drawable/ic_input_add" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                tools:listitem="@layout/note_item" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_add_node"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom|right"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:src="@android:drawable/ic_input_add"
+                app:backgroundTint="@color/teal_700"
+                app:tint="@color/white" />
+        </RelativeLayout>
+
     </FrameLayout>
 
 
