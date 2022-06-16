@@ -19,7 +19,7 @@
        android:orientation="vertical"
        android:layout_height="match_parent">
        <TextView
-           android:text="@string/enter_your_password"
+           android:text="@string/Enter_your_Password"
            android:layout_width="match_parent"
            android:gravity="center"
            android:textColor="@color/white"
@@ -35,7 +35,7 @@
            android:layout_height="wrap_content"/>
        <androidx.appcompat.widget.AppCompatButton
            android:layout_width="wrap_content"
-           android:text="@string/confirm"
+           android:text="@string/Confirm"
            android:elevation="@dimen/_6sdp"
            android:paddingLeft="@dimen/_40sdp"
            android:paddingRight="@dimen/_40sdp"

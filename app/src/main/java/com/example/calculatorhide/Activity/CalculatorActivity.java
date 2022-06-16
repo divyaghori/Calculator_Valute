@@ -378,9 +378,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         {
             startActivity(new Intent(activity,HomeActivity.class));
         }
-
     }
-
     private void saveLastExpression(String input)
     {
         String lastOfExpression = input.charAt(input.length() - 1) + "";

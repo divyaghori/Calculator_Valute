@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
             android:text="Settings"
             android:textColor="@color/white"
@@ -75,7 +75,7 @@
                     android:text="@string/security"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -113,7 +113,7 @@
                     android:text="@string/important"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -151,7 +151,7 @@
                     android:text="@string/langugae"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -195,7 +195,7 @@
                     android:text="@string/block"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -231,7 +231,7 @@
                     android:text="@string/icon"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -267,7 +267,7 @@
                     android:text="@string/password"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -303,7 +303,7 @@
                     android:text="@string/rateus"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -340,7 +340,7 @@
                     android:text="@string/shareapp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -376,7 +376,7 @@
                     android:text="@string/recyclebin"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -412,7 +412,7 @@
                     android:text="@string/update"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -448,7 +448,7 @@
                     android:text="@string/privacy"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 
@@ -484,7 +484,7 @@
                     android:text="@string/aboutus"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/medium"
+                    android:fontFamily="@font/varelaroundregular"
                     android:paddingLeft="@dimen/_15sdp"
                     android:textSize="16sp">
 

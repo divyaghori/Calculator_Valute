@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Calculator Hide</string>
+    <string name="app_name">Calculator</string>
     <string name="name">Calculator</string>
     <string name="vault_name_cal">Calculator</string>
     <string name="view_by">View By</string>
@@ -40,6 +40,9 @@
     <string name="delete">Delete</string>
     <string name="restore">Restore</string>
     <string name="Calculator">Calculator</string>
+
+
+
 
 
     <string name="addFromFolder"> "Add From Folder"</string>
@@ -114,7 +117,7 @@
     <string name="PEqual"> "Press '=' to confirm"</string>
     <string name="SetPass"> "Set Your Password"</string>
     <string name="SetPassLabel"> "Set Your password for the first time"</string>
-    <string name="AboutUsMsg"> "We built the Calculator Vault app as a Free app. If You Have Any Problem Or Question Regarding This App So Before Rating 1 or 2 Stars in Play Store Please Contact us on example@gmail.com We will solve your problem as soon as possible.'"</string>
+    <string name="AboutUsMsg"> "We built the Calculator Vault app as a Free app. If You Have Any Problem Or Question Regarding This App So Before Rating 1 or 2 Stars in Play Store Please Contact us on calculatorlock002@gmail.com We will solve your problem as soon as possible.'"</string>
     <string name="FeedbackForm"> "Feedback Form"</string>
     <string name="Description"> "Description"</string>
     <string name="Title"> "Title"</string>

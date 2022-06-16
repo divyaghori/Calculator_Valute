@@ -15,7 +15,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="@string/do_you_want_to_delete_or_restore_this_file"
+            android:text="@string/"
             android:layout_height="wrap_content"/>
         <LinearLayout
             android:orientation="horizontal"

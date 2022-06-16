@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_700"
+    android:background="#4E504E"
     android:orientation="vertical"
     tools:context=".Activity.GuideActivity">
 
@@ -12,25 +12,24 @@
         android:id="@+id/img"
         android:layout_width="@dimen/_210sdp"
         android:layout_height="@dimen/_210sdp"
-        android:layout_marginTop="@dimen/_30sdp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_authentication__2_">
+        android:layout_marginTop="@dimen/_30sdp"
+        android:src="@drawable/aaa">
 
     </ImageView>
 
 
     <TextView
-        android:layout_below="@+id/img"
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:layout_below="@+id/img"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_30sdp"
-        android:textSize="18sp"
-        android:fontFamily="@font/bold"
-        android:text="Welcome to Calculator Hide">
+        android:fontFamily="@font/varelaroundregular"
+        android:text="Welcome to Calculator Lock"
+        android:textColor="@color/white"
+        android:textSize="22sp">
 
     </TextView>
 
@@ -44,32 +43,102 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:fontFamily="@font/medium"
+        android:fontFamily="@font/varelaroundregular"
         android:gravity="center"
-        android:text="You can Hide your all private things behind the calculator"
+        android:text="Hide Photos, Videos &amp; Documents Within Calculator!"
         android:textColor="@color/white"
         android:textSize="16sp"></TextView>
+
     <LinearLayout
         android:id="@+id/selectBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/privacy"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_15sdp"
-        android:background="@drawable/ic_hidden"
+        android:background="@drawable/ic_guidelayout"
+        android:gravity="center"
         android:paddingLeft="@dimen/_20sdp"
+        android:paddingTop="@dimen/_15sdp"
         android:paddingRight="@dimen/_20sdp"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_10sdp">
+        android:paddingBottom="@dimen/_15sdp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/medium"
-            android:gravity="center"
             android:layout_gravity="center"
+            android:fontFamily="@font/varelaroundregular"
+            android:gravity="center"
             android:text="Get Started"
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/privacy"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_above="@+id/terms"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:fontFamily="@font/varelaroundregular"
+            android:gravity="center"
+            android:text="By continuing you agree to our "
+            android:textColor="@color/white"
+            android:textSize="14sp"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:fontFamily="@font/varelaroundregular"
+            android:gravity="center"
+            android:text="@string/Privacy_Policy"
+            android:textColor="#0370E5"
+            android:textSize="14sp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/terms"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/varelaroundregular"
+            android:gravity="center"
+            android:text="and "
+            android:textColor="@color/white"
+            android:textSize="14sp"></TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/varelaroundregular"
+            android:gravity="center"
+            android:text="Terms of Service"
+            android:textColor="#0370E5"
+            android:textSize="14sp"></TextView>
+    </LinearLayout>
+
+
 </RelativeLayout>

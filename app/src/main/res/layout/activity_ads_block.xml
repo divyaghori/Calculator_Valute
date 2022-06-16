@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Ads Block"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/varelaroundregular"
             android:textColor="@color/white"
             android:textSize="20sp">
 
@@ -53,7 +53,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="@dimen/_7sdp"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/varelaroundregular"
             android:text="36% oFF">
 
         </TextView>
@@ -76,7 +76,7 @@
         android:textColor="@color/white"
         android:padding="@dimen/_7sdp"
         android:textSize="22sp"
-        android:fontFamily="@font/bold"
+        android:fontFamily="@font/varelaroundregular"
         android:text="No-Ads">
 
     </TextView>
@@ -87,7 +87,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:padding="@dimen/_7sdp"
-        android:fontFamily="@font/bold"
+        android:fontFamily="@font/varelaroundregular"
         android:text="Turn off ads \n and have fun while \n using application">
 
     </TextView>
@@ -104,7 +104,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="@dimen/_7sdp"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/varelaroundregular"
             android:text="CONTINUE">
 
         </TextView>

@@ -34,23 +34,6 @@ public class SplashActivity extends AppCompatActivity {
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();
-
-        //  MyApplication.appOpenAdManager = new MyApplication.AppOpenAdManager();
-
-        //appOpenAdManager.showAdIfAvailable(currentActivity);
-//        MyApplication app = (MyApplication) getApplication();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                app.ShowOpenAd(SplashActivity.this,new MyApplication.OnShowAdCompleteListener() {
-//                    @Override
-//                    public void onShowAdComplete() {
-//                        startMainActivity();
-//                    }
-//                });
-//            }
-//        }, 2000);
-
         MyApplication app = (MyApplication) getApplication();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -62,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-        binding.tvVersion.setText("Version " + BuildConfig.VERSION_NAME);
+        binding.tvVersion.setText("Version " + "1.8.1");
         binding.lavLoad.loop(true);
         binding.lavLoad.playAnimation();
         if (LocaleHelper.getLanguage(SplashActivity.this).equalsIgnoreCase("en")) {

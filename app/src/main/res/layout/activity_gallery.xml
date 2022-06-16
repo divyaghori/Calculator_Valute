@@ -12,7 +12,7 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/purple_700">
+        android:background="@color/black">
 
         <ImageView
             android:id="@+id/back"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
             android:text="Gallery"
             android:textColor="@color/white"
@@ -58,23 +58,43 @@
         android:layout_above="@id/adLAyout"
         android:layout_marginBottom="@dimen/_5sdp"
         android:layout_height="wrap_content">
+
         <GridView
             android:id="@+id/gvGallery"
-            android:numColumns="3"
-            android:background="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/purple_700"
+            android:numColumns="3" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_gravity="center"
-            android:fontFamily="@font/bold"
-            android:gravity="center"
-            android:id="@+id/tvNodata"
-            android:text="File Not Found"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_250sdp"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_undraw_empty_xct9">
+
+            </ImageView>
+            <TextView
+                android:id="@+id/tvNodata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/varelaroundregular"
+                android:gravity="center"
+                android:layout_below="@+id/image"
+                android:text="File Not Found"
+                android:textColor="@color/white"
+                android:textSize="20sp">
+            </TextView>
+        </RelativeLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/getimage"

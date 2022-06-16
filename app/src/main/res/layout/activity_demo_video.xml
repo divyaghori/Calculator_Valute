@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:background="@drawable/ic_hidden"
-        android:fontFamily="@font/medium"
+        android:fontFamily="@font/varelaroundregular"
         android:padding="@dimen/_9sdp"
         android:gravity="center"
         android:drawableLeft="@android:drawable/ic_lock_idle_lock"

@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
             android:text="Add/Edit Note"
             android:textColor="@color/white"
@@ -45,7 +45,7 @@
         android:textSize="16sp"
         android:textColor="@color/white"
         android:textColorHint="#C1BEBE"
-        android:fontFamily="@font/medium"
+        android:fontFamily="@font/varelaroundregular"
         android:background="@color/purple_700"
         android:layout_marginTop="70dp"
         android:inputType="text"/>
@@ -63,7 +63,7 @@
         android:visibility="gone"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
-        android:fontFamily="@font/medium"
+        android:fontFamily="@font/varelaroundregular"
         android:inputType="textMultiLine"/>
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:text="Priority"
         android:padding="16dp"
-        android:fontFamily="@font/medium"
+        android:fontFamily="@font/varelaroundregular"
         android:visibility="gone"
         android:layout_margin="8dp"
         android:textAppearance="@android:style/TextAppearance.Medium"/>

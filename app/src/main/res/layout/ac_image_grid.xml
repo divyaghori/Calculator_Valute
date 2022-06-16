@@ -29,21 +29,36 @@
             android:id="@+id/selectBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:drawableLeft="@android:drawable/ic_lock_idle_lock"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
-            android:text="Hidden Files"
-            android:textColor="@color/white" />
+            android:text="Hide Files"
+            android:textColor="@color/black" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varelaroundregular"
+            android:paddingLeft="@dimen/_5sdp"
+            android:text="("
+            android:textColor="@color/black">
+        </TextView>
         <TextView
             android:id="@+id/count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/medium"
-            android:paddingLeft="@dimen/_5sdp"
+            android:fontFamily="@font/varelaroundregular"
+            android:paddingLeft="@dimen/_2sdp"
             android:text="0"
-            android:textColor="@color/white">
+            android:textColor="@color/black">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varelaroundregular"
+            android:paddingLeft="@dimen/_2sdp"
+            android:text=")"
+            android:textColor="@color/black">
         </TextView>
     </LinearLayout>
 

@@ -10,6 +10,6 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
     <style name="YourCustomLabelsStyle">
-        <item name="fontFamily">@font/medium</item>
+        <item name="fontFamily">@font/varelaroundregular</item>
     </style>
 </resources>

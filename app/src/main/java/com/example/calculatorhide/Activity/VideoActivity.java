@@ -50,12 +50,17 @@ public class VideoActivity extends AppCompatActivity {
     private List<String> file_uris=new ArrayList<>();
     private List<MediaItem>mediaItems=new ArrayList<>();
     private GalleryAdapter adapter;
+    TextView maintext,filenotfound;
     AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         activity=this;
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Video));
+        filenotfound = findViewById(R.id.tvNodata);
+        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
         hidedDatabase=HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         findId();

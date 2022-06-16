@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
             android:text="Document"
             android:textColor="@color/white"
@@ -61,17 +61,29 @@
 
         </ScrollView>
 
-        <TextView
-            android:id="@+id/filenotfound"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/bold"
-            android:gravity="center"
-            android:text="File Not Found"
-            android:textColor="@color/white"
-            android:textSize="20sp">
-        </TextView>
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_250sdp"
+                android:src="@drawable/ic_undraw_empty_xct9">
+
+            </ImageView>
+            <TextView
+                android:id="@+id/filenotfound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/varelaroundregular"
+                android:gravity="center"
+                android:text="File Not Found"
+                android:textColor="@color/white"
+                android:textSize="20sp">
+            </TextView>
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/getimage"

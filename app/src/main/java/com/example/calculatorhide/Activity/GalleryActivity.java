@@ -71,7 +71,10 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         activity = this;
-
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Gallery));
+        filenotfound = findViewById(R.id.tvNodata);
+        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
         hidedDatabase = HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
@@ -243,10 +246,7 @@ public class GalleryActivity extends AppCompatActivity {
         });
 
         alertDialog.show();
-        maintext = findViewById(R.id.maintext);
-        maintext.setText("Gallery");
-        filenotfound = findViewById(R.id.filenotfound);
-        filenotfound.setText(getString(R.string.No_files_added));
+
     }
 
 

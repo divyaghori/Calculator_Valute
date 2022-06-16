@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/medium"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
             android:text="File Manager"
             android:textColor="@color/white"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/varelaroundregular"
                 android:text="Gallery"
                 android:textColor="@color/white"
                 android:textSize="18sp">
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/varelaroundregular"
                 android:text="Video"
                 android:textColor="@color/white"
                 android:textSize="18sp">
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/varelaroundregular"
                 android:text="Audio"
                 android:textColor="@color/white"
                 android:textSize="18sp">
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/varelaroundregular"
                 android:text="Document"
                 android:textColor="@color/white"
                 android:textSize="18sp">
@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/varelaroundregular"
                 android:text="Note"
                 android:textColor="@color/white"
                 android:textSize="18sp">
