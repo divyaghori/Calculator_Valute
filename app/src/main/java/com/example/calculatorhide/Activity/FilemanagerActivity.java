@@ -92,6 +92,11 @@ public class FilemanagerActivity extends AppCompatActivity {
         });
 
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(FilemanagerActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
 
 }

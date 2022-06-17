@@ -28,12 +28,15 @@
         android:theme="@style/Theme.CalculatorHide"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.TransitionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.GuideActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
             android:exported="false" />
-        <activity android:name=".Activity.AudioActivity"></activity>
+        <activity android:name=".Activity.AudioActivity" />
         <activity
             android:name=".Activity.ChanepasswordActivity"
             android:exported="false" />
@@ -1071,7 +1074,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.VideoViewActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Activity.FilemanagerActivity"
             android:exported="false" />
@@ -1090,8 +1093,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".toDoList.MainActivity"></activity>
-        <activity android:name=".toDoList.AddEditNoteActivity"></activity>
+        <activity android:name=".toDoList.MainActivity" />
+        <activity android:name=".toDoList.AddEditNoteActivity" />
     </application>
 
 </manifest>

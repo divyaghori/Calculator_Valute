@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -212,5 +213,11 @@ public class DisguiseActivity extends AppCompatActivity {
                 packageManager2.setComponentEnabledSetting(new ComponentName(this, disguise + i2),   PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
             }
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(DisguiseActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
 }

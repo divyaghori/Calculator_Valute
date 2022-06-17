@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,12 +53,14 @@ public class VideoActivity extends AppCompatActivity {
     private GalleryAdapter adapter;
     TextView maintext,filenotfound;
     AdView mAdView;
+    RelativeLayout tvdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         activity=this;
         maintext = findViewById(R.id.maintext);
+        tvdata = findViewById(R.id.tvdata);
         maintext.setText(SplashActivity.resources.getString(R.string.Video));
         filenotfound = findViewById(R.id.tvNodata);
         filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
@@ -129,6 +132,7 @@ public class VideoActivity extends AppCompatActivity {
         mediaItems= hidedDatabase.mediaDao().getImagesMedia("video",0);
         if(mediaItems.size()!=0) {
             tvNoData.setVisibility(View.GONE);
+            tvdata.setVisibility(View.GONE);
             adapter = new GalleryAdapter(activity, mediaItems);
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -151,6 +155,7 @@ public class VideoActivity extends AppCompatActivity {
         else
         {
             tvNoData.setVisibility(View.VISIBLE);
+            tvdata.setVisibility(View.VISIBLE);
         }
 
     }
@@ -231,5 +236,11 @@ public class VideoActivity extends AppCompatActivity {
 
         alertDialog.show();
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(VideoActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
 }

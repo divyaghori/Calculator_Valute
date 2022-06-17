@@ -48,10 +48,10 @@
                 android:layout_weight="1"
                 android:background="@color/cal_no_button"
                 android:text="7"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_four"
                 android:layout_width="match_parent"
@@ -59,32 +59,32 @@
                 android:layout_weight="1"
                 android:background="@color/cal_no_button"
                 android:text="4"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_one"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:background="@color/cal_no_button"
                 android:text="1"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_zero"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:background="@color/cal_no_button"
                 android:text="0"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
 
 
 
@@ -100,44 +100,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:background="@color/cal_no_button"
                 android:text="8"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_five"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:background="@color/cal_no_button"
                 android:text="5"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_two"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:background="@color/cal_no_button"
                 android:text="2"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_dot"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:background="@color/cal_no_button"
                 android:text="."
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
 
 
 
@@ -154,12 +154,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:background="@color/cal_no_button"
                 android:text="9"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_six"
                 android:layout_width="match_parent"
@@ -167,10 +167,10 @@
                 android:layout_weight="1"
                 android:background="@color/cal_no_button"
                 android:text="6"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_three"
                 android:layout_width="match_parent"
@@ -178,17 +178,17 @@
                 android:layout_weight="1"
                 android:background="@color/cal_no_button"
                 android:text="3"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:fontFamily="@font/robotolight"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_equal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="0.1dp"
                 android:layout_weight="1"
-                android:padding="@dimen/_30sdp"
+                android:padding="@dimen/_28sdp"
                 android:fontFamily="@font/robotolight"
                 android:background="@color/cal_blue"
                 android:text="="
@@ -212,7 +212,7 @@
                 android:background="@color/cal_op_button"
                 android:text="DEL"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_division"
                 android:layout_width="match_parent"
@@ -232,7 +232,7 @@
                 android:text="x"
                 android:fontFamily="@font/robotothin"
                 android:textColor="@color/cal_text"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_subtraction"
                 android:layout_width="match_parent"

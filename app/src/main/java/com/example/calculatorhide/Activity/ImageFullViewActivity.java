@@ -57,7 +57,6 @@ public class ImageFullViewActivity extends AppCompatActivity {
 
     private void initUi() {
          hideFiles=new HideFiles(activity);
-
         if(media!=null)
         {
             Glide.with(activity)
@@ -65,7 +64,6 @@ public class ImageFullViewActivity extends AppCompatActivity {
                     .centerCrop()
                     .into(binding.ivImg);
         }
-        //
         binding.ivInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

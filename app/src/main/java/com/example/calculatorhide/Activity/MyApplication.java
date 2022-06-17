@@ -19,7 +19,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
+import com.example.calculatorhide.Utils.GoogleAds;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -104,15 +107,15 @@ public class MyApplication extends Application
             currentActivity = activity;
         }
     }
-
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
+//        ShowOpenAd();
+//        GoogleAds.loadpreloadFullAds(activity);
     }
-
-    @Override
     public void onActivityPaused(@NonNull Activity activity) {
+//        ShowOpenAd();
+//        GoogleAds.loadpreloadFullAds(activity);
     }
-
     @Override
     public void onActivityStopped(@NonNull Activity activity) {
     }

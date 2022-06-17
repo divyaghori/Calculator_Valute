@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@id/selectBtn"
-        android:columnWidth="90dp"
+        android:columnWidth="@dimen/_70sdp"
         android:gravity="center"
         android:horizontalSpacing="2dp"
         android:numColumns="auto_fit"
@@ -29,10 +29,10 @@
             android:id="@+id/selectBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+            android:drawableLeft="@drawable/padlock"
             android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
-            android:text="Hide Files"
+            android:text=" Hide Files"
             android:textColor="@color/black" />
 
         <TextView

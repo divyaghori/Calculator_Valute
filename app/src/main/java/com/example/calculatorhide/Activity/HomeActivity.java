@@ -88,7 +88,6 @@ public class HomeActivity extends AppCompatActivity {
                 public void onAdDismissedFullScreenContent() {
                     GoogleAds.loadpreloadFullAds(activity);
                 }
-
                 @Override
                 public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                     super.onAdFailedToShowFullScreenContent(adError);
@@ -115,39 +114,54 @@ public class HomeActivity extends AppCompatActivity {
             public void onRowClick(int click) {
 
                 if(click == 0){
-                    Intent i = new Intent(HomeActivity.this,GalleryActivity.class);
+                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                    i.putExtra("index",0);
                     startActivity(i);
                 }
                 if(click == 1){
-                    Intent i = new Intent(HomeActivity.this,VideoActivity.class);
+                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                    i.putExtra("index",1);
                     startActivity(i);
                 }
                 if(click == 2){
-                    Intent i = new Intent(HomeActivity.this,AdioActivity.class);
+
+                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                    i.putExtra("index",2);
                     startActivity(i);
                 }
+                if(click == 3){
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sunfreeenergy.in/applocker/"));
+                    startActivity(browserIntent);
+                }
+
                 if(click == 4){
-                    Intent i = new Intent(HomeActivity.this,DocumentActivity.class);
+                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                    i.putExtra("index",4);
                     startActivity(i);
                 }
                 if(click == 5){
-                    Intent i = new Intent(HomeActivity.this,FilemanagerActivity.class);
+                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                    i.putExtra("index",5);
                     startActivity(i);
                 }
                 if(click == 8){
-                    Intent i = new Intent(HomeActivity.this,SettingActivity.class);
+                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                    i.putExtra("index",8);
                     startActivity(i);
                 }
                 if(click == 6){
-                    Intent i = new Intent(HomeActivity.this, MainActivity.class);
+                    Intent i = new Intent(HomeActivity.this, TransitionActivity.class);
+                    i.putExtra("index",6);
                     startActivity(i);
                 }
                 if(click == 7){
-                    Intent i = new Intent(HomeActivity.this, RecycleBinActivity.class);
+                    Intent i = new Intent(HomeActivity.this, TransitionActivity.class);
+                    i.putExtra("index",7);
                     startActivity(i);
                 }
                 if(click == 9){
-                    Intent i = new Intent(HomeActivity.this,DisguiseActivity.class);
+                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                    i.putExtra("index",9);
                     startActivity(i);
                 }
 

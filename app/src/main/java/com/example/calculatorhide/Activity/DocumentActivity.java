@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.calculatorhide.R;
@@ -26,6 +27,7 @@ public class DocumentActivity extends AppCompatActivity {
     TextView maintext,filenotfound;
     AdView mAdView;
     Activity activity;
+    LinearLayout tvdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,6 @@ public class DocumentActivity extends AppCompatActivity {
                 public void onAdDismissedFullScreenContent() {
                     GoogleAds.loadpreloadFullAds(activity);
                 }
-
                 @Override
                 public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                     super.onAdFailedToShowFullScreenContent(adError);
@@ -55,6 +56,7 @@ public class DocumentActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
     }
     private void findId() {
+        tvdata = findViewById(R.id.tvdata);
         icback = findViewById(R.id.back);
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,5 +76,11 @@ public class DocumentActivity extends AppCompatActivity {
         maintext.setText(SplashActivity.resources.getString(R.string.Documents));
         filenotfound = findViewById(R.id.filenotfound);
         filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(DocumentActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
 }

@@ -257,7 +257,12 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     public void onNothingSelected(AdapterView<?> arg0) {
 
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(SettingActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
 }
 
 

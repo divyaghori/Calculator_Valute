@@ -56,52 +56,41 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/topbar"
-        android:visibility="gone"
         android:background="@color/purple_700"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <LinearLayout
             android:id="@+id/Ad_Contianer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
 
-<!--        <com.google.android.gms.ads.AdView-->
-<!--            android:id="@+id/adView"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            app:adSize="BANNER"-->
-<!--            app:adUnitId="ca-app-pub-3940256099942544/6300978111">-->
+        <!--        <com.google.android.gms.ads.AdView-->
+        <!--            android:id="@+id/adView"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            app:adSize="BANNER"-->
+        <!--            app:adUnitId="ca-app-pub-3940256099942544/6300978111">-->
 
-<!--        </com.google.android.gms.ads.AdView>-->
+        <!--        </com.google.android.gms.ads.AdView>-->
 
     </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/purple_700"
         android:layout_below="@+id/adLAyout">
-
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listhome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/purple_700"
-            android:scrollbars="none">
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listhome"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginRight="@dimen/_15sdp"
-                tools:listitem="@layout/activity_home_adapter">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-        </ScrollView>
-
-
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            tools:listitem="@layout/activity_home_adapter">
+        </androidx.recyclerview.widget.RecyclerView>
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/fab_menu"
             android:layout_width="match_parent"

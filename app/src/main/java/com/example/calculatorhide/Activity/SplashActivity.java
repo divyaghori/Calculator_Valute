@@ -26,14 +26,13 @@ public class SplashActivity extends AppCompatActivity {
     Context context;
     public static Resources resources;
     Boolean getdata;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initUi();
+
         MyApplication app = (MyApplication) getApplication();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -43,7 +42,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 500);
     }
-
     private void initUi() {
         binding.tvVersion.setText("Version " + "1.8.1");
         binding.lavLoad.loop(true);
@@ -74,19 +72,15 @@ public class SplashActivity extends AppCompatActivity {
                                     public void onShowAdComplete() {
                                         startMainActivity();
                                     }
-
                                 });
-
             }
         }, 5000);
     }
-
     public void startMainActivity() {
         getdata = PreferenceManager.getInstance(getApplicationContext()).getpreferenceboolean("login");
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-
                 if (getdata == false) {
                     Intent mainIntent1 = new Intent(SplashActivity.this,GuideActivity.class);
                     startActivity(mainIntent1);
@@ -94,7 +88,6 @@ public class SplashActivity extends AppCompatActivity {
                 else {
                     Intent mainIntent = new Intent(SplashActivity.this,CalculatorActivity.class);
                     startActivity(mainIntent);
-
                 }
             }
         }, 2000);

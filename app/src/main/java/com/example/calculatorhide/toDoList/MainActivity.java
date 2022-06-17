@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calculatorhide.Activity.DocumentActivity;
 import com.example.calculatorhide.Activity.HomeActivity;
 import com.example.calculatorhide.Activity.SplashActivity;
 import com.example.calculatorhide.R;
@@ -182,5 +183,12 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(MainActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
 }

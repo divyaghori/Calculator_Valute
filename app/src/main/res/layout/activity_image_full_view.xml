@@ -19,6 +19,7 @@
             android:id="@+id/ivImg"
             android:layout_gravity="center"
             android:layout_width="match_parent"
+            android:scaleType="fitXY"
             android:layout_height="@dimen/_400sdp"/>
 
     </LinearLayout>

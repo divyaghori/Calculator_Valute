@@ -24,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +66,7 @@ public class GalleryActivity extends AppCompatActivity {
     private GalleryAdapter adapter;
     TextView maintext, filenotfound;
     private AdView mAdView;
+    RelativeLayout tvdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         activity = this;
         maintext = findViewById(R.id.maintext);
+        tvdata = findViewById(R.id.tvdata);
         maintext.setText(SplashActivity.resources.getString(R.string.Gallery));
         filenotfound = findViewById(R.id.tvNodata);
         filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
@@ -149,6 +152,7 @@ public class GalleryActivity extends AppCompatActivity {
         mediaItems = hidedDatabase.mediaDao().getImagesMedia("image", 0);
         if (mediaItems.size() != 0) {
             tvNoData.setVisibility(View.GONE);
+            tvdata.setVisibility(View.GONE);
             adapter = new GalleryAdapter(activity, mediaItems);
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -169,6 +173,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         } else {
             tvNoData.setVisibility(View.VISIBLE);
+            tvdata.setVisibility(View.VISIBLE);
         }
 
     }
@@ -189,8 +194,7 @@ public class GalleryActivity extends AppCompatActivity {
             file.mkdirs();
         }
         return file;
-    }
-
+    }//
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -249,5 +253,10 @@ public class GalleryActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(GalleryActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
 }

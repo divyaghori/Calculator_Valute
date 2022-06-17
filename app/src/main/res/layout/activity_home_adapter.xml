@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     app:cardBackgroundColor="@color/home_item"
-    app:cardCornerRadius="@dimen/_12sdp"
+    app:cardCornerRadius="@dimen/_13sdp"
     app:cardElevation="@dimen/_6sdp"
     app:cardUseCompatPadding="true"
     tools:context=".Adapter.Home_Adapter">
