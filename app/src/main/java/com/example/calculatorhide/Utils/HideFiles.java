@@ -1,26 +1,15 @@
 package com.example.calculatorhide.Utils;
 
-import static com.google.android.gms.common.util.CollectionUtils.listOf;
-
-import android.annotation.SuppressLint;
-import android.app.RecoverableSecurityException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
-import android.widget.Toast;
-
-import androidx.activity.result.IntentSenderRequest;
-import androidx.room.Room;
 
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
+import com.github.f4b6a3.uuid.UuidCreator;
 
 import org.apache.commons.io.FileUtils;
 
@@ -28,19 +17,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 public class HideFiles {
     private List<String> listUris;
     private Context mContext;
     HidedDatabase hidedDatabase;
     SuccessInterface successInterface;
-
+    UUID uuid;
     public HideFiles(Context context) {
         mContext = context;
     }
-    public void HideFile(List<String> uris, String type, File hiddenPath) {
-
-        hidedDatabase=HidedDatabase.getDatabse(mContext);
+    public void   HideFile(List<String> uris, String type, File hiddenPath) {
+        hidedDatabase = HidedDatabase.getDatabse(mContext);
 //        hidedDatabase= Room.databaseBuilder(mContext, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         for (int i = 0; i < uris.size(); i++) {
             successInterface.onLoading(true);
@@ -49,9 +38,8 @@ public class HideFiles {
             String title = getFileName(path);
             String fname = title.substring(0, title.lastIndexOf("."));
             File source = new File(path);
-            File des = new File(hiddenPath,fname +"."+ ex);
-
-            //
+            uuid = UuidCreator.getRandomBased();
+            File des = new File(hiddenPath, uuid + "." + "vault");
             MediaItem mediaItem = new MediaItem();
             mediaItem.setType(type);
             mediaItem.setFileExt(ex);
@@ -60,20 +48,17 @@ public class HideFiles {
             mediaItem.setOrPath(source.getPath());
             mediaItem.setTime((int) Calendar.getInstance().getTimeInMillis());
             mediaItem.setDeleted(0);
-            //
             copyFiles(source, des, path);
             hidedDatabase.mediaDao().addData(mediaItem);
-
         }
         successInterface.onSuccess(true);
-
     }
     public void unHideFile(List<MediaItem> item)
     {
         for(int i=0;i<item.size();i++) {
             successInterface.onLoading(true);
             hidedDatabase = HidedDatabase.getDatabse(mContext);
-            String title = getFileName(item.get(i).getPath());
+            String title = getFileName(item.get(i).getOrPath());
             String org = item.get(i).getOrPath();
             File src = new File(item.get(i).getPath());
             File des = new File(item.get(i).getOrPath());

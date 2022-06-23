@@ -3,7 +3,9 @@ package com.example.calculatorhide.Activity;
 import static android.os.Build.VERSION.SDK_INT;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,6 +15,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -31,6 +34,7 @@ import com.example.calculatorhide.Model.HomeModel;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.toDoList.MainActivity;
+import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -71,6 +75,10 @@ public class HomeActivity extends AppCompatActivity {
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
   //  private AdView mAdView;
     Activity activity;
+
+    FloatingActionButton gallery,fabvideo,fabapplock,addfolder,howtouse;
+    public AlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +87,45 @@ public class HomeActivity extends AppCompatActivity {
             checkMultiplePermissions();
         }
         findID();
+        fabvideo = findViewById(R.id.video);
+        fabapplock = findViewById(R.id.applock);
+        addfolder = findViewById(R.id.addfolder);
+        howtouse = findViewById(R.id.howtouse);
+        gallery = findViewById(R.id.fabgallery);
+        fabvideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this,VideoActivity.class);
+                startActivity(i);
+            }
+        });
+        fabapplock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sunfreeenergy.in/applocker/"));
+                startActivity(browserIntent);
+            }
+        });
+        addfolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeActivity.this,GalleryActivity.class);
+                startActivity(i);
+            }
+        });
+        howtouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sunfreeenergy.in/cal"));
+                startActivity(browserIntent);
+            }
+        });
         activity = this;
 //        GoogleAds.bannerAdLoadGoogle(activity,findViewById(R.id.Ad_Contianer));
         InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
@@ -283,7 +330,6 @@ public class HomeActivity extends AppCompatActivity {
             rootPath=context.getExternalFilesDir(null).getAbsoluteFile()+"/"+path+"/"+"files"+"/"+".vault";
             file= new File(rootPath);
         }
-
         if (!file.exists()) {
             file.mkdirs();
         }
@@ -301,7 +347,43 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finishAffinity();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final View customLayout = getLayoutInflater().inflate(R.layout.activity_rating_dialog, null);
+        builder.setView(customLayout);
+        CardView cardView = customLayout.findViewById(R.id.exit);
+        CardView first = customLayout.findViewById(R.id.first);
+        CardView second = customLayout.findViewById(R.id.second);
+        CardView third = customLayout.findViewById(R.id.third);
+        first.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Thank You", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+            }
+        });
+        second.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Thank You", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        third.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Thank You", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog = builder.create();
+        dialog.show();
     }
 }
 

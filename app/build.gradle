@@ -54,6 +54,7 @@ dependencies {
     implementation 'io.apisense:rhino-android:1.0'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.airbnb.android:lottie:3.5.0'
+    implementation 'com.github.f4b6a3:uuid-creator:4.6.1'
     //
     implementation 'commons-io:commons-io:2.6'
 }

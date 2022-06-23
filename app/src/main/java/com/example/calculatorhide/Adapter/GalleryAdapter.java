@@ -24,13 +24,11 @@ public class GalleryAdapter extends ArrayAdapter<MediaItem> {
     private Context mContext;
     private List<MediaItem>mitemList;
     private ClickItemInterface clickItemInterface;
-
     public GalleryAdapter(Context context, List<MediaItem>itemList) {
         super(context,0,itemList);
         mContext=context;
         mitemList=itemList;
     }
-
     @Override
     public int getCount() {
         return mitemList.size();

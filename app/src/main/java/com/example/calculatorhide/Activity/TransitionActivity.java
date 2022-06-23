@@ -130,7 +130,5 @@ public class TransitionActivity extends AppCompatActivity {
                 }
             }, 1000);
         }
-
-
     }
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class ImageFullViewActivity extends AppCompatActivity {
     private MediaItem media;
     HidedDatabase hidedDatabase;
     HideFiles hideFiles;
+    ImageView ivImg;
     String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class ImageFullViewActivity extends AppCompatActivity {
         binding=ActivityImageFullViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         activity=this;
+        ivImg = findViewById(R.id.ivImg);
         hidedDatabase=HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         if(getIntent()!=null)
@@ -61,8 +64,7 @@ public class ImageFullViewActivity extends AppCompatActivity {
         {
             Glide.with(activity)
                     .load(media.getPath())
-                    .centerCrop()
-                    .into(binding.ivImg);
+                    .into(ivImg);
         }
         binding.ivInfo.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -201,12 +202,21 @@ public class MultVideoSelectActivity extends BaseActivity {
             }
             CheckBox mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox1);
             final ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
+            FrameLayout frameLayout = convertView.findViewById(R.id.frame);
+            ImageView image = convertView.findViewById(R.id.image);
             Glide.with(getApplicationContext()).load(imageUrls.get(position))
                     .placeholder(R.drawable.ic_launcher_background).centerCrop()
                     .into(imageView);
             mCheckBox.setTag(position);
             mCheckBox.setChecked(mSparseBooleanArray.get(position));
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
+            frameLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mSparseBooleanArray.put(position,true);
+                    image.setVisibility(View.VISIBLE);
+                }
+            });
             return convertView;
         }
 

@@ -61,9 +61,9 @@
         android:background="@drawable/ic_guidelayout"
         android:gravity="center"
         android:paddingLeft="@dimen/_20sdp"
-        android:paddingTop="@dimen/_15sdp"
+        android:paddingTop="@dimen/_13sdp"
         android:paddingRight="@dimen/_20sdp"
-        android:paddingBottom="@dimen/_15sdp">
+        android:paddingBottom="@dimen/_13sdp">
 
         <TextView
             android:layout_width="wrap_content"

@@ -91,6 +91,7 @@
             android:layout_marginRight="@dimen/_15sdp"
             tools:listitem="@layout/activity_home_adapter">
         </androidx.recyclerview.widget.RecyclerView>
+
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/fab_menu"
             android:layout_width="match_parent"
@@ -105,6 +106,7 @@
             app:menu_openDirection="up">
 
             <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/howtouse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_help"
@@ -113,6 +115,7 @@
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/addfolder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_gallery"
@@ -121,6 +124,7 @@
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/presence_video_online"
@@ -128,9 +132,8 @@
                 app:fab_label="Video"
                 app:fab_size="mini" />
 
-
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab2"
+                android:id="@+id/applock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_lock_idle_lock"
@@ -139,14 +142,13 @@
                 app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab1"
+                android:id="@+id/fabgallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_gallery"
                 app:fab_colorNormal="#56ab2f"
                 app:fab_label="Gallery"
                 app:fab_size="mini" />
-
 
         </com.github.clans.fab.FloatingActionMenu>
     </FrameLayout>

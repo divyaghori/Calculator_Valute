@@ -1,5 +1,7 @@
 package com.example.calculatorhide.Activity;
 
+import static com.example.calculatorhide.Utils.RealPathUtil.isExternalStorageDocument;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -24,7 +27,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,38 +68,34 @@ public class GalleryActivity extends AppCompatActivity {
     private GalleryAdapter adapter;
     TextView maintext, filenotfound;
     private AdView mAdView;
-    RelativeLayout tvdata;
+    ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         activity = this;
-        maintext = findViewById(R.id.maintext);
-        tvdata = findViewById(R.id.tvdata);
-        maintext.setText(SplashActivity.resources.getString(R.string.Gallery));
-        filenotfound = findViewById(R.id.tvNodata);
-        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
+
         hidedDatabase = HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
+//        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+//        if (interstitialAd != null) {
+//            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                @Override
+//                public void onAdDismissedFullScreenContent() {
+//                    GoogleAds.loadpreloadFullAds(activity);
+//                }
+//
+//                @Override
+//                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+//                    super.onAdFailedToShowFullScreenContent(adError);
+//                    Log.e("Home : ", "Error : " + adError);
+//                }
+//            });
+//            interstitialAd.show(activity);
+//        } else {
+//            Log.e("Home : ", "in Else part");
+//        }
 
         findId();
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -108,6 +106,7 @@ public class GalleryActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
     }
 
     private void findId() {
@@ -116,6 +115,7 @@ public class GalleryActivity extends AppCompatActivity {
         icback = findViewById(R.id.back);
         gvGallery = findViewById(R.id.gvGallery);
         tvNoData = findViewById(R.id.tvNodata);
+        image = findViewById(R.id.image);
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +123,8 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
         getimage = findViewById(R.id.getimage);
+        maintext = findViewById(R.id.maintext);
+        maintext.setText("Gallery");
         getimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +154,7 @@ public class GalleryActivity extends AppCompatActivity {
         mediaItems = hidedDatabase.mediaDao().getImagesMedia("image", 0);
         if (mediaItems.size() != 0) {
             tvNoData.setVisibility(View.GONE);
-            tvdata.setVisibility(View.GONE);
+            image.setVisibility(View.GONE);
             adapter = new GalleryAdapter(activity, mediaItems);
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -167,34 +169,35 @@ public class GalleryActivity extends AppCompatActivity {
 
                 @Override
                 public void onItemLongClick(int position, MediaItem item) {
-                    showUnHideRcyclePopup(position, item);
+                    showUnHideRcyclePopup(position,item);
                 }
             });
-
         } else {
             tvNoData.setVisibility(View.VISIBLE);
-            tvdata.setVisibility(View.VISIBLE);
+            image.setVisibility(View.VISIBLE);
         }
 
     }
-
     public File getFolder() {
         String rootPath = "";
-        String path = "CalculatorVault";
+        String path = ".CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + path + "/" + "files" + "/" + ".vault";
+//            file = new File(Environment.getExternalStorageDirectory(), path);
+            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android") + "/"
+                    + path + "/" + "files";
             file = new File(rootPath);
         } else {
-            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files" + "/" + ".vault";
+//            file = new File(Environment.getExternalStorageDirectory(), path);
+            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
+            Log.d("root",rootPath);
             file = new File(rootPath);
         }
-
         if (!file.exists()) {
             file.mkdirs();
         }
         return file;
-    }//
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -219,7 +222,6 @@ public class GalleryActivity extends AppCompatActivity {
     protected void onResume() {
         getImages();
         super.onResume();
-
     }
 
     public void showUnHideRcyclePopup(int position, MediaItem item) {
@@ -229,7 +231,6 @@ public class GalleryActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
         TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
-        //
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,7 +257,7 @@ public class GalleryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(GalleryActivity.this,HomeActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
 }

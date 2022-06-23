@@ -28,6 +28,12 @@
         android:theme="@style/Theme.CalculatorHide"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.TouchImageView"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.RatingDialogActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.TransitionActivity"
             android:exported="false" />
         <activity

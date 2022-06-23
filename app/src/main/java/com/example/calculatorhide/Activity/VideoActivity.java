@@ -1,7 +1,4 @@
 package com.example.calculatorhide.Activity;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,30 +7,24 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calculatorhide.Adapter.GalleryAdapter;
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
-import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.HideFiles;
-import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,40 +42,34 @@ public class VideoActivity extends AppCompatActivity {
     private List<String> file_uris=new ArrayList<>();
     private List<MediaItem>mediaItems=new ArrayList<>();
     private GalleryAdapter adapter;
-    TextView maintext,filenotfound;
+    ImageView image;
     AdView mAdView;
-    RelativeLayout tvdata;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         activity=this;
-        maintext = findViewById(R.id.maintext);
-        tvdata = findViewById(R.id.tvdata);
-        maintext.setText(SplashActivity.resources.getString(R.string.Video));
-        filenotfound = findViewById(R.id.tvNodata);
-        filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
         hidedDatabase=HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         findId();
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
+//        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+//        if (interstitialAd != null) {
+//            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                @Override
+//                public void onAdDismissedFullScreenContent() {
+//                    GoogleAds.loadpreloadFullAds(activity);
+//                }
+//
+//                @Override
+//                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+//                    super.onAdFailedToShowFullScreenContent(adError);
+//                    Log.e("Home : ", "Error : " + adError);
+//                }
+//            });
+//            interstitialAd.show(activity);
+//        } else {
+//            Log.e("Home : ", "in Else part");
+//        }
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -96,6 +81,7 @@ public class VideoActivity extends AppCompatActivity {
         icback = findViewById(R.id.back);
         gvGallery=findViewById(R.id.gvGallery);
         tvNoData=findViewById(R.id.tvNodata);
+        image = findViewById(R.id.image);
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,7 +118,7 @@ public class VideoActivity extends AppCompatActivity {
         mediaItems= hidedDatabase.mediaDao().getImagesMedia("video",0);
         if(mediaItems.size()!=0) {
             tvNoData.setVisibility(View.GONE);
-            tvdata.setVisibility(View.GONE);
+            image.setVisibility(View.GONE);
             adapter = new GalleryAdapter(activity, mediaItems);
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -155,7 +141,7 @@ public class VideoActivity extends AppCompatActivity {
         else
         {
             tvNoData.setVisibility(View.VISIBLE);
-            tvdata.setVisibility(View.VISIBLE);
+            image.setVisibility(View.VISIBLE);
         }
 
     }
@@ -163,13 +149,13 @@ public class VideoActivity extends AppCompatActivity {
     public File getFolder()
     {
         String rootPath="";
-        String path="CalculatorVault";
+        String path=".CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            rootPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+path+"/"+"files"+"/"+".vault";
+            rootPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+path+"/"+"files";
             file= new File(rootPath);
         } else {
-            rootPath=getExternalFilesDir(null).getAbsoluteFile()+"/"+path+"/"+"files"+"/"+".vault";
+            rootPath=getExternalFilesDir(null).getAbsoluteFile()+"/"+path+"/"+"files";
             file= new File(rootPath);
         }
 
@@ -240,7 +226,7 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent i = new Intent(VideoActivity.this,HomeActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
 }

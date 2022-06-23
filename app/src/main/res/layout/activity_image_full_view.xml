@@ -15,12 +15,13 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="0dp">
+
         <ImageView
             android:id="@+id/ivImg"
             android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:scaleType="fitXY"
-            android:layout_height="@dimen/_400sdp"/>
+            android:src="@drawable/chnage_password"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
     <LinearLayout

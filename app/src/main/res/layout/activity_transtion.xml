@@ -9,16 +9,17 @@
 
     <LinearLayout
         android:id="@+id/llmin"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_150sdp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_110sdp"
+        android:orientation="vertical">
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
             android:layout_gravity="center"
+            android:padding="@dimen/_5sdp"
             app:cardCornerRadius="@dimen/_5sdp">
 
             <ImageView
@@ -26,22 +27,23 @@
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:padding="@dimen/_8sdp"
-                android:tint="@color/white"
-                android:src="@drawable/ic_photo_gallery">
+                android:src="@drawable/ic_photo_gallery"
+                android:tint="@color/white">
 
             </ImageView>
         </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/text"
-            android:text="Calculator Lock"
-            android:textSize="22sp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:fontFamily="@font/varelaroundregular"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/varelaroundregular"
+            android:text="Calculator Lock"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout

@@ -26,7 +26,16 @@
         </ImageView>
 
     </FrameLayout>
-
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:visibility="gone"
+        android:layout_margin="@dimen/_4sdp"
+        android:src="@drawable/tick" />
 
     <CheckBox
         android:id='@+id/checkBox1'
@@ -35,5 +44,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="right"
+        android:visibility="gone"
         android:buttonTint="@color/white" />
 </FrameLayout>

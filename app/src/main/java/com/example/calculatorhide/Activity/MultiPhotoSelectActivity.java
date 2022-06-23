@@ -28,6 +28,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,28 +63,29 @@ public class MultiPhotoSelectActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_image_grid);
         activity = this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
+//        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+//        if (interstitialAd != null) {
+//            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+//                @Override
+//                public void onAdDismissedFullScreenContent() {
+//                    GoogleAds.loadpreloadFullAds(activity);
+//                }
+//                @Override
+//                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+//                    super.onAdFailedToShowFullScreenContent(adError);
+//                    Log.e("Home : ", "Error : " + adError);
+//                }
+//            });
+//            interstitialAd.show(activity);
+//        } else {
+//            Log.e("Home : ", "in Else part");
+//        }
+        String sort=MediaStore.Images.Media.DATE_ADDED + " DESC";
         final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
         final String orderBy = MediaStore.Images.Media.DATE_TAKEN;
         Cursor imagecursor = managedQuery(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
-                null, orderBy + " ASC");
+                null, orderBy + " DESC");
         imageUrls = new ArrayList<String>();
         for (int i = 0; i < imagecursor.getCount(); i++) {
             imagecursor.moveToPosition(i);
@@ -110,34 +112,34 @@ public class MultiPhotoSelectActivity extends BaseActivity {
                 });
             }
         }, 1000, 1000);
-       llCount.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               if(selectedItems.size()!=0) {
-                   InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-                   if (interstitialAd != null) {
-                       interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                           @Override
-                           public void onAdDismissedFullScreenContent() {
-                               GoogleAds.loadpreloadFullAds(activity);
-                           }
-                           @Override
-                           public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                               super.onAdFailedToShowFullScreenContent(adError);
-                               Log.e("Home : ", "Error : " + adError);
-                           }
-                       });
-                       interstitialAd.show(activity);
-                   } else {
-                       Log.e("Home : ", "in Else part");
-                   }
-                   Intent intent = new Intent();
-                   intent.putExtra("files", (Serializable) selectedItems);
-                   setResult(2, intent);
-                   finish();
-               }
-           }
-       });
+        llCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selectedItems.size()!=0) {
+                    InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+                    if (interstitialAd != null) {
+                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                GoogleAds.loadpreloadFullAds(activity);
+                            }
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                super.onAdFailedToShowFullScreenContent(adError);
+                                Log.e("Home : ", "Error : " + adError);
+                            }
+                        });
+                        interstitialAd.show(activity);
+                    } else {
+                        Log.e("Home : ", "in Else part");
+                    }
+                    Intent intent = new Intent();
+                    intent.putExtra("files", (Serializable) selectedItems);
+                    setResult(2, intent);
+                    finish();
+                }
+            }
+        });
         gridView.setAdapter(imageAdapter);
     }
 
@@ -146,7 +148,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
         super.onStop();
     }
     public void btnChoosePhotosClick() {
-         selectedItems = imageAdapter.getCheckedItems();
+        selectedItems = imageAdapter.getCheckedItems();
         if(imageAdapter.getCheckedItems().size() == 0){
             count.setText("0");
         }else{
@@ -204,12 +206,21 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             }
             CheckBox mCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox1);
             final ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView1);
+            FrameLayout frameLayout = convertView.findViewById(R.id.frame);
+            ImageView image = convertView.findViewById(R.id.image);
             Glide.with(getApplicationContext()).load(imageUrls.get(position))
                     .placeholder(R.drawable.ic_launcher_background).centerCrop()
                     .into(imageView);
             mCheckBox.setTag(position);
             mCheckBox.setChecked(mSparseBooleanArray.get(position));
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
+            frameLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mSparseBooleanArray.put(position,true);
+                    image.setVisibility(View.VISIBLE);
+                }
+            });
             return convertView;
         }
 
@@ -245,7 +256,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 //            collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
 //        }else{
-            collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 //        }
 
 

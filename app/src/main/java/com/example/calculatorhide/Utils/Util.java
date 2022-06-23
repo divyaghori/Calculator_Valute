@@ -11,7 +11,7 @@ public class Util {
     public File getFolder(Context context)
     {
         String rootPath="";
-        String path="CalculatorVault";
+        String path=".CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             rootPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+path;
@@ -20,7 +20,6 @@ public class Util {
             rootPath=context.getExternalFilesDir(null).getAbsoluteFile()+"/"+path;
             file= new File(rootPath);
         }
-
         if (!file.exists()) {
             file.mkdirs();
         }

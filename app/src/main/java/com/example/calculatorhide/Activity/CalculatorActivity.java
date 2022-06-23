@@ -1,10 +1,8 @@
 package com.example.calculatorhide.Activity;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.PreferenceManager;
 import com.example.calculatorhide.databinding.ActivityCalculatorBinding;
 
@@ -69,8 +66,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         binding.buttonAddition.setOnClickListener(this);
         binding.buttonEqual.setOnClickListener(this);
         binding.buttonDot.setOnClickListener(this);
-
-
     }
 
     private void setOnTouchListener()
@@ -377,7 +372,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         if(PreferenceManager.getInstance(getApplicationContext()).getPass(activity).equalsIgnoreCase(""))
         {
             PreferenceManager.getInstance(getApplicationContext()).setPass(activity,result);
-
             startActivity(new Intent(activity,HomeActivity.class));
         }
         else  if(!PreferenceManager.getInstance(getApplicationContext()).getPass(activity).equalsIgnoreCase("")&&PreferenceManager.getInstance(getApplicationContext()).getPass(activity).equalsIgnoreCase(result))
