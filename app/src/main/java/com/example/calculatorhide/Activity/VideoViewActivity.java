@@ -60,7 +60,6 @@ public class VideoViewActivity extends AppCompatActivity {
             binding.vvImg.setVideoPath(media.getPath());
             binding.vvImg.start();
         }
-        //
         binding.ivInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,12 +75,9 @@ public class VideoViewActivity extends AppCompatActivity {
         hideFiles.getSuccess(new HideFiles.SuccessInterface() {
             @Override
             public void onSuccess(boolean value) {
-
             }
-
             @Override
             public void onLoading(boolean value) {
-
             }
         });
     }
@@ -94,7 +90,6 @@ public class VideoViewActivity extends AppCompatActivity {
         TextView tvCrPath =dialogView.findViewById(R.id.tvCurentPath);
         TextView tvDsPath =dialogView.findViewById(R.id.tvOrPath);
         TextView tvAdded=dialogView.findViewById(R.id.tvAddedOn);
-        //
         tvDsPath.setText(media.getOrPath());
         tvCrPath.setText(media.getPath());
         File f=new File(media.getOrPath());

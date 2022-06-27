@@ -29,7 +29,7 @@ public class securityquestionActivity extends AppCompatActivity implements Adapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_securityquestion);
-        question = findViewById(R.id.question);
+        question = findViewById(R.id.question_spinner);
         maintext = findViewById(R.id.maintext);
         maintext.setText(SplashActivity.resources.getString(R.string.Set_security_question));
         oldsecurity = findViewById(R.id.oldsecurity);
@@ -38,7 +38,7 @@ public class securityquestionActivity extends AppCompatActivity implements Adapt
         selectquestion.setText(SplashActivity.resources.getString(R.string.Select_security_question));
         enteryourans = findViewById(R.id.enteryouranswer);
         enteryourans.setText(SplashActivity.resources.getString(R.string.Enter_your_answer));
-        confirm = findViewById(R.id.confirm);
+        confirm = findViewById(R.id.submit_btn);
         confirm.setText(SplashActivity.resources.getString(R.string.Confirm));
         hinit = findViewById(R.id.hinit);
         hinit.setText(SplashActivity.resources.getString(R.string.Press_112));

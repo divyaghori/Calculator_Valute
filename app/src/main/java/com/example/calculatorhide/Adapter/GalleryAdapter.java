@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -47,19 +48,20 @@ public class GalleryAdapter extends ArrayAdapter<MediaItem> {
 
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_media_item, parent, false);
             ImageView ivItem = view.findViewById(R.id.ivItem);
-        if(item!=null) {
-            if (item.getType().equalsIgnoreCase("image")) {
-                Glide.with(mContext)
+            CheckBox checkBox = view.findViewById(R.id.checkbox);
+           if(item!=null) {
+              if (item.getType().equalsIgnoreCase("image")) {
+                 Glide.with(mContext)
                         .load(item.getPath())
                         .centerCrop()
                         .into(ivItem);
-                view.setOnClickListener(new View.OnClickListener() {
+                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(clickItemInterface!=null)
-                        {
+                         if(clickItemInterface!=null)
+                         {
                             clickItemInterface.onItemClick(position,mitemList.get(position).getPath());
-                        }
+                         }
                     }
                 });
                 view.setOnLongClickListener(new View.OnLongClickListener() {

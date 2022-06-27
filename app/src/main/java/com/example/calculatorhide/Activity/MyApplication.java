@@ -20,8 +20,10 @@ import android.app.Application;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -54,6 +56,9 @@ public class MyApplication extends Application
     public static String Ad_Open = "ca-app-pub-3940256099942544/3419835294";
     public static String Ad_Intertitial = "ca-app-pub-3940256099942544/1033173712";
     public static String Ad_Banner = "ca-app-pub-3940256099942544/6300978111";
+    public static String PIN = "pin";
+    public static String QUESTION = "Question";
+    public static String ANSWER = "Answer";
 
 
     @Override
@@ -316,5 +321,54 @@ public class MyApplication extends Application
             isShowingAd = true;
             appOpenAd.show(activity);
         }
+    }
+
+    public static void SetIntToPrefs(Activity activity, String key, int value) {
+        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
+    public static int GetIntFromPrefs(Activity activity, String key) {
+        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
+        return prefs.getInt(key, 0);
+    }
+
+    public static void SetStringToPrefs(Context context, String key, String value) {
+//        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        editor.putString(key, value);
+//        editor.commit();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.apply(); // or editor.commit()
+
+    }
+
+    public static String GetStringFromPrefs(Context context, String key) {
+//        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
+//        return prefs.getString(key, "");
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
+
+    public static void SetBooleanToPrefs(Activity activity, String key, boolean value) {
+        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+
+    public static boolean GetBooleanFromPrefs(Activity activity, String key) {
+        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
+        return prefs.getBoolean(key, false);
+    }
+
+    public static boolean CheckPrefs(Context context, String key) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.contains(key);
     }
 }

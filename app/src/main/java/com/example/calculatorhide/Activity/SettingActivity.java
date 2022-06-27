@@ -155,7 +155,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SettingActivity.this,NewPasswordActivity.class);
+                Intent i = new Intent(SettingActivity.this,ConfirmQuestionActivity.class);
                 startActivity(i);
             }
         });

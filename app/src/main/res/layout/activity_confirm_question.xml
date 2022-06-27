@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:background="@color/purple_700">
+
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
@@ -21,8 +22,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/back">
-        </ImageView>
+            android:src="@drawable/back"></ImageView>
 
         <TextView
             android:id="@+id/maintext"
@@ -31,7 +31,7 @@
             android:layout_centerInParent="true"
             android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
-            android:text="New Password"
+            android:text="Security Question"
             android:textColor="@color/white"
             android:textSize="20sp"></TextView>
 
@@ -43,53 +43,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:fontFamily="@font/varelaroundregular"
-            android:textSize="15sp"
             android:layout_marginBottom="@dimen/_15sdp"
-            android:text="Enter Your Password">
+            android:fontFamily="@font/varelaroundregular"
+            android:text="Enter Your Password"
+            android:textColor="@color/white"
+            android:textSize="15sp">
 
         </TextView>
 
 
         <EditText
-            android:id="@+id/pin_et"
+            android:id="@+id/answer_et"
             android:layout_width="match_parent"
-            android:background="@drawable/whitecorner"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_35sdp"
             android:layout_marginRight="@dimen/_35sdp"
-            android:textColor="#686666"
-            android:hint="Code..."
+            android:background="@drawable/whitecorner"
             android:fontFamily="@font/varelaroundregular"
             android:paddingLeft="@dimen/_10sdp"
-            android:layout_height="wrap_content">
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:hint="Code..."
+            android:textColor="#686666">
 
         </EditText>
-
 
 
         <TextView
             android:id="@+id/submit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:fontFamily="@font/varelaroundregular"
-            android:textSize="16sp"
-            android:paddingLeft="@dimen/_13sdp"
-            android:paddingRight="@dimen/_13sdp"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/home_item"
-            android:text="Confirm">
+            android:fontFamily="@font/varelaroundregular"
+            android:paddingLeft="@dimen/_13sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_13sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Confirm"
+            android:textColor="@color/white"
+            android:textSize="16sp">
 
         </TextView>
 

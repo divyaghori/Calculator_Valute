@@ -28,8 +28,17 @@
         android:theme="@style/Theme.CalculatorHide"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.TouchImageView"
+            android:name=".Activity.CalculatorActivityy"
             android:exported="false" />
+        <activity android:name=".Activity.QuestionsActivity">
+
+        </activity>
+        <activity android:name=".Activity.ConfirmQuestionActivity">
+
+        </activity>
+        <activity android:name=".Activity.NewPinActivity">
+
+        </activity>
         <activity
             android:name=".Activity.RatingDialogActivity"
             android:exported="false" />
@@ -1063,9 +1072,6 @@
             android:name=".Activity.SettingActivity"
             android:exported="false" />
         <activity android:name=".Activity.MultiAudioSelectActivity" />
-        <activity
-            android:name=".Activity.CalculatorActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.SecurityQuesActivity"
             android:exported="false" />

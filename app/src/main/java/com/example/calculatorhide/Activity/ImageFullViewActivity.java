@@ -39,7 +39,7 @@ public class ImageFullViewActivity extends AppCompatActivity {
     private MediaItem media;
     HidedDatabase hidedDatabase;
     HideFiles hideFiles;
-    ImageView ivImg;
+    TouchImageView ivImg;
     String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

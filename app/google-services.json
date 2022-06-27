@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "362821641423",
+    "project_id": "calchider-623f4",
+    "storage_bucket": "calchider-623f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362821641423:android:fa07ab2befd54745e083ba",
+        "android_client_info": {
+          "package_name": "com.example.calculatorhide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362821641423-01issfvkao8tmtir7035ihrr4c915jvi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8gbJxGLJWg2SSoyap5dUv6pcpFZVeWMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362821641423-01issfvkao8tmtir7035ihrr4c915jvi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

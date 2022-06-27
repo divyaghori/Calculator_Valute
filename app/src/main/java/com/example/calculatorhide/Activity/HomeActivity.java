@@ -33,6 +33,7 @@ import com.example.calculatorhide.Adapter.Home_Adapter;
 import com.example.calculatorhide.Model.HomeModel;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
+import com.example.calculatorhide.Utils.InterstitialAdManager;
 import com.example.calculatorhide.toDoList.MainActivity;
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.ads.AdError;
@@ -50,12 +51,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HomeActivity extends AppCompatActivity {
 
-  //  private InterstitialAd mInterstitialAd;
-
-
+    AtomicBoolean atomicBooleanGallary = new AtomicBoolean();
+    AtomicBoolean atomicBooleanVideo = new AtomicBoolean();
+    AtomicBoolean atomicBooleanAudio = new AtomicBoolean();
+    AtomicBoolean atomicBooleanAppLock = new AtomicBoolean();
+    AtomicBoolean atomicBooleanDocuments = new AtomicBoolean();
+    AtomicBoolean atomicBooleanFileManager = new AtomicBoolean();
+    AtomicBoolean atomicBooleanNote = new AtomicBoolean();
+    AtomicBoolean atomicBooleanRecycleBin = new AtomicBoolean();
+    AtomicBoolean atomicBooleanSettings = new AtomicBoolean();
+    AtomicBoolean atomicBooleanIcon = new AtomicBoolean();
     RecyclerView listhome;
     private Context context=this;
     Home_Adapter home_adapter;
@@ -73,11 +82,10 @@ public class HomeActivity extends AppCompatActivity {
     };
     ImageView more;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-  //  private AdView mAdView;
     Activity activity;
-
     FloatingActionButton gallery,fabvideo,fabapplock,addfolder,howtouse;
     public AlertDialog dialog;
+    private InterstitialAdManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         if (SDK_INT >= 23) {
             checkMultiplePermissions();
         }
+        setAdAtomic();
         findID();
         fabvideo = findViewById(R.id.video);
         fabapplock = findViewById(R.id.applock);
@@ -127,24 +136,18 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         activity = this;
-//        GoogleAds.bannerAdLoadGoogle(activity,findViewById(R.id.Ad_Contianer));
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : " ,"Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        }else {
-            Log.e("Home : " ,"in Else part");
-        }
+    }
+    private void setAdAtomic() {
+        atomicBooleanGallary.set(true);
+        atomicBooleanVideo.set(true);
+        atomicBooleanAudio.set(true);
+        atomicBooleanAppLock.set(true);
+        atomicBooleanDocuments.set(true);
+        atomicBooleanFileManager.set(true);
+        atomicBooleanNote.set(true);
+        atomicBooleanRecycleBin.set(true);
+        atomicBooleanSettings.set(true);
+        atomicBooleanIcon.set(true);
     }
     private void findID() {
         more = findViewById(R.id.more);
@@ -159,22 +162,107 @@ public class HomeActivity extends AppCompatActivity {
         home_adapter = new Home_Adapter(getApplicationContext(),homeModelList, new Home_Adapter.HomeAdapterInterface() {
             @Override
             public void onRowClick(int click) {
-
                 if(click == 0){
-                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
-                    i.putExtra("index",0);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",0);
+                                    startActivity(i);
+                                }
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",0);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",0);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",0);
+                        startActivity(i);
+                    }
                 }
                 if(click == 1){
-                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
-                    i.putExtra("index",1);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",1);
+                                    startActivity(i);
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",1);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",1);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",1);
+                        startActivity(i);
+                    }
+
                 }
                 if(click == 2){
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",2);
+                                    startActivity(i);
+                                }
 
-                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
-                    i.putExtra("index",2);
-                    startActivity(i);
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",2);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",2);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",2);
+                        startActivity(i);
+                    }
                 }
                 if(click == 3){
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sunfreeenergy.in/applocker/"));
@@ -182,34 +270,209 @@ public class HomeActivity extends AppCompatActivity {
                 }
 
                 if(click == 4){
-                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
-                    i.putExtra("index",4);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",4);
+                                    startActivity(i);
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",4);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",4);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",4);
+                        startActivity(i);
+                    }
+
                 }
                 if(click == 5){
-                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
-                    i.putExtra("index",5);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",5);
+                                    startActivity(i);
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",5);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",5);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",5);
+                        startActivity(i);
+                    }
                 }
                 if(click == 8){
-                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
-                    i.putExtra("index",8);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",8);
+                                    startActivity(i);
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",8);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",8);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",8);
+                        startActivity(i);
+                    }
                 }
                 if(click == 6){
-                    Intent i = new Intent(HomeActivity.this, TransitionActivity.class);
-                    i.putExtra("index",6);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",6);
+                                    startActivity(i);
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",6);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",6);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",6);
+                        startActivity(i);
+                    }
                 }
                 if(click == 7){
-                    Intent i = new Intent(HomeActivity.this, TransitionActivity.class);
-                    i.putExtra("index",7);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",7);
+                                    startActivity(i);
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",7);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",7);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",7);
+                        startActivity(i);
+                    }
                 }
                 if(click == 9){
-                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
-                    i.putExtra("index",9);
-                    startActivity(i);
+                    if (atomicBooleanGallary.get()) {
+                        atomicBooleanGallary.getAndSet(false);
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",9);
+                                    startActivity(i);
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                                    i.putExtra("index",9);
+                                    startActivity(i);
+                                }
+                            });
+                            interstitialAd.show(HomeActivity.this);
+                        } else {
+                            Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                            i.putExtra("index",9);
+                            startActivity(i);
+                        }
+                    } else {
+                        Intent i = new Intent(HomeActivity.this,TransitionActivity.class);
+                        i.putExtra("index",9);
+                        startActivity(i);
+                    }
                 }
 
             }
@@ -218,7 +481,7 @@ public class HomeActivity extends AppCompatActivity {
         listhome.setAdapter(home_adapter);
     }
     private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(HomeActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int result = ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
@@ -265,7 +528,7 @@ public class HomeActivity extends AppCompatActivity {
                 permissionsNeeded.add("Write Storage");
             }
 
-            if (!addPermission(permissionsList, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            if (!addPermission(permissionsList, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 permissionsNeeded.add("Read Storage");
             }
 //            if (!addPermission(permissionsList, Manifest.permission.MANAGE_EXTERNAL_STORAGE)) {
@@ -294,12 +557,12 @@ public class HomeActivity extends AppCompatActivity {
                 Map<String, Integer> perms = new HashMap<String, Integer>();
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
 //                perms.put(Manifest.permission.MANAGE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-                perms.put(android.Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 for (int i = 0; i < permissions.length; i++)
                     perms.put(permissions[i], grantResults[i]);
                 if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
 //                        perms.get(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                        && perms.get(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        && perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     createAppFolder();
                     return;
                 } else {
@@ -336,6 +599,8 @@ public class HomeActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume() {
+        manager = new InterstitialAdManager();
+        manager.fetchAd(this,true);
         if (SDK_INT >= Build.VERSION_CODES.R) {
             if(Environment.isExternalStorageManager())
             {
@@ -380,6 +645,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                finishAffinity();
             }
         });
         dialog = builder.create();

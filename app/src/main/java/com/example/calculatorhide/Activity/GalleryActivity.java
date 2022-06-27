@@ -11,17 +11,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -53,6 +57,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GalleryActivity extends AppCompatActivity {
     HidedDatabase hidedDatabase;
@@ -69,44 +75,45 @@ public class GalleryActivity extends AppCompatActivity {
     TextView maintext, filenotfound;
     private AdView mAdView;
     ImageView image;
+    CheckBox check;
+    private List<MediaItem> selectedItems = new ArrayList<>();
+    ImageView unlock;
+    boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         activity = this;
-
         hidedDatabase = HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
-//        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-//        if (interstitialAd != null) {
-//            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-//                @Override
-//                public void onAdDismissedFullScreenContent() {
-//                    GoogleAds.loadpreloadFullAds(activity);
-//                }
-//
-//                @Override
-//                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-//                    super.onAdFailedToShowFullScreenContent(adError);
-//                    Log.e("Home : ", "Error : " + adError);
-//                }
-//            });
-//            interstitialAd.show(activity);
-//        } else {
-//            Log.e("Home : ", "in Else part");
-//        }
+        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
+        if (interstitialAd != null) {
+            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    GoogleAds.loadpreloadFullAds(activity);
+                }
 
-        findId();
+                @Override
+                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                    super.onAdFailedToShowFullScreenContent(adError);
+                    Log.e("Home : ", "Error : " + adError);
+                }
+            });
+            interstitialAd.show(activity);
+        } else {
+            Log.e("Home : ", "in Else part");
+        }
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+        findId();
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
     }
 
     private void findId() {
@@ -116,6 +123,8 @@ public class GalleryActivity extends AppCompatActivity {
         gvGallery = findViewById(R.id.gvGallery);
         tvNoData = findViewById(R.id.tvNodata);
         image = findViewById(R.id.image);
+        check = findViewById(R.id.check);
+        unlock = findViewById(R.id.unlock);
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,7 +147,6 @@ public class GalleryActivity extends AppCompatActivity {
                 Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show();
                 getImages();
                 dialogue.dismiss();
-
             }
 
             @Override
@@ -146,7 +154,25 @@ public class GalleryActivity extends AppCompatActivity {
                 dialogue.show();
             }
         });
-
+        Timer T = new Timer();
+        T.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnChoosePhotosClick();
+                        checked = check.isChecked();
+                    }
+                });
+            }
+        }, 1000, 1000);
+        unlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showUnHideRcyclePopup1(0, selectedItems);
+            }
+        });
     }
 
     private void getImages() {
@@ -155,29 +181,39 @@ public class GalleryActivity extends AppCompatActivity {
         if (mediaItems.size() != 0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
-            adapter = new GalleryAdapter(activity, mediaItems);
+            adapter = new GalleryAdapter(activity, mediaItems, checked);
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
-            adapter.setClickItemInterface(new GalleryAdapter.ClickItemInterface() {
-                @Override
-                public void onItemClick(int position, String path) {
-                    Intent intent = new Intent(activity, ImageFullViewActivity.class);
-                    intent.putExtra("path", path);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onItemLongClick(int position, MediaItem item) {
-                    showUnHideRcyclePopup(position,item);
-                }
-            });
+//            adapter.setClickItemInterface(new GalleryAdapter.ClickItemInterface() {
+//                @Override
+//                public void onItemClick(int position, String path) {
+//                    Intent intent = new Intent(activity, ImageFullViewActivity.class);
+//                    intent.putExtra("path", path);
+//                    startActivity(intent);
+//                }
+//                @Override
+//                public void onItemLongClick(int position, MediaItem item) {
+//                    showUnHideRcyclePopup(position,item);
+//                }
+//            });
         } else {
             tvNoData.setVisibility(View.VISIBLE);
             image.setVisibility(View.VISIBLE);
         }
-
     }
+
+    public void btnChoosePhotosClick() {
+        if(selectedItems.size() != 0) {
+            selectedItems = adapter.getCheckedItems();
+            if (selectedItems.size() == 0) {
+                unlock.setVisibility(View.GONE);
+            } else {
+                unlock.setVisibility(View.VISIBLE);
+            }
+        }
+        Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
+    }
+
     public File getFolder() {
         String rootPath = "";
         String path = ".CalculatorVault";
@@ -190,7 +226,7 @@ public class GalleryActivity extends AppCompatActivity {
         } else {
 //            file = new File(Environment.getExternalStorageDirectory(), path);
             rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
-            Log.d("root",rootPath);
+            Log.d("root", rootPath);
             file = new File(rootPath);
         }
         if (!file.exists()) {
@@ -198,6 +234,7 @@ public class GalleryActivity extends AppCompatActivity {
         }
         return file;
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -251,13 +288,148 @@ public class GalleryActivity extends AppCompatActivity {
         });
 
         alertDialog.show();
+    }
+    public void showUnHideRcyclePopup1(int position, List<MediaItem> itemList) {
+        MediaItem item = itemList.get(position);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.long_ubhide_popup, null);
+        dialogBuilder.setView(dialogView);
+        TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
+        TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
+        AlertDialog alertDialog = dialogBuilder.create();
+        tvUnHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                List<MediaItem> itemList = new ArrayList<>();
+//                itemList.add(item);
+                hideFiles.unHideFile(itemList);
+                alertDialog.dismiss();
+            }
+        });
+        tvRecycle.setVisibility(View.GONE);
+        tvRecycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hidedDatabase.mediaDao().addtoRecycle(1, item.getPath());
+                getImages();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
 
     }
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(GalleryActivity.this,HomeActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent i = new Intent(GalleryActivity.this, HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
+
+    public class GalleryAdapter extends ArrayAdapter<MediaItem> {
+        private Context mContext;
+        private List<MediaItem> mitemList;
+        boolean cheked;
+        SparseBooleanArray mSparseBooleanArray;
+
+        public GalleryAdapter(Context context, List<MediaItem> itemList, boolean checked) {
+            super(context, 0, itemList);
+            mContext = context;
+            mitemList = itemList;
+            this.cheked = checked;
+            mSparseBooleanArray = new SparseBooleanArray();
+        }
+
+        public ArrayList<MediaItem> getCheckedItems() {
+            ArrayList<MediaItem> mTempArry = new ArrayList<MediaItem>();
+            for (int i = 0; i < mitemList.size(); i++) {
+                if (mSparseBooleanArray.get(i)) {
+                    mTempArry.add(mitemList.get(i));
+                }
+            }
+            return mTempArry;
+        }
+
+        @Override
+        public int getCount() {
+            return mitemList.size();
+        }
+
+        @Nullable
+        @Override
+        public MediaItem getItem(int position) {
+            return mitemList.get(position);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            MediaItem item = mitemList.get(position);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_media_item, parent, false);
+            ImageView ivItem = view.findViewById(R.id.ivItem);
+            CheckBox mCheckBox = view.findViewById(R.id.checkbox);
+//            if(checked == true) {
+//                mCheckBox.setVisibility(View.VISIBLE);
+//            }
+            mCheckBox.setTag(position);
+            mCheckBox.setChecked(mSparseBooleanArray.get(position));
+            mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
+            if (item != null) {
+                if (item.getType().equalsIgnoreCase("image")) {
+                    Glide.with(mContext)
+                            .load(item.getPath())
+                            .centerCrop()
+                            .into(ivItem);
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(activity, ImageFullViewActivity.class);
+                            intent.putExtra("path", mitemList.get(position).getPath());
+                            startActivity(intent);
+                        }
+                    });
+                    view.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            showUnHideRcyclePopup(position, item);
+                            return false;
+                        }
+                    });
+                }
+                if (item.getType().equalsIgnoreCase("video")) {
+                    Bitmap bitmap2 = ThumbnailUtils.createVideoThumbnail(item.getPath(), MediaStore.Images.Thumbnails.MINI_KIND);
+                    Glide.with(mContext)
+                            .load(bitmap2)
+                            .centerCrop()
+                            .into(ivItem);
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(activity, ImageFullViewActivity.class);
+                            intent.putExtra("path", mitemList.get(position).getPath());
+                            startActivity(intent);
+                        }
+                    });
+                    view.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            showUnHideRcyclePopup(position, item);
+                            return false;
+                        }
+                    });
+                }
+
+            }
+            return view;
+        }
+
+        CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+            }
+        };
+    }
+
 }

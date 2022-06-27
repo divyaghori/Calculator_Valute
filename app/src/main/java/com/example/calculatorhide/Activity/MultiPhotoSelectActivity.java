@@ -171,10 +171,8 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             this.mList = imageList;
             imageLoader = ImageLoader.getInstance();
         }
-
         public ArrayList<String> getCheckedItems() {
             ArrayList<String> mTempArry = new ArrayList<String>();
-
             for (int i = 0; i < mList.size(); i++) {
                 if (mSparseBooleanArray.get(i)) {
                     mTempArry.add(mList.get(i));
@@ -182,7 +180,6 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             }
             return mTempArry;
         }
-
         @Override
         public int getCount() {
             return imageUrls.size();

@@ -6,20 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context="com.example.calculatorhide.Activity.ImageFullViewActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"/>
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
         <VideoView
             android:id="@+id/vvImg"
             android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_400sdp"/>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
     <LinearLayout
@@ -27,7 +21,9 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:padding="@dimen/_6sdp"
+        android:background="#000000"
+        android:alpha="0.5"
+        android:padding="@dimen/_10sdp"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/ivInfo"

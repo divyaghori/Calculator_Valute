@@ -86,7 +86,7 @@
 
 
         <Spinner
-            android:id="@+id/question"
+            android:id="@+id/question_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_25sdp"
@@ -118,6 +118,7 @@
 
 
         <EditText
+            android:id="@+id/answer_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_25sdp"
@@ -127,7 +128,7 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:text="Code..."
+            android:hint="Code..."
             android:textColor="#686666">
 
         </EditText>
@@ -149,7 +150,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/confirm"
+            android:id="@+id/submit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
