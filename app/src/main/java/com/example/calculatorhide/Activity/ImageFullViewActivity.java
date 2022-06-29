@@ -2,6 +2,7 @@ package com.example.calculatorhide.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,8 @@ import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.HideFiles;
+import com.example.calculatorhide.Utils.InterstitialAdManager;
+import com.example.calculatorhide.Utils.Util;
 import com.example.calculatorhide.databinding.ActivityImageFullViewBinding;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -29,6 +32,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -41,15 +45,24 @@ public class ImageFullViewActivity extends AppCompatActivity {
     HideFiles hideFiles;
     TouchImageView ivImg;
     String path;
+    private boolean isAdShowen;
+    private InterstitialAdManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityImageFullViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         activity=this;
+        manager = new InterstitialAdManager();
+        manager.fetchAd(this,true);
+        if (Util.activityData_list.contains("ImageFullViewActivity")) {
+            isAdShowen = false;
+        } else {
+            isAdShowen = true;
+            Util.activityData_list.add("ImageFullViewActivity");
+        }
         ivImg = findViewById(R.id.ivImg);
         hidedDatabase=HidedDatabase.getDatabse(activity);
-//        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         if(getIntent()!=null)
         {
             path=getIntent().getStringExtra("path");
@@ -75,25 +88,30 @@ public class ImageFullViewActivity extends AppCompatActivity {
         binding.ivUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-                if (interstitialAd != null) {
-                    interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            GoogleAds.loadpreloadFullAds(activity);
-                        }
+                if (isAdShowen) {
+                    InterstitialAd interstitialAd = manager.showIfItAvaible();
+                    if (interstitialAd != null) {
+                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                super.onAdDismissedFullScreenContent();
+                                showUnHideRcyclePopup(media);
 
-                        @Override
-                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                            super.onAdFailedToShowFullScreenContent(adError);
-                            Log.e("Home : ", "Error : " + adError);
-                        }
-                    });
-                    interstitialAd.show(activity);
+                            }
+
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                super.onAdFailedToShowFullScreenContent(adError);
+                                showUnHideRcyclePopup(media);
+
+                            }
+                        });
+                        interstitialAd.show(ImageFullViewActivity.this);
+                    }
                 } else {
-                    Log.e("Home : ", "in Else part");
+                    showUnHideRcyclePopup(media);
+
                 }
-                showUnHideRcyclePopup(media);
             }
         });
         hideFiles.getSuccess(new HideFiles.SuccessInterface() {

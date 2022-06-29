@@ -33,24 +33,6 @@ public class DisguiseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disguise);
         activity = this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
         maintext = findViewById(R.id.maintext);
         maintext.setText(SplashActivity.resources.getString(R.string.Disguise_Icon));
         back = findViewById(R.id.back);

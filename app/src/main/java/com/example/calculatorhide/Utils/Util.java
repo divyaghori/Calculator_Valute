@@ -5,8 +5,20 @@ import android.os.Build;
 import android.os.Environment;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Util {
+
+    // public static int CurrentScreen;
+
+    // 0 Spalsj
+    // 1 Calculator
+    //2 Home
+    // 3 TransitionActivity
+    // 4
+    public static List<String> activityData_list = new ArrayList<>();
+
 
     public File getFolder(Context context)
     {

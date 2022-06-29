@@ -34,23 +34,7 @@ public class DocumentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_document);
         findId();
         activity = this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
+
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);

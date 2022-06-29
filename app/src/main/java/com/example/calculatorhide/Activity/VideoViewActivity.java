@@ -1,5 +1,6 @@
 package com.example.calculatorhide.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,8 +18,13 @@ import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.HideFiles;
+import com.example.calculatorhide.Utils.InterstitialAdManager;
+import com.example.calculatorhide.Utils.Util;
 import com.example.calculatorhide.databinding.ActivityImageFullViewBinding;
 import com.example.calculatorhide.databinding.ActivityVideoViewBinding;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +40,21 @@ public class VideoViewActivity extends AppCompatActivity {
     HidedDatabase hidedDatabase;
     HideFiles hideFiles;
     String path;
+    private boolean isAdShowen;
+    private InterstitialAdManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityVideoViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        manager = new InterstitialAdManager();
+        manager.fetchAd(this,true);
+        if (Util.activityData_list.contains("VideoViewActivity")) {
+            isAdShowen = false;
+        } else {
+            isAdShowen = true;
+            Util.activityData_list.add("VideoViewActivity");
+        }
         hidedDatabase=HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         if(getIntent()!=null)
@@ -69,7 +85,26 @@ public class VideoViewActivity extends AppCompatActivity {
         binding.ivUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showUnHideRcyclePopup(media);
+                if (isAdShowen) {
+                    InterstitialAd interstitialAd = manager.showIfItAvaible();
+                    if (interstitialAd != null) {
+                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                super.onAdDismissedFullScreenContent();
+                                showUnHideRcyclePopup(media);
+                            }
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                super.onAdFailedToShowFullScreenContent(adError);
+                                showUnHideRcyclePopup(media);
+                            }
+                        });
+                        interstitialAd.show(VideoViewActivity.this);
+                    }
+                } else {
+                    showUnHideRcyclePopup(media);
+                }
             }
         });
         hideFiles.getSuccess(new HideFiles.SuccessInterface() {

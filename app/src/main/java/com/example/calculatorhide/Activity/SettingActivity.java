@@ -51,24 +51,6 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         activity = this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
         t1 = findViewById(R.id.t1);
         t2 = findViewById(R.id.t2);
         t3 = findViewById(R.id.t3);

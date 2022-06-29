@@ -33,6 +33,7 @@ import java.util.Map;
 public class GuideActivity extends AppCompatActivity {
     LinearLayout selectBtn,privacy,term;
     public AlertDialog dialog;
+
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     public static int REQUEST_PERMISSION = 132;
     @Override
@@ -66,7 +67,6 @@ public class GuideActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 permissiondialog();
-
             }
         });
     }
@@ -81,7 +81,6 @@ public class GuideActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Thank You", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-
             }
         });
         grant.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +93,7 @@ public class GuideActivity extends AppCompatActivity {
         dialog = builder.create();
         dialog.show();
     }
-    public void grantStoragePermission() {
+    public void grantStoragePermission()   {
         if (Build.VERSION.SDK_INT >= 30) {
             try {
                 Intent intent = new Intent("android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION");
@@ -122,12 +121,10 @@ public class GuideActivity extends AppCompatActivity {
             case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
                 Map<String, Integer> perms = new HashMap<String, Integer>();
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-//                perms.put(Manifest.permission.MANAGE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 perms.put(android.Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 for (int i = 0; i < permissions.length; i++)
                     perms.put(permissions[i], grantResults[i]);
                 if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-//                        perms.get(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                         && perms.get(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     return;
                 } else {

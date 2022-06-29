@@ -17,16 +17,20 @@ public class InterstitialAdManager {
         if (isCal) {
             SessionManager sessionManager = new SessionManager(context);
             AdRequest adRequest = new AdRequest.Builder().build();
+
             InterstitialAd.load(context, sessionManager.getCalAdId(), adRequest,
                     new InterstitialAdLoadCallback() {
                         @Override
                         public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            // The mInterstitialAd reference will be null until
+                            // an ad is loaded.
                             mInterstitialAd = interstitialAd;
                             Log.i("TAG", "onAdLoaded");
                         }
 
                         @Override
                         public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            // Handle the error
                             Log.d("TAG", loadAdError.toString());
                             mInterstitialAd = null;
                         }
@@ -38,12 +42,15 @@ public class InterstitialAdManager {
                     new InterstitialAdLoadCallback() {
                         @Override
                         public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            // The mInterstitialAd reference will be null until
+                            // an ad is loaded.
                             mInterstitialAd = interstitialAd;
                             Log.i("TAG", "onAdLoaded");
                         }
 
                         @Override
                         public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            // Handle the error
                             Log.d("TAG", loadAdError.toString());
                             mInterstitialAd = null;
                         }

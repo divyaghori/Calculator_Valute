@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -41,7 +42,9 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
+import com.example.calculatorhide.Utils.InterstitialAdManager;
 import com.example.calculatorhide.Utils.RealPathUtil;
+import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
@@ -57,29 +60,24 @@ public class MultiPhotoSelectActivity extends BaseActivity {
     private GridView gridView;
     private LinearLayout llCount;
     private List<String>selectedItems=new ArrayList<>();
+    private InterstitialAdManager manager;
+    AtomicBoolean atomicBooleanGallary = new AtomicBoolean();
+    private boolean isAdShowen;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_image_grid);
+        manager = new InterstitialAdManager();
+        manager.fetchAd(this,true);
+        if (Util.activityData_list.contains("MultiPhotoSelectActivity")) {
+            isAdShowen = false;
+        } else {
+            isAdShowen = true;
+            Util.activityData_list.add("MultiPhotoSelectActivity");
+        }
+        atomicBooleanGallary.set(true);
         activity = this;
-//        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-//        if (interstitialAd != null) {
-//            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-//                @Override
-//                public void onAdDismissedFullScreenContent() {
-//                    GoogleAds.loadpreloadFullAds(activity);
-//                }
-//                @Override
-//                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-//                    super.onAdFailedToShowFullScreenContent(adError);
-//                    Log.e("Home : ", "Error : " + adError);
-//                }
-//            });
-//            interstitialAd.show(activity);
-//        } else {
-//            Log.e("Home : ", "in Else part");
-//        }
         String sort=MediaStore.Images.Media.DATE_ADDED + " DESC";
         final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
         final String orderBy = MediaStore.Images.Media.DATE_TAKEN;
@@ -92,8 +90,6 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
             imageUrls.add(imagecursor.getString(dataColumnIndex));
         }
-//        String sort=MediaStore.Files.FileColumns.DATE_ADDED + " DESC";
-//        imageUrls.addAll(getImageList(sort));
         imageAdapter = new ImageAdapter(this, imageUrls);
         gridView = (GridView) findViewById(R.id.gridview);
         count =  findViewById(R.id.count);
@@ -116,27 +112,36 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(selectedItems.size()!=0) {
-                    InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-                    if (interstitialAd != null) {
-                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                GoogleAds.loadpreloadFullAds(activity);
-                            }
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                super.onAdFailedToShowFullScreenContent(adError);
-                                Log.e("Home : ", "Error : " + adError);
-                            }
-                        });
-                        interstitialAd.show(activity);
+                    if (isAdShowen) {
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent intent = new Intent();
+                                    intent.putExtra("files", (Serializable) selectedItems);
+                                    setResult(2, intent);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent intent = new Intent();
+                                    intent.putExtra("files", (Serializable) selectedItems);
+                                    setResult(2, intent);
+                                    finish();
+                                }
+                            });
+                            interstitialAd.show(MultiPhotoSelectActivity.this);
+                        }
                     } else {
-                        Log.e("Home : ", "in Else part");
+                        Intent intent = new Intent();
+                        intent.putExtra("files", (Serializable) selectedItems);
+                        setResult(2, intent);
+                        finish();
                     }
-                    Intent intent = new Intent();
-                    intent.putExtra("files", (Serializable) selectedItems);
-                    setResult(2, intent);
-                    finish();
                 }
             }
         });

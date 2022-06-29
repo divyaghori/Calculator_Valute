@@ -25,24 +25,7 @@ public class FilemanagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_manager);
         activity = this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
 
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
         gallery = findViewById(R.id.gallery);
         video = findViewById(R.id.video);
         audio = findViewById(R.id.audio);

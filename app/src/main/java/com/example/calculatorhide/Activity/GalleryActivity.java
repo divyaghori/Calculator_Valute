@@ -87,29 +87,6 @@ public class GalleryActivity extends AppCompatActivity {
         activity = this;
         hidedDatabase = HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
         findId();
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -317,7 +294,6 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
         alertDialog.show();
-
     }
 
     @Override

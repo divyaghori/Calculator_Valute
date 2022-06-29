@@ -13,8 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calculatorhide.Dialog.TipsDialog;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.ActivityData;
 import com.example.calculatorhide.Utils.InterstitialAdManager;
 import com.example.calculatorhide.Utils.PreferenceManager;
+import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
@@ -36,10 +38,15 @@ public class CalculatorActivityy extends AppCompatActivity {
     private Activity activity = this;
     private InterstitialAdManager manager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator1);
+//        if (Util.isBackPressed)
+//            Util.isBackPressed
+    //    Util.activityData_list.add(new ActivityData(CalculatorActivityy.this,true));
+
         getWindow().setFlags(1024,1024);
         manager = new InterstitialAdManager();
         manager.fetchAd(this,false);
@@ -114,13 +121,17 @@ public class CalculatorActivityy extends AppCompatActivity {
                             @Override
                             public void onAdDismissedFullScreenContent() {
                                 super.onAdDismissedFullScreenContent();
-                                startActivity(new Intent(activity, HomeActivity.class));
+                                Intent intent = new Intent(activity,HomeActivity.class);
+                                intent.putExtra("start",false);
+                                startActivity(intent);
 
                             }
                             @Override
                             public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                                 super.onAdFailedToShowFullScreenContent(adError);
-                                startActivity(new Intent(activity, HomeActivity.class));
+                                Intent intent = new Intent(activity,HomeActivity.class);
+                                intent.putExtra("start",false);
+                                startActivity(intent);
                             }
                             @Override
                             public void onAdImpression() {
@@ -133,7 +144,9 @@ public class CalculatorActivityy extends AppCompatActivity {
                         });
                         interstitialAd.show(this);
                     } else {
-                        startActivity(new Intent(activity, HomeActivity.class));
+                        Intent intent = new Intent(activity,HomeActivity.class);
+                        intent.putExtra("start",false);
+                        startActivity(intent);
                     }
             }
         }
@@ -148,6 +161,12 @@ public class CalculatorActivityy extends AppCompatActivity {
 
         if (result != null)
             resultsTV.setText(String.valueOf(result.doubleValue()));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private void checkForPowerOf() {

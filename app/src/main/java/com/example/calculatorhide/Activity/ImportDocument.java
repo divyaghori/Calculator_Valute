@@ -60,24 +60,6 @@ public class ImportDocument extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_document);
         activity=this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
-        } else {
-            Log.e("Home : ", "in Else part");
-        }
         count = findViewById(R.id.count);
         checkFileFormat = "All Docs";
         itemsList = new ArrayList<>();

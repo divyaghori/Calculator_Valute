@@ -28,6 +28,8 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
+import com.example.calculatorhide.Utils.InterstitialAdManager;
+import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
@@ -38,6 +40,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MultVideoSelectActivity extends BaseActivity {
 
@@ -48,27 +51,21 @@ public class MultVideoSelectActivity extends BaseActivity {
     private LinearLayout llCount;
     ArrayList<String> selectedItems=new ArrayList<>();
     Activity activity;
+    private InterstitialAdManager manager;
+    AtomicBoolean atomicBooleanGallary = new AtomicBoolean();
+    private boolean isAdShowen;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_image_grid);
         activity = this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
+        manager = new InterstitialAdManager();
+        manager.fetchAd(this,true);
+        if (Util.activityData_list.contains("MultVideoSelectActivity")) {
+            isAdShowen = false;
         } else {
-            Log.e("Home : ", "in Else part");
+            isAdShowen = true;
+            Util.activityData_list.add("MultVideoSelectActivity");
         }
         final String[] columns = {MediaStore.Video.Media.DATA, MediaStore.Video.Media._ID};
         final String orderBy = MediaStore.Video.Media.DATE_TAKEN;
@@ -104,27 +101,37 @@ public class MultVideoSelectActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(selectedItems.size()!=0) {
-                    InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-                    if (interstitialAd != null) {
-                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                GoogleAds.loadpreloadFullAds(activity);
-                            }
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                super.onAdFailedToShowFullScreenContent(adError);
-                                Log.e("Home : ", "Error : " + adError);
-                            }
-                        });
-                        interstitialAd.show(activity);
+                    if (isAdShowen) {
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent intent = new Intent();
+                                    intent.putExtra("files", (Serializable) selectedItems);
+                                    setResult(2, intent);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent intent = new Intent();
+                                    intent.putExtra("files", (Serializable) selectedItems);
+                                    setResult(2, intent);
+                                    finish();
+                                }
+                            });
+                            interstitialAd.show(MultVideoSelectActivity.this);
+                        }
                     } else {
-                        Log.e("Home : ", "in Else part");
+                        Intent intent = new Intent();
+                        intent.putExtra("files", (Serializable) selectedItems);
+                        setResult(2, intent);
+                        finish();
                     }
-                    Intent intent = new Intent();
-                    intent.putExtra("files", (Serializable) selectedItems);
-                    setResult(2, intent);
-                    finish();
+
                 }
             }
         });

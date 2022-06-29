@@ -11,21 +11,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.ActivityData;
 import com.example.calculatorhide.Utils.GoogleAds;
+import com.example.calculatorhide.Utils.Util;
 import com.example.calculatorhide.toDoList.MainActivity;
 
 public class TransitionActivity extends AppCompatActivity {
-
-
 
     int index;
     CardView cardview;
     ImageView image;
     TextView text;
+    private int CurrentScreen ;
+    private boolean isShowAds;
+    private boolean isAdShowen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transtion);
+        if(Util.activityData_list.contains("TransitionActivity")){
+            isAdShowen = false;
+        }
+        else {
+            isAdShowen = true;
+            Util.activityData_list.add("TransitionActivity");
+        }
+
         cardview = findViewById(R.id.cardview);
         image = findViewById(R.id.image);
         text = findViewById(R.id.text);

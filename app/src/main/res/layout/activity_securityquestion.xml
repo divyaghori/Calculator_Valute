@@ -129,7 +129,7 @@
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
             android:hint="Code..."
-            android:textColor="#686666">
+            android:textColor="@color/white">
 
         </EditText>
 

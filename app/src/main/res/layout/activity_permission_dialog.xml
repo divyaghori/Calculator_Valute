@@ -7,7 +7,6 @@
     app:cardCornerRadius="@dimen/_7sdp"
     app:cardElevation="@dimen/_5sdp"
     android:layout_margin="@dimen/_5sdp"
-    app:cardBackgroundColor="@color/purple_700"
     tools:context=".Activity.RatingDialogActivity">
 
     <LinearLayout
@@ -19,10 +18,9 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:fontFamily="@font/varelaroundregular"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_margin="@dimen/_5sdp"
-            android:text="Necessary Permissions:-\n In order for the call to work properly please grant access to all files.">
+            android:text="Necessary Permissions:-\nIn order for the call to work properly please grant access to all files.">
 
         </TextView>
 

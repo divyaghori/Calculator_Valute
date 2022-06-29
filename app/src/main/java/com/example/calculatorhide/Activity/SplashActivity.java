@@ -1,4 +1,5 @@
 package com.example.calculatorhide.Activity;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calculatorhide.BuildConfig;
 import com.example.calculatorhide.LOCALIZATION.LocaleHelper;
+import com.example.calculatorhide.Utils.ActivityData;
 import com.example.calculatorhide.Utils.AdDetails;
 import com.example.calculatorhide.Utils.AppOpenManager;
 import com.example.calculatorhide.Utils.PreferenceManager;
 import com.example.calculatorhide.Utils.SessionManager;
+import com.example.calculatorhide.Utils.Util;
 import com.example.calculatorhide.databinding.ActivitySplashBinding;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -34,6 +37,8 @@ public class SplashActivity extends AppCompatActivity {
     private ActivitySplashBinding binding;
     private AppOpenManager appOpenManager;
     private SessionManager sessionManager;
+
+   // private int CurrentScreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,9 @@ public class SplashActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         firebaseData();
         initUi();
+      //  CurrentScreen = 0;
+       // if (CurrentScreen > Util.CurrentScreen){   Util.CurrentScreen = CurrentScreen;}
+       // Util.activityData_list.add(new ActivityData(SplashActivity.this,true));
     }
 
     private void firebaseData() {
@@ -56,6 +64,7 @@ public class SplashActivity extends AppCompatActivity {
                 sessionManager.setCanAdId(details.getCalAdId());
                 sessionManager.setOpenAppId(details.getOpenAppId());
                 sessionManager.setHomeAdId(details.getHomeAdId());
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -106,7 +115,6 @@ public class SplashActivity extends AppCompatActivity {
                                     } else {
                                         Intent mainIntent = new Intent(SplashActivity.this, CalculatorActivityy.class);
                                         startActivity(mainIntent);
-
                                     }
                                 }
                                 @Override
@@ -117,13 +125,13 @@ public class SplashActivity extends AppCompatActivity {
                                     } else {
                                         Intent mainIntent = new Intent(SplashActivity.this, CalculatorActivityy.class);
                                         startActivity(mainIntent);
-
                                     }
                                 }
                                 @Override
                                 public void onAdShowedFullScreenContent() {
                                 }
                             };
+
                     appOpenAd.setFullScreenContentCallback(fullScreenContentCallback);
                     appOpenAd.show(SplashActivity.this);
                 } else {
@@ -136,6 +144,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     }
                 }
+
             }
         }, 5000);
     }

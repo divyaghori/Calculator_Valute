@@ -16,18 +16,23 @@ import com.google.android.gms.ads.appopen.AppOpenAd;
 
 public class AppOpenManager extends Application {
     private static final String LOG_TAG = "AppOpenManager";
+//    private static final String AD_UNIT_ID = "ca-app-pub-68959573532223023/3473201416";
+        private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294";
     private static boolean isShowingAd = false;
     private final Application myApplication;
     private AppOpenAd appOpenAd = null;
     private AppOpenAd.AppOpenAdLoadCallback loadCallback;
+
     public AppOpenManager(Application myApplication) {
         this.myApplication = myApplication;
 
     }
+
     public void fetchAd(Context context) {
         if (isAdAvailable()) {
             return;
         }
+
         loadCallback =
                 new AppOpenAd.AppOpenAdLoadCallback() {
                     @Override
