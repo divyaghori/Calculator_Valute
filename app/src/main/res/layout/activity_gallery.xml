@@ -58,6 +58,7 @@
             android:layout_toLeftOf="@+id/check"
             android:src="@drawable/unlock"
             android:text="0"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:tint="@color/white">
 

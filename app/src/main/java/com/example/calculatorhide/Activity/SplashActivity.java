@@ -38,7 +38,6 @@ public class SplashActivity extends AppCompatActivity {
     private AppOpenManager appOpenManager;
     private SessionManager sessionManager;
 
-   // private int CurrentScreen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +46,8 @@ public class SplashActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         firebaseData();
         initUi();
-      //  CurrentScreen = 0;
-       // if (CurrentScreen > Util.CurrentScreen){   Util.CurrentScreen = CurrentScreen;}
-       // Util.activityData_list.add(new ActivityData(SplashActivity.this,true));
+        Log.d("Splash a", "onCreate: ");
+
     }
 
     private void firebaseData() {
@@ -74,8 +72,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-        appOpenManager = new AppOpenManager(getApplication());
-        appOpenManager.fetchAd(SplashActivity.this);
         binding.tvVersion.setText("Version " + BuildConfig.VERSION_NAME);
         binding.lavLoad.loop(true);
         binding.lavLoad.playAnimation();
@@ -89,63 +85,28 @@ public class SplashActivity extends AppCompatActivity {
             context = LocaleHelper.setLocale(SplashActivity.this, "en");
             resources = context.getResources();
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startMainActivity();
-                return;
-            }
-        }, 2000);
+        startMainActivity();
+
     }
 
     public void startMainActivity() {
         getdata = PreferenceManager.getInstance(getApplicationContext()).getpreferenceboolean("login");
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AppOpenAd appOpenAd = appOpenManager.showAdIfAvailable(SplashActivity.this);
-                if (appOpenAd != null) {
-                    FullScreenContentCallback fullScreenContentCallback =
-                            new FullScreenContentCallback() {
-                                @Override
-                                public void onAdDismissedFullScreenContent() {
-                                    if (getdata == false) {
-                                        Intent mainIntent1 = new Intent(SplashActivity.this, GuideActivity.class);
-                                        startActivity(mainIntent1);
-                                    } else {
-                                        Intent mainIntent = new Intent(SplashActivity.this, CalculatorActivityy.class);
-                                        startActivity(mainIntent);
-                                    }
-                                }
-                                @Override
-                                public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                    if (getdata == false) {
-                                        Intent mainIntent1 = new Intent(SplashActivity.this, GuideActivity.class);
-                                        startActivity(mainIntent1);
-                                    } else {
-                                        Intent mainIntent = new Intent(SplashActivity.this, CalculatorActivityy.class);
-                                        startActivity(mainIntent);
-                                    }
-                                }
-                                @Override
-                                public void onAdShowedFullScreenContent() {
-                                }
-                            };
+        MyApplication application = (MyApplication) getApplication();
+        if (application == null) {
+            Log.e("Splash", "Failed to cast application to MyApplication.");
+            startActivity(new Intent(SplashActivity.this,getdata ? CalculatorActivityy.class : GuideActivity.class));
+            return;
+        }
 
-                    appOpenAd.setFullScreenContentCallback(fullScreenContentCallback);
-                    appOpenAd.show(SplashActivity.this);
-                } else {
-                    if (getdata == false) {
-                        Intent mainIntent1 = new Intent(SplashActivity.this, GuideActivity.class);
-                        startActivity(mainIntent1);
-                    } else {
-                        Intent mainIntent = new Intent(SplashActivity.this, CalculatorActivityy.class);
-                        startActivity(mainIntent);
-
-                    }
-                }
-
-            }
-        }, 5000);
+        Log.e("Splash", "MyApplication show If Avilable");
+        (application)
+                .showAdIfAvailable(
+                        SplashActivity.this,
+                        new MyApplication.OnShowAdCompleteListener() {
+                            @Override
+                            public void onShowAdComplete() {
+                                startActivity(new Intent(SplashActivity.this,getdata ? CalculatorActivityy.class : GuideActivity.class));
+                            }
+                        });
     }
 }

@@ -11,10 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Utils.ActivityData;
-import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.Util;
-import com.example.calculatorhide.toDoList.MainActivity;
+import com.example.calculatorhide.Note.MainActivity;
 
 public class TransitionActivity extends AppCompatActivity {
 

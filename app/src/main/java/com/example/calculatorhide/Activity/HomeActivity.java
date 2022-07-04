@@ -25,6 +25,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.SkuDetails;
 import com.example.calculatorhide.Adapter.Home_Adapter;
 import com.example.calculatorhide.Model.HomeModel;
 import com.example.calculatorhide.R;
@@ -38,12 +40,14 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity  implements IAPHelper.IAPHelperListener{
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     AtomicBoolean atomicBooleanGallary = new AtomicBoolean();
@@ -67,15 +71,13 @@ public class HomeActivity extends AppCompatActivity {
     private Context context = this;
     private InterstitialAdManager manager;
     FloatingActionButton gallery, fabvideo, fabapplock, addfolder, howtouse;
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(this, "Finish", Toast.LENGTH_SHORT).show();
-    }
-
+    HashMap<String, SkuDetails> skuDetailsHashMap = new HashMap<>();
+    IAPHelper iapHelper;
+    final String TEST = "android.test.purchased"; //This id can be used for testing purpose
+    private List<String> skuList = Arrays.asList(TEST);
     private boolean isAdShowen;
     boolean isFromCalculatorActivity;
+    ImageView noad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +86,14 @@ public class HomeActivity extends AppCompatActivity {
         if (SDK_INT >= 23) {
             checkMultiplePermissions();
         }
-
-
+        noad = findViewById(R.id.noad);
+        noad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launch(TEST);
+            }
+        });
+        iapHelper = new IAPHelper(this, this, skuList);
         // if(Util.activityData_list.)
         if (Util.activityData_list.contains("HomeActivity")) {
             isAdShowen = false;
@@ -140,6 +148,10 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private void launch(String sku){
+        if(!skuDetailsHashMap.isEmpty())
+            iapHelper.launchBillingFLow(skuDetailsHashMap.get(sku));
+    }
     private void setAdAtomic() {
         atomicBooleanGallary.set(true);
     }
@@ -603,6 +615,35 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finishAffinity();
+    }
+
+    @Override
+    public void onSkuListResponse(HashMap<String, SkuDetails> skuDetails) {
+        skuDetailsHashMap = skuDetails;
+    }
+
+    @Override
+    public void onPurchasehistoryResponse(List<Purchase> purchasedItems) {
+        if (purchasedItems != null) {
+
+        }
+    }
+
+    @Override
+    public void onPurchaseCompleted(Purchase purchase) {
+        Toast.makeText(getApplicationContext(), "Purchase Successful", Toast.LENGTH_SHORT).show();
+        updatePurchase(purchase);
+    }
+
+    private void updatePurchase(Purchase purchase){
+        String sku = purchase.getSku();
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (iapHelper != null)
+            iapHelper.endConnection();
     }
 }
 

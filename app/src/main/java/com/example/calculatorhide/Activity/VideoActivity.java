@@ -135,19 +135,23 @@ public class VideoActivity extends AppCompatActivity {
 
     }
 
-    public File getFolder()
-    {
-        String rootPath="";
-        String path=".CalculatorVault";
+    public File getFolder() {
+        String rootPath = "";
+        String path = ".CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            rootPath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+path+"/"+"files";
-            file= new File(rootPath);
+//            file = new File(Environment.getExternalStorageDirectory(), path);
+            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
+                    + path + "/" + "files" ;
+            file = new File(rootPath);
         } else {
-            rootPath=getExternalFilesDir(null).getAbsoluteFile()+"/"+path+"/"+"files";
-            file= new File(rootPath);
+            file = new File(Environment.getExternalStorageDirectory(), path);
+            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
+                    + path + "/" + "files";
+//            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
+            Log.d("root", rootPath);
+            file = new File(rootPath);
         }
-
         if (!file.exists()) {
             file.mkdirs();
         }

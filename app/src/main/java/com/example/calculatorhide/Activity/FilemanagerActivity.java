@@ -3,18 +3,12 @@ package com.example.calculatorhide.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Utils.GoogleAds;
-import com.example.calculatorhide.toDoList.MainActivity;
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.example.calculatorhide.Note.MainActivity;
 
 public class FilemanagerActivity extends AppCompatActivity {
 

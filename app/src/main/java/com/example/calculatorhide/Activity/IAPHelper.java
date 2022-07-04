@@ -30,13 +30,6 @@ public class IAPHelper {
     private BillingClient mBillingClient;
     private IAPHelperListener IAPHelperListener;
     private List<String> skuList;
-
-    /**
-     * To instantiate the object
-     *  @param context           It will be used to get an application context to bind to the in-app billing service.
-     * @param IAPHelperListener Your listener to get the response for your query.
-     * @param skuList
-     */
     public IAPHelper(Context context, IAPHelperListener IAPHelperListener, List<String> skuList) {
         this.context = context;
         this.IAPHelperListener = IAPHelperListener;
@@ -51,11 +44,6 @@ public class IAPHelper {
         }
     }
 
-    /**
-     * To establish the connection with play library
-     * It will be used to notify that setup is complete and the billing
-     * client is ready. You can query whatever you want.
-     */
     private void startConnection() {
         mBillingClient.startConnection(new BillingClientStateListener() {
             @Override
@@ -75,18 +63,12 @@ public class IAPHelper {
         });
     }
 
-    /**
-     * Get purchases details for all the items bought within your app.
-     */
     public void getPurchasedItems() {
         Purchase.PurchasesResult purchasesResult = mBillingClient.queryPurchases(BillingClient.SkuType.INAPP);
         if (IAPHelperListener != null)
             IAPHelperListener.onPurchasehistoryResponse(purchasesResult.getPurchasesList());
     }
 
-    /**
-     * Perform a network query to get SKU details and return the result asynchronously.
-     */
     public void getSKUDetails(List<String> skuList) {
         final HashMap<String, SkuDetails> skuDetailsHashMap = new HashMap<>();
         SkuDetailsParams skuParams = SkuDetailsParams.newBuilder().setType(BillingClient.SkuType.INAPP).setSkusList(skuList).build();
@@ -103,13 +85,6 @@ public class IAPHelper {
             }
         });
     }
-
-    /**
-     * Initiate the billing flow for an in-app purchase or subscription.
-     *
-     * @param skuDetails skudetails of the product to be purchased
-     *                   Developer console.
-     */
     public void launchBillingFLow(final SkuDetails skuDetails) {
         if(mBillingClient.isReady()){
             BillingFlowParams mBillingFlowParams = BillingFlowParams.newBuilder()
@@ -118,20 +93,11 @@ public class IAPHelper {
             mBillingClient.launchBillingFlow((Activity) context, mBillingFlowParams);
         }
     }
-
-    /**
-     * Your listener to get the response for purchase updates which happen when, the user buys
-     * something within the app or by initiating a purchase from Google Play Store.
-     */
     private PurchasesUpdatedListener getPurchaseUpdatedListener() {
         return (billingResult, purchases) -> {
             int responseCode = billingResult.getResponseCode();
             if (responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
-                //here when purchase completed
                 for (Purchase purchase : purchases) {
-                    //I have named sku in such a way that I get sku name as "type_name" for ex: "nc_ring"
-                    //For non consumable I will acknowledge purchase
-                    //For consumable I will consume purchase
                     String type = purchase.getSku().split("_")[0];
                     if(type.equals("nc"))
                         acknowledgePurchase(purchase);
@@ -139,7 +105,6 @@ public class IAPHelper {
                         consumePurchase(purchase);
                 }
             } else if (responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
-                // Handle an error caused by a user cancelling the purchase flow.
                 Log.d(TAG, "user cancelled");
             } else if (responseCode == BillingClient.BillingResponseCode.SERVICE_DISCONNECTED) {
                 Log.d(TAG , "service disconnected");
@@ -151,7 +116,6 @@ public class IAPHelper {
     public void acknowledgePurchase(Purchase purchase) {
         if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED
                 && isSignatureValid(purchase)) {
-
             AcknowledgePurchaseParams acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
                     .setPurchaseToken(purchase.getPurchaseToken())
                     .build();
@@ -170,8 +134,6 @@ public class IAPHelper {
     public void consumePurchase(Purchase purchase) {
         if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED
                 && isSignatureValid(purchase)) {
-
-            //This is for Consumable product
             ConsumeParams consumeParams = ConsumeParams.newBuilder()
                     .setPurchaseToken(purchase.getPurchaseToken())
                     .build();
@@ -191,19 +153,12 @@ public class IAPHelper {
         return Security.verifyPurchase(Security.BASE_64_ENCODED_PUBLIC_KEY, purchase.getOriginalJson(), purchase.getSignature());
     }
 
-    /**
-     * Call this method once you are done with this BillingClient reference.
-     */
     public void endConnection() {
         if (mBillingClient != null && mBillingClient.isReady()) {
             mBillingClient.endConnection();
             mBillingClient = null;
         }
     }
-
-    /**
-     * Listener interface for handling the various responses of the Purchase helper util
-     */
     public interface IAPHelperListener {
         void onSkuListResponse(HashMap<String, SkuDetails> skuDetailsHashMap);
         void onPurchasehistoryResponse(List<Purchase> purchasedItem);

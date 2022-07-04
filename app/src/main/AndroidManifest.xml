@@ -1105,8 +1105,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".toDoList.MainActivity" />
-        <activity android:name=".toDoList.AddEditNoteActivity" />
+        <activity android:name=".Note.MainActivity" />
+        <activity android:name=".Note.AddEditNoteActivity" />
     </application>
 
 </manifest>

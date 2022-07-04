@@ -79,7 +79,6 @@ public class GalleryActivity extends AppCompatActivity {
     private List<MediaItem> selectedItems = new ArrayList<>();
     ImageView unlock;
     boolean checked = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,18 +160,6 @@ public class GalleryActivity extends AppCompatActivity {
             adapter = new GalleryAdapter(activity, mediaItems, checked);
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-//            adapter.setClickItemInterface(new GalleryAdapter.ClickItemInterface() {
-//                @Override
-//                public void onItemClick(int position, String path) {
-//                    Intent intent = new Intent(activity, ImageFullViewActivity.class);
-//                    intent.putExtra("path", path);
-//                    startActivity(intent);
-//                }
-//                @Override
-//                public void onItemLongClick(int position, MediaItem item) {
-//                    showUnHideRcyclePopup(position,item);
-//                }
-//            });
         } else {
             tvNoData.setVisibility(View.VISIBLE);
             image.setVisibility(View.VISIBLE);
@@ -180,14 +167,12 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
     public void btnChoosePhotosClick() {
-        if(selectedItems.size() != 0) {
             selectedItems = adapter.getCheckedItems();
             if (selectedItems.size() == 0) {
                 unlock.setVisibility(View.GONE);
             } else {
                 unlock.setVisibility(View.VISIBLE);
             }
-        }
         Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
     }
 
@@ -197,12 +182,14 @@ public class GalleryActivity extends AppCompatActivity {
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 //            file = new File(Environment.getExternalStorageDirectory(), path);
-            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android") + "/"
-                    + path + "/" + "files";
+            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
+                    + path + "/" + "files" ;
             file = new File(rootPath);
         } else {
-//            file = new File(Environment.getExternalStorageDirectory(), path);
-            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
+            file = new File(Environment.getExternalStorageDirectory(), path);
+            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
+                    + path + "/" + "files";
+//            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
             Log.d("root", rootPath);
             file = new File(rootPath);
         }
@@ -211,7 +198,6 @@ public class GalleryActivity extends AppCompatActivity {
         }
         return file;
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -226,9 +212,7 @@ public class GalleryActivity extends AppCompatActivity {
                         getImages();
                     }
                 }, 1000);
-
             }
-
         }
     }
 
@@ -374,7 +358,7 @@ public class GalleryActivity extends AppCompatActivity {
                     });
                 }
                 if (item.getType().equalsIgnoreCase("video")) {
-                    Bitmap bitmap2 = ThumbnailUtils.createVideoThumbnail(item.getPath(), MediaStore.Images.Thumbnails.MINI_KIND);
+                    Bitmap bitmap2 = ThumbnailUtils.createVideoThumbnail(item.getPath(),MediaStore.Images.Thumbnails.MINI_KIND);
                     Glide.with(mContext)
                             .load(bitmap2)
                             .centerCrop()

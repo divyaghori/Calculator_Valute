@@ -18,7 +18,8 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
-
+//test test1 km che - have nai ave run karso etle okok to mara bija phone ma kem android ni andar 0 emulator m kem aave ke hve nay aave
+// bijo cable sathe connect karo haa wait kru
 public class HideFiles {
     private List<String> listUris;
     private Context mContext;

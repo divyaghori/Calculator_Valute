@@ -14,10 +14,10 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.appopen.AppOpenAd;
 
 
-public class AppOpenManager extends Application {
+public class AppOpenManager  {
     private static final String LOG_TAG = "AppOpenManager";
 //    private static final String AD_UNIT_ID = "ca-app-pub-68959573532223023/3473201416";
-        private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294";
+    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294";
     private static boolean isShowingAd = false;
     private final Application myApplication;
     private AppOpenAd appOpenAd = null;
@@ -55,7 +55,6 @@ public class AppOpenManager extends Application {
     public AppOpenAd showAdIfAvailable(Context context) {
         if (!isShowingAd && isAdAvailable()) {
             Log.d(LOG_TAG, "Will show ad.");
-
             return appOpenAd;
         } else {
             Log.d(LOG_TAG, "Can not show ad.");
