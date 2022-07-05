@@ -167,12 +167,14 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
     public void btnChoosePhotosClick() {
+        if(selectedItems.size()!=0) {
             selectedItems = adapter.getCheckedItems();
             if (selectedItems.size() == 0) {
                 unlock.setVisibility(View.GONE);
             } else {
                 unlock.setVisibility(View.VISIBLE);
             }
+        }
         Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
     }
 

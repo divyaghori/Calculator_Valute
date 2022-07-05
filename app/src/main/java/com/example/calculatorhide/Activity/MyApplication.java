@@ -310,7 +310,6 @@ public class MyApplication extends Application implements ActivityLifecycleCallb
     public static String GetStringFromPrefs(Context context, String key) {
 //        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
 //        return prefs.getString(key, "");
-
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
     }

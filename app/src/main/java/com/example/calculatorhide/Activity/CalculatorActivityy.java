@@ -46,7 +46,6 @@ public class CalculatorActivityy extends AppCompatActivity {
 //        if (Util.isBackPressed)
 //            Util.isBackPressed
     //    Util.activityData_list.add(new ActivityData(CalculatorActivityy.this,true));
-
         getWindow().setFlags(1024,1024);
         manager = new InterstitialAdManager();
         manager.fetchAd(this,false);

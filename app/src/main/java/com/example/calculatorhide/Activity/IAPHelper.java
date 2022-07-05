@@ -40,6 +40,7 @@ public class IAPHelper {
                 .build();
         if (!mBillingClient.isReady()) {
             Log.d(TAG, "BillingClient: Start connection...");
+
             startConnection();
         }
     }
