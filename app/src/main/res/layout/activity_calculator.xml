@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/cal_display"
-    android:layout_marginTop="0.5dp"
-    tools:context=".Activity.CalculatorActivity">
+    >
 
 
     <LinearLayout

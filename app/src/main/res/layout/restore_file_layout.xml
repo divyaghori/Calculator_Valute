@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/cal_display"
+    android:background="@color/home_item"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_margin="12dp"
@@ -15,7 +15,8 @@
             android:textColor="@color/white"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="@string/"
+            android:fontFamily="@font/varelaroundregular"
+            android:text="Do You Want to delete or restore this file?"
             android:layout_height="wrap_content"/>
         <LinearLayout
             android:orientation="horizontal"
@@ -28,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:text="@string/delete"
                 android:layout_margin="12dp"
+                android:fontFamily="@font/varelaroundregular"
                 android:textColor="@color/cal_blue"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -35,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:text="@string/restore"
                 android:layout_margin="12dp"
+                android:fontFamily="@font/varelaroundregular"
                 android:textColor="@color/cal_blue"
                 android:layout_height="wrap_content"/>
 

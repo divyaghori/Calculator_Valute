@@ -29,15 +29,13 @@ import javax.script.ScriptException;
 
 public class CalculatorActivityy extends AppCompatActivity {
     TextView workingsTV;
-    TextView resultsTV;
-
+    TextView resultsTV,simplemsg,simplesubmsg;
     String workings = "";
     String formula = "";
     String tempFormula = "";
     private boolean isPinSet = true;
     private Activity activity = this;
     private InterstitialAdManager manager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +47,19 @@ public class CalculatorActivityy extends AppCompatActivity {
         getWindow().setFlags(1024,1024);
         manager = new InterstitialAdManager();
         manager.fetchAd(this,false);
+        simplemsg = findViewById(R.id.simplemsg);
+        simplesubmsg = findViewById(R.id.simplesubmsg);
         initTextViews();
         if (!MyApplication.CheckPrefs(this, MyApplication.PIN)) {
             ShowTipsDialog();
+            simplemsg.setVisibility(View.VISIBLE);
+            simplesubmsg.setVisibility(View.VISIBLE);
             isPinSet = false;
         }
     }
 
     public boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+        return str.matches("-?\\d+(\\.\\d+)?");
     }
     public static boolean isLastCharIsNumber(String str) {
         if (str.isEmpty()) return true;
@@ -91,13 +93,9 @@ public class CalculatorActivityy extends AppCompatActivity {
                     workings = workings + givenValue;
                 }
             }
-
         }
-
         workingsTV.setText(workings);
     }
-
-
     public void equalsOnClick(View view) {
         Double result = null;
         if (!isPinSet) {
@@ -123,7 +121,6 @@ public class CalculatorActivityy extends AppCompatActivity {
                                 Intent intent = new Intent(activity,HomeActivity.class);
                                 intent.putExtra("start",false);
                                 startActivity(intent);
-
                             }
                             @Override
                             public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
@@ -151,13 +148,11 @@ public class CalculatorActivityy extends AppCompatActivity {
         }
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
         checkForPowerOf();
-
         try {
             result = (double) engine.eval(formula);
         } catch (ScriptException e) {
             Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
         }
-
         if (result != null)
             resultsTV.setText(String.valueOf(result.doubleValue()));
     }
@@ -174,7 +169,6 @@ public class CalculatorActivityy extends AppCompatActivity {
             if (workings.charAt(i) == '^')
                 indexOfPowers.add(i);
         }
-
         formula = workings;
         tempFormula = workings;
         for (Integer index : indexOfPowers) {
@@ -186,21 +180,18 @@ public class CalculatorActivityy extends AppCompatActivity {
     private void changeFormula(Integer index) {
         String numberLeft = "";
         String numberRight = "";
-
         for (int i = index + 1; i < workings.length(); i++) {
             if (isNumeric(workings.charAt(i)))
                 numberRight = numberRight + workings.charAt(i);
             else
                 break;
         }
-
         for (int i = index - 1; i >= 0; i--) {
             if (isNumeric(workings.charAt(i)))
                 numberLeft = numberLeft + workings.charAt(i);
             else
                 break;
         }
-
         String original = numberLeft + "^" + numberRight;
         String changed = "Math.pow(" + numberLeft + "," + numberRight + ")";
         tempFormula = tempFormula.replace(original, changed);

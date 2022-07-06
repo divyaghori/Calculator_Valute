@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4D000000"
+    android:background="@color/home_item"
     android:layout_gravity="center"
     android:gravity="center">
 
@@ -11,14 +11,14 @@
         android:paddingRight="30dp"
         android:padding="@dimen/_30sdp"
         android:orientation="vertical"
-        android:background="@color/white"
+        android:background="@color/home_item"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center"
             android:text="Set Your Password"
@@ -26,31 +26,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"/>
-        <View
-            android:background="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
+
         <TextView
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:fontFamily="@font/varelaroundregular"
             android:text="@string/tip_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <Button
+        <TextView
             android:id="@+id/done"
             android:layout_marginBottom="15dp"
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
-            android:text="Got It"
+            android:text="Okay"
+            android:layout_gravity="right"
+            android:gravity="right"
             android:fontFamily="@font/varelaroundregular"
-            android:textColor="@color/white"
-            android:background="@drawable/new_but"
+            android:textColor="@color/cal_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

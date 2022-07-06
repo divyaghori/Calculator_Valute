@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="0.5dp"
     android:background="@color/cal_display"
     android:orientation="vertical"
     tools:context=".Activity.CalculatorActivityy">
@@ -12,12 +12,34 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="0.9dp"
-        android:layout_marginTop="0.1dp"
         android:layout_marginRight="0.1dp"
         android:layout_weight="3"
         android:background="@color/cal_display"
         android:orientation="vertical">
-
+        <TextView
+            android:id="@+id/simplemsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/robotolight"
+            android:gravity="end"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:text="Enter 4 digit password"
+            android:textSize="30sp" />
+        <TextView
+            android:id="@+id/simplesubmsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/robotolight"
+            android:gravity="end"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:text="Press '-' to confirm"
+            android:textSize="25sp" />
         <TextView
             android:id="@+id/resultTextView"
             android:layout_width="match_parent"
@@ -62,7 +84,6 @@
                 android:background="@color/cal_no_button"
                 android:fontFamily="@font/robotolight"
                 android:onClick="sevenOnClick"
-
                 android:padding="@dimen/_28sdp"
                 android:text="7"
                 android:textColor="@color/cal_text"
@@ -90,7 +111,6 @@
                 android:fontFamily="@font/robotolight"
                 android:onClick="oneOnClick"
                 android:padding="@dimen/_28sdp"
-
                 android:text="1"
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
@@ -104,7 +124,6 @@
                 android:fontFamily="@font/robotolight"
                 android:onClick="zeroOnClick"
                 android:padding="@dimen/_28sdp"
-
                 android:text="0"
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
@@ -128,7 +147,6 @@
                 android:fontFamily="@font/robotolight"
                 android:onClick="eightOnClick"
                 android:padding="@dimen/_28sdp"
-
                 android:text="8"
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
@@ -142,7 +160,6 @@
                 android:fontFamily="@font/robotolight"
                 android:onClick="fiveOnClick"
                 android:padding="@dimen/_28sdp"
-
                 android:text="5"
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
@@ -156,7 +173,6 @@
                 android:fontFamily="@font/robotolight"
                 android:onClick="twoOnClick"
                 android:padding="@dimen/_28sdp"
-
                 android:text="2"
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
@@ -170,7 +186,6 @@
                 android:onClick="decimalOnClick"
                 android:padding="@dimen/_28sdp"
                 android:text="."
-
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
 
@@ -205,7 +220,6 @@
                 android:background="@color/cal_no_button"
                 android:fontFamily="@font/robotolight"
                 android:onClick="sixOnClick"
-
                 android:padding="@dimen/_28sdp"
                 android:text="6"
                 android:textColor="@color/cal_text"
@@ -219,7 +233,6 @@
                 android:background="@color/cal_no_button"
                 android:fontFamily="@font/robotolight"
                 android:onClick="threeOnClick"
-
                 android:padding="@dimen/_28sdp"
                 android:text="3"
                 android:textColor="@color/cal_text"
@@ -236,7 +249,6 @@
                 android:onClick="equalsOnClick"
                 android:padding="@dimen/_28sdp"
                 android:text="="
-
                 android:textColor="@color/cal_text"
                 android:textSize="40sp" />
 
@@ -259,7 +271,6 @@
                 android:fontFamily="@font/robotothin"
                 android:onClick="clearOnClick"
                 android:text="DEL"
-
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
 
@@ -272,7 +283,6 @@
                 android:fontFamily="@font/robotothin"
                 android:onClick="divisionOnClick"
                 android:text="\u00F7"
-
                 android:textColor="@color/cal_text"
                 android:textSize="40sp" />
 
@@ -284,7 +294,6 @@
                 android:background="@color/cal_op_button"
                 android:fontFamily="@font/robotothin"
                 android:onClick="timesOnClick"
-
                 android:text="x"
                 android:textColor="@color/cal_text"
                 android:textSize="25sp" />
@@ -297,7 +306,6 @@
                 android:background="@color/cal_op_button"
                 android:fontFamily="@font/robotothin"
                 android:onClick="minusOnClick"
-
                 android:text="-"
                 android:textColor="@color/cal_text"
                 android:textSize="40sp" />
@@ -310,7 +318,6 @@
                 android:background="@color/cal_op_button"
                 android:fontFamily="@font/robotothin"
                 android:onClick="plusOnClick"
-
                 android:text="+"
                 android:textColor="@color/cal_text"
                 android:textSize="40sp" />

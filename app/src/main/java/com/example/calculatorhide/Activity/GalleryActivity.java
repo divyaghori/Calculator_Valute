@@ -1,12 +1,7 @@
 package com.example.calculatorhide.Activity;
-
-import static com.example.calculatorhide.Utils.RealPathUtil.isExternalStorageDocument;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -33,9 +28,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.calculatorhide.Adapter.GalleryAdapter;
 import com.example.calculatorhide.Model.HidedDatabase;
@@ -53,7 +46,6 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +112,6 @@ public class GalleryActivity extends AppCompatActivity {
         hideFiles.getSuccess(new HideFiles.SuccessInterface() {
             @Override
             public void onSuccess(boolean value) {
-                Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show();
                 getImages();
                 dialogue.dismiss();
             }

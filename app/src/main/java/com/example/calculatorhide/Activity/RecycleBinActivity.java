@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,26 +41,37 @@ public class RecycleBinActivity extends AppCompatActivity {
     private HideFiles hideFiles;
     AdView mAdView;
     Activity activity;
-
+    ImageView image,back;
+    TextView tvNoData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityRecycleBinBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        initUi();
         activity = this;
-
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        hidedDatabase=HidedDatabase.getDatabse(getApplicationContext());
+        initUi();
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
     public void initUi()
     {
-        hidedDatabase=HidedDatabase.getDatabse(activity);
+        tvNoData = findViewById(R.id.tvNodata);
+        image = findViewById(R.id.image);
         dataList=hidedDatabase.mediaDao().getRecycleData(1);
         hideFiles=new HideFiles(activity);
         if(dataList.size()!=0)
         {
+            tvNoData.setVisibility(View.GONE);
+            image.setVisibility(View.GONE);
             adapter=new RecycleBinAdapter(activity,dataList);
             binding.lvList.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -69,6 +81,9 @@ public class RecycleBinActivity extends AppCompatActivity {
                    showRestorePopup(position,data);
                 }
             });
+        }else{
+            tvNoData.setVisibility(View.VISIBLE);
+            image.setVisibility(View.VISIBLE);
         }
 
     }

@@ -56,7 +56,6 @@ public class IAPHelper {
                     getSKUDetails(skuList);
                 }
             }
-
             @Override
             public void onBillingServiceDisconnected() {
                 Log.d(TAG, "onBillingServiceDisconnected: ");
@@ -69,7 +68,6 @@ public class IAPHelper {
         if (IAPHelperListener != null)
             IAPHelperListener.onPurchasehistoryResponse(purchasesResult.getPurchasesList());
     }
-
     public void getSKUDetails(List<String> skuList) {
         final HashMap<String, SkuDetails> skuDetailsHashMap = new HashMap<>();
         SkuDetailsParams skuParams = SkuDetailsParams.newBuilder().setType(BillingClient.SkuType.INAPP).setSkusList(skuList).build();
