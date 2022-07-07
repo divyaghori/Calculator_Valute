@@ -111,7 +111,6 @@ public class VideoActivity extends AppCompatActivity {
             adapter = new GalleryAdapter(activity, mediaItems);
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
             adapter.setClickItemInterface(new GalleryAdapter.ClickItemInterface() {
                 @Override
                 public void onItemClick(int position, String path) {

@@ -38,7 +38,6 @@ public class HideFiles {
             String path = uris.get(i);
             String ex = getFileExtension(path);
             String title = getFileName(path);
-            String fname = title.substring(0, title.lastIndexOf("."));
             File source = new File(path);
             uuid = UuidCreator.getRandomBased();
             File des = new File(hiddenPath, uuid + "." + "vault");

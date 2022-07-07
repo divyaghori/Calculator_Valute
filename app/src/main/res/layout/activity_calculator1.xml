@@ -38,7 +38,7 @@
             android:gravity="end"
             android:visibility="gone"
             android:textColor="@color/white"
-            android:text="Press '-' to confirm"
+            android:text="Press '=' to confirm"
             android:textSize="25sp" />
         <TextView
             android:id="@+id/resultTextView"

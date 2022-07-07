@@ -124,7 +124,6 @@ public class MultiPhotoSelectActivity extends BaseActivity {
                                     setResult(2, intent);
                                     finish();
                                 }
-
                                 @Override
                                 public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                                     super.onAdFailedToShowFullScreenContent(adError);

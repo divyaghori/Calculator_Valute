@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,11 +46,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
+import com.example.calculatorhide.Utils.InterstitialAdManager;
+import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,52 +70,83 @@ public class AudioActivity extends AppCompatActivity {
     ImageAdapter imageAdapter;
     TextView count;
     Activity activity;
+    private LinearLayout llCount;
+    private boolean isAdShowen;
+    private InterstitialAdManager manager;
+    private List<String>selectedItems=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_audio);
         count = findViewById(R.id.count);
-        activity=this;
-        InterstitialAd interstitialAd = GoogleAds.getpreloadFullAds(activity);
-        if (interstitialAd != null) {
-            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                @Override
-                public void onAdDismissedFullScreenContent() {
-                    GoogleAds.loadpreloadFullAds(activity);
-                }
-
-                @Override
-                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                    super.onAdFailedToShowFullScreenContent(adError);
-                    Log.e("Home : ", "Error : " + adError);
-                }
-            });
-            interstitialAd.show(activity);
+        activity = this;
+        if (Util.activityData_list.contains("AudioActivity")) {
+            isAdShowen = false;
         } else {
-            Log.e("Home : ", "in Else part");
+            isAdShowen = true;
+            Util.activityData_list.add("AudioActivity");
         }
+        manager = new InterstitialAdManager();
+        manager.fetchAd(this, true);
+        llCount = findViewById(R.id.llCount);
+        llCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectedItems.size() != 0) {
+                    if (isAdShowen) {
+                        InterstitialAd interstitialAd = manager.showIfItAvaible();
+                        if (interstitialAd != null) {
+                            interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                @Override
+                                public void onAdDismissedFullScreenContent() {
+                                    super.onAdDismissedFullScreenContent();
+                                    Intent intent = new Intent();
+                                    intent.putExtra("files", (Serializable) selectedItems);
+                                    setResult(2, intent);
+                                    finish();
+                                }
+                                @Override
+                                public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                                    super.onAdFailedToShowFullScreenContent(adError);
+                                    Intent intent = new Intent();
+                                    intent.putExtra("files", (Serializable) selectedItems);
+                                    setResult(2, intent);
+                                    finish();
+                                }
+                            });
+                            interstitialAd.show(AudioActivity.this);
+                        }
+                    } else {
+                        Intent intent = new Intent();
+                        intent.putExtra("files", (Serializable) selectedItems);
+                        setResult(2, intent);
+                        finish();
+                    }
+                }
+            }
+        });
         recyclerview = findViewById(R.id.recyclerview);
         storagePermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
-           if (result){
-               fetchSongs();
-           }
-           else {
-               respondOnUserPermissionActs();
-           }
+            if (result) {
+                fetchSongs();
+            } else {
+                respondOnUserPermissionActs();
+            }
         });
         storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void respondOnUserPermissionActs() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             fetchSongs();
-        }
-        else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             new AlertDialog.Builder(this)
                     .setTitle("Requesting Permission")
                     .setMessage("Allow us to fetch & show songs on your device")
@@ -120,50 +156,50 @@ public class AudioActivity extends AppCompatActivity {
                             storagePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                         }
                     }).setNegativeButton("Don't Allow", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getApplicationContext()," You denied to fetch songs", Toast.LENGTH_LONG).show();
-                            dialogInterface.dismiss();
-                        }
-                    })
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(getApplicationContext(), " You denied to fetch songs", Toast.LENGTH_LONG).show();
+                    dialogInterface.dismiss();
+                }
+            })
                     .show();
-        }
-        else{
+        } else {
             Toast.makeText(this, "You denied to fetch songs", Toast.LENGTH_LONG).show();
         }
     }
+
     private void fetchSongs() {
         List<Song> songs = new ArrayList<>();
         Uri songLibraryUri;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             songLibraryUri = MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL);
-        }else {
+        } else {
             songLibraryUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         }
         String[] projection = new String[]{
-             MediaStore.Audio.Media._ID,
-             MediaStore.Audio.Media.DISPLAY_NAME,
-             MediaStore.Audio.Media.DURATION,
-        MediaStore.Audio.Media.SIZE,
-        MediaStore.Audio.Media.ALBUM_ID,
+                MediaStore.Audio.Media._ID,
+                MediaStore.Audio.Media.DISPLAY_NAME,
+                MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.SIZE,
+                MediaStore.Audio.Media.ALBUM_ID,
         };
         String sortOrder = MediaStore.Audio.Media.DATE_ADDED + " DESC";
-        try(Cursor cursor = getContentResolver().query(songLibraryUri, projection, null, null,sortOrder)) {
-            int idColumn  = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
-            int nameColumn  = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME);
-            int durationColumn  = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
-            int sizeColumn  = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE);
-            int albumIdColumn  = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
-            while (cursor.moveToNext()){
-                long id =  cursor.getLong(idColumn);
+        try (Cursor cursor = getContentResolver().query(songLibraryUri, projection, null, null, sortOrder)) {
+            int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
+            int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME);
+            int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
+            int sizeColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE);
+            int albumIdColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
+            while (cursor.moveToNext()) {
+                long id = cursor.getLong(idColumn);
                 String name = cursor.getString(nameColumn);
                 int duration = cursor.getInt(durationColumn);
                 int size = cursor.getInt(sizeColumn);
                 long albumId = cursor.getLong(albumIdColumn);
-                Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,id);
-                Uri albumartUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"),albumId);
-                name = name.substring(0,name.lastIndexOf("."));
-                Song song = new Song(id,uri,name,duration,size,albumId,albumartUri);
+                Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
+                Uri albumartUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), albumId);
+                name = name.substring(0, name.lastIndexOf("."));
+                Song song = new Song(id, uri, name, duration, size, albumId, albumartUri);
                 songs.add(song);
             }
             showSongs(songs);
@@ -171,7 +207,7 @@ public class AudioActivity extends AppCompatActivity {
     }
 
     private void showSongs(List<Song> songs) {
-        GridLayoutManager layoutManager = new GridLayoutManager(this,gridSpanSize);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, gridSpanSize);
 //        recyclerview.setLayoutManager(layoutManager);
         songsAdapter = new SongsAdapter(songs);
         imageAdapter = new ImageAdapter(this, songs);
@@ -189,14 +225,16 @@ public class AudioActivity extends AppCompatActivity {
             }
         }, 1000, 1000);
     }
+
     public void btnChoosePhotosClick() {
-        ArrayList<String> selectedItems = ImageAdapter.getCheckedItems();
+        selectedItems = ImageAdapter.getCheckedItems();
         if (ImageAdapter.getCheckedItems().size() == 0) {
             count.setText("0");
         } else {
             count.setText(String.valueOf(ImageAdapter.getCheckedItems().size()));
         }
     }
+
     public static class ImageAdapter extends BaseAdapter {
         static List<Song> mList;
         LayoutInflater mInflater;
@@ -257,6 +295,7 @@ public class AudioActivity extends AppCompatActivity {
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
             return convertView;
         }
+
         CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

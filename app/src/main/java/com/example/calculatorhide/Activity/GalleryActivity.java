@@ -208,13 +208,11 @@ public class GalleryActivity extends AppCompatActivity {
             }
         }
     }
-
     @Override
     protected void onResume() {
         getImages();
         super.onResume();
     }
-
     public void showUnHideRcyclePopup(int position, MediaItem item) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();

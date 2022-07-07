@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,12 +46,12 @@ public class GalleryAdapter extends ArrayAdapter<MediaItem> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         MediaItem item=mitemList.get(position);
-
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_media_item, parent, false);
             ImageView ivItem = view.findViewById(R.id.ivItem);
             CheckBox checkBox = view.findViewById(R.id.checkbox);
            if(item!=null) {
               if (item.getType().equalsIgnoreCase("image")) {
+                 Log.d("imagename",item.getName());
                  Glide.with(mContext)
                         .load(item.getPath())
                         .centerCrop()

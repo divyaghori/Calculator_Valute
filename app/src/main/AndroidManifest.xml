@@ -36,6 +36,9 @@
         <activity android:name=".Activity.ConfirmQuestionActivity">
 
         </activity>
+        <activity android:name=".Activity.CalcualatorTransitionActivity">
+
+        </activity>
         <activity android:name=".Activity.NewPinActivity">
 
         </activity>

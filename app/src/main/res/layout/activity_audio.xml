@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.HomeActivity">
+
     <RelativeLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:background="@color/purple_700">
+
         <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
@@ -18,6 +20,7 @@
             android:layout_centerVertical="true"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/back">
+
         </ImageView>
 
         <TextView
@@ -38,8 +41,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:buttonTint="@color/white"
-            android:padding="@dimen/_5sdp">
-        </CheckBox>
+            android:padding="@dimen/_5sdp"></CheckBox>
     </RelativeLayout>
 
     <FrameLayout
@@ -47,19 +49,12 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/adLAyout"
         android:layout_below="@+id/topbar">
-        <ScrollView
+        <GridView
+            android:id="@+id/gvGallery"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/purple_700"
-            android:scrollbars="none">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listitem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </androidx.recyclerview.widget.RecyclerView>
-
-
-        </ScrollView>
+            android:numColumns="1" />
 
         <LinearLayout
             android:id="@+id/tvdata"
@@ -69,13 +64,14 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/image"
                 android:layout_width="@dimen/_250sdp"
                 android:layout_height="@dimen/_250sdp"
                 android:src="@drawable/ic_undraw_empty_xct9">
 
             </ImageView>
             <TextView
-                android:id="@+id/filenotfound"
+                android:id="@+id/tvNodata"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/varelaroundregular"

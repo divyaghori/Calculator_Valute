@@ -33,7 +33,7 @@ public class QuestionsActivity extends AppCompatActivity  implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_securityquestion);
+        setContentView(R.layout.activity_securityquestion_main);
         activity = this;
         question_sp = findViewById(R.id.question_spinner);
         question_sp.setOnItemSelectedListener(this);
@@ -57,7 +57,9 @@ public class QuestionsActivity extends AppCompatActivity  implements AdapterView
                     //if (!MyApplication.CheckPrefs(QuestionsActivity.this, MyApplication.ANSWER)) {
                         MyApplication.SetStringToPrefs(QuestionsActivity.this, MyApplication.QUESTION, question_sp.getSelectedItem().toString());
                         MyApplication.SetStringToPrefs(QuestionsActivity.this, MyApplication.ANSWER, ans);
-                        startActivity(new Intent(activity, HomeActivity.class));
+                        Intent i = new Intent(QuestionsActivity.this,CalcualatorTransitionActivity.class);
+                        i.putExtra("index",0);
+                        startActivity(i);
                         finish();
 //                    } else {
 //                        if (ans.equalsIgnoreCase(MyApplication.GetStringFromPrefs(QuestionsActivity.this, MyApplication.ANSWER))
@@ -76,7 +78,6 @@ public class QuestionsActivity extends AppCompatActivity  implements AdapterView
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
         ((TextView) view).setTextColor(Color.WHITE);
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
     }
 
