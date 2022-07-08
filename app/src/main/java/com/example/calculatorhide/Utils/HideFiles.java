@@ -29,7 +29,7 @@ public class HideFiles {
     public HideFiles(Context context) {
         mContext = context;
     }
-    public void   HideFile(List<String> uris, String type, File hiddenPath) {
+    public void  HideFile(List<String> uris, String type, File hiddenPath) {
         hidedDatabase = HidedDatabase.getDatabse(mContext);
         Log.d("databse",hidedDatabase.toString());
 //        hidedDatabase= Room.databaseBuilder(mContext, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
@@ -100,11 +100,8 @@ public class HideFiles {
         };
         final ContentResolver contentResolver = context.getContentResolver();
         final Uri filesUri = MediaStore.Files.getContentUri("external");
-
         contentResolver.delete(filesUri, where, selectionArgs);
-
         if (file.exists()) {
-
             contentResolver.delete(filesUri, where, selectionArgs);
         }
         return !file.exists();

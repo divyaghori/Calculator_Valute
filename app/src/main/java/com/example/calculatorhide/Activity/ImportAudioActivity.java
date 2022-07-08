@@ -1,14 +1,8 @@
 package com.example.calculatorhide.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,23 +12,23 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.calculatorhide.Adapter.AdapterFilesHolder;
-import com.example.calculatorhide.Adapter.MainConstant;
+import com.example.calculatorhide.Adapter.AdapterFilesHolderAudio;
 import com.example.calculatorhide.Model.ModelFilesHolder;
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.InterstitialAdManager;
 import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdError;
@@ -44,17 +38,15 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ImportDocument extends AppCompatActivity {
+public class ImportAudioActivity extends AppCompatActivity {
     GridView recyclerView;
     ArrayList<ModelFilesHolder> itemsList;
     String checkFileFormat;
-    AdapterFilesHolder adapterFilesHolder;
+    AdapterFilesHolderAudio adapterFilesHolder;
     ProgressBar loadingbar;
     ImageAdapter imageAdapter;
     ImageView back;
@@ -64,18 +56,21 @@ public class ImportDocument extends AppCompatActivity {
     private List<String>selectedItems=new ArrayList<>();
     private boolean isAdShowen;
     private InterstitialAdManager manager;
+    TextView searchtext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_import_document);
         activity=this;
-        if (Util.activityData_list.contains("ImportDocument")) {
+        if (Util.activityData_list.contains("ImportAudioActivity")) {
             isAdShowen = false;
         } else {
             isAdShowen = true;
-            Util.activityData_list.add("ImportDocument");
+            Util.activityData_list.add("ImportAudioActivity");
         }
+        searchtext = findViewById(R.id.searchtext);
+        searchtext.setText("Audio");
         count = findViewById(R.id.count);
         checkFileFormat = "All Docs";
         itemsList = new ArrayList<>();
@@ -120,7 +115,7 @@ public class ImportDocument extends AppCompatActivity {
                                     finish();
                                 }
                             });
-                            interstitialAd.show(ImportDocument.this);
+                            interstitialAd.show(ImportAudioActivity.this);
                         }
                     } else {
                         Intent intent = new Intent();
@@ -171,7 +166,7 @@ public class ImportDocument extends AppCompatActivity {
                         loadingbar.setVisibility(4);
                         recyclerView.setVisibility(0);
                         imageAdapter = new ImageAdapter(getApplicationContext(), itemsList);
-                        adapterFilesHolder = new AdapterFilesHolder(getApplicationContext(), ImportDocument.this, itemsList);
+                        adapterFilesHolder = new AdapterFilesHolderAudio(getApplicationContext(), ImportAudioActivity.this, itemsList);
                         recyclerView.setAdapter(imageAdapter);
                         Timer T = new Timer();
                         T.scheduleAtFixedRate(new TimerTask() {
@@ -197,7 +192,7 @@ public class ImportDocument extends AppCompatActivity {
             for (int i = 0; i < listFiles.length; i++) {
                 if (listFiles[i].isDirectory() && !listFiles[i].getAbsolutePath().contains(".galleryvault_DoNotDelete") && !listFiles[i].getAbsolutePath().contains(".Shared")) {
                     allDocsFiles(listFiles[i]);
-                } else if ((listFiles[i].getName().endsWith(".pdf") || listFiles[i].getName().endsWith(".doc") || listFiles[i].getName().endsWith(".doc") || listFiles[i].getName().endsWith(".ppt") || listFiles[i].getName().endsWith(".xlsx") || listFiles[i].getName().endsWith(".xls") || listFiles[i].getName().endsWith(".html") || listFiles[i].getName().endsWith(".pptx") || listFiles[i].getName().endsWith(".txt") || listFiles[i].getName().endsWith(".xml") || listFiles[i].getName().endsWith(".rtf")) && !this.itemsList.contains(listFiles[i])) {
+                } else if ((listFiles[i].getName().endsWith(".mp3") || listFiles[i].getName().endsWith(".wav") && !this.itemsList.contains(listFiles[i]))) {
                     this.itemsList.add(new ModelFilesHolder(listFiles[i].getName(), listFiles[i].getAbsolutePath(), false));
                 }
             }
@@ -248,7 +243,7 @@ public class ImportDocument extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.item_document_holder, null);
+                convertView = mInflater.inflate(R.layout.item_audio_holder, null);
             }
             TextView textView = (TextView) convertView.findViewById(R.id.itemView_acFilesHolder_FileNameTV);
             textView.setText(mList.get(position).getFileName());

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/purple_700"
     android:orientation="vertical"
-    tools:context=".Activity.NewPasswordActivity">
+    tools:context=".Activity.QuestionsActivity">
 
 
     <RelativeLayout
@@ -14,8 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:background="@color/purple_700">
-
-
 
         <TextView
             android:id="@+id/maintext"
@@ -26,7 +24,7 @@
             android:gravity="center"
             android:text="Set Your Security Question"
             android:textColor="@color/white"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp"/>
 
 
     </RelativeLayout>
@@ -126,13 +124,18 @@
 
         </EditText>
 
-
+        <LinearLayout
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
 
         <TextView
+            android:layout_marginLeft="@dimen/_20sdp"
             android:id="@+id/submit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
             android:background="@color/home_item"
             android:fontFamily="@font/varelaroundregular"
             android:paddingLeft="@dimen/_13sdp"
@@ -141,9 +144,16 @@
             android:paddingBottom="@dimen/_10sdp"
             android:text="Confirm"
             android:textColor="@color/white"
-            android:textSize="16sp">
-
-        </TextView>
-
+            android:textSize="16sp"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/skip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/varelaroundregular"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Skip"
+            android:textColor="@color/cal_blue"
+            android:textSize="16sp"/>
     </LinearLayout>
 </LinearLayout>

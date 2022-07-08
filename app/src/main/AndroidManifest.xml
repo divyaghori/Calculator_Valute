@@ -36,6 +36,18 @@
         <activity android:name=".Activity.ConfirmQuestionActivity">
 
         </activity>
+        <activity android:name=".Activity.VideoActivity1">
+
+        </activity>
+        <activity android:name=".Activity.DocumentActivity1">
+
+        </activity>
+        <activity android:name=".Activity.ImportAudioActivity">
+
+        </activity>
+        <activity android:name=".Activity.AudioActivity1">
+
+        </activity>
         <activity android:name=".Activity.CalcualatorTransitionActivity">
 
         </activity>

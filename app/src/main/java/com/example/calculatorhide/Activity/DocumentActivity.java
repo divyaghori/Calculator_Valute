@@ -58,7 +58,7 @@ public class DocumentActivity extends AppCompatActivity {
         });
         maintext = findViewById(R.id.maintext);
         maintext.setText(SplashActivity.resources.getString(R.string.Documents));
-        filenotfound = findViewById(R.id.filenotfound);
+        filenotfound = findViewById(R.id.tvNodata);
         filenotfound.setText(SplashActivity.resources.getString(R.string.No_files_added));
     }
     @Override

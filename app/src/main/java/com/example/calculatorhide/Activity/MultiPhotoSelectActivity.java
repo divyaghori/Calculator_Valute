@@ -201,7 +201,6 @@ public class MultiPhotoSelectActivity extends BaseActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.row_multiphoto_item, null);
             }

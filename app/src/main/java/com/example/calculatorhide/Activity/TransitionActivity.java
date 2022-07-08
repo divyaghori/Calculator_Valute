@@ -69,7 +69,7 @@ public class TransitionActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(TransitionActivity.this,AdioActivity.class);
+                    Intent i = new Intent(TransitionActivity.this,AudioActivity1.class);
                     startActivity(i);
                 }
             }, 1000);
@@ -80,7 +80,7 @@ public class TransitionActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(TransitionActivity.this,DocumentActivity.class);
+                    Intent i = new Intent(TransitionActivity.this,DocumentActivity1.class);
                     startActivity(i);
                 }
             }, 1000);

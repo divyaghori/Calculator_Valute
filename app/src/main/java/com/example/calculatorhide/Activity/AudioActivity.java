@@ -207,8 +207,6 @@ public class AudioActivity extends AppCompatActivity {
     }
 
     private void showSongs(List<Song> songs) {
-        GridLayoutManager layoutManager = new GridLayoutManager(this, gridSpanSize);
-//        recyclerview.setLayoutManager(layoutManager);
         songsAdapter = new SongsAdapter(songs);
         imageAdapter = new ImageAdapter(this, songs);
         recyclerview.setAdapter(imageAdapter);
