@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class AddEditNoteActivity extends AppCompatActivity {
     private NumberPicker numberPickerPriority;
     Toolbar toolbar;
     FloatingActionButton floatingActionButton;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,13 @@ public class AddEditNoteActivity extends AppCompatActivity {
         numberPickerPriority = findViewById(R.id.number_picker_priority);
         numberPickerPriority.setMinValue(1);
         numberPickerPriority.setMaxValue(10);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Note");

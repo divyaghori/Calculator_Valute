@@ -29,13 +29,14 @@ import javax.script.ScriptException;
 
 public class CalculatorActivityy extends AppCompatActivity {
     TextView workingsTV;
-    TextView resultsTV,simplemsg,simplesubmsg;
+    TextView resultsTV, simplemsg, simplesubmsg;
     String workings = "";
     String formula = "";
     String tempFormula = "";
     private boolean isPinSet = true;
     private Activity activity = this;
     private InterstitialAdManager manager;
+    private Boolean isPinConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +44,17 @@ public class CalculatorActivityy extends AppCompatActivity {
         setContentView(R.layout.activity_calculator1);
 //        if (Util.isBackPressed)
 //            Util.isBackPressed
-    //    Util.activityData_list.add(new ActivityData(CalculatorActivityy.this,true));
-        getWindow().setFlags(1024,1024);
+        //    Util.activityData_list.add(new ActivityData(CalculatorActivityy.this,true));
+        getWindow().setFlags(1024, 1024);
         manager = new InterstitialAdManager();
-        manager.fetchAd(this,false);
+        manager.fetchAd(this, false);
         simplemsg = findViewById(R.id.simplemsg);
         simplesubmsg = findViewById(R.id.simplesubmsg);
         initTextViews();
+
         if (!MyApplication.CheckPrefs(this, MyApplication.PIN)) {
+            HideSpecialChar();
+            isPinConfirm = false;
             ShowTipsDialog();
             simplemsg.setVisibility(View.VISIBLE);
             simplesubmsg.setVisibility(View.VISIBLE);
@@ -58,9 +62,18 @@ public class CalculatorActivityy extends AppCompatActivity {
         }
     }
 
+    private void HideSpecialChar() {
+        findViewById(R.id.button_divide).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button_multi).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button_sub).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button_add).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button_dot).setVisibility(View.INVISIBLE);
+    }
+
     public boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
+
     public static boolean isLastCharIsNumber(String str) {
         if (str.isEmpty()) return true;
         char l = str.charAt(str.length() - 1);
@@ -75,6 +88,7 @@ public class CalculatorActivityy extends AppCompatActivity {
         td.show();
     }
 
+
     private void initTextViews() {
         workingsTV = (TextView) findViewById(R.id.workingsTextView);
         resultsTV = (TextView) findViewById(R.id.resultTextView);
@@ -82,9 +96,7 @@ public class CalculatorActivityy extends AppCompatActivity {
 
     private void setWorkings(String givenValue) {
         if (isNumeric(givenValue) || givenValue == "(" || givenValue == ")") {
-            //if (workings.length() == 0){
             workings = workings + givenValue;
-            // }
         } else {
             if (workings.length() != 0) {
                 if (!isLastCharIsNumber(workings)) {
@@ -96,54 +108,88 @@ public class CalculatorActivityy extends AppCompatActivity {
         }
         workingsTV.setText(workings);
     }
+
+    private String firstPin;
+
+    private String AddStar(String temp) {
+        StringBuilder a = new StringBuilder();
+        for (int i = 0; i < temp.length(); i++) {
+            a.append("*");
+        }
+        return a.toString();
+    }
+
     public void equalsOnClick(View view) {
         Double result = null;
         if (!isPinSet) {
-            if (workings.length() != 0) {
+            if (!isPinConfirm) {
+                if (workings.length() == 4) {
+                    firstPin = workings;
+                    workings = "";
+                    simplemsg.setText("Confirm Password");
+                    resultsTV.setText(AddStar(firstPin));
+                    workingsTV.setText("");
+                    isPinConfirm = true;
+                    return;
+                }
+            }
+
+            if (workings.equals(firstPin)) {
                 MyApplication.SetStringToPrefs(this, MyApplication.PIN, workings);
                 startActivity(new Intent(this, QuestionsActivity.class));
                 finish();
             } else {
+                simplemsg.setText("Enter 4 digit password");
+                workings = "";
+                firstPin = "";
+                isPinConfirm = false;
+                resultsTV.setText("");
+                workingsTV.setText("");
                 ShowTipsDialog();
+                return;
             }
         } else {
             if (MyApplication.GetStringFromPrefs(this, MyApplication.PIN).equals(workings)) {
-                    InterstitialAd interstitialAd = manager.showIfItAvaible();
-                    if (interstitialAd != null) {
-                        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                            @Override
-                            public void onAdClicked() {
-                                super.onAdClicked();
-                            }
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                super.onAdDismissedFullScreenContent();
-                                Intent intent = new Intent(activity,HomeActivity.class);
-                                intent.putExtra("start",false);
-                                startActivity(intent);
-                            }
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
-                                super.onAdFailedToShowFullScreenContent(adError);
-                                Intent intent = new Intent(activity,HomeActivity.class);
-                                intent.putExtra("start",false);
-                                startActivity(intent);
-                            }
-                            @Override
-                            public void onAdImpression() {
-                                super.onAdImpression();
-                            }
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                super.onAdShowedFullScreenContent();
-                            }
-                        });
-                        interstitialAd.show(this);
-                    } else {
-                        Intent intent = new Intent(activity,HomeActivity.class);
-                        intent.putExtra("start",false);
-                        startActivity(intent);
-                    }
+                InterstitialAd interstitialAd = manager.showIfItAvaible();
+                if (interstitialAd != null) {
+                    interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                        @Override
+                        public void onAdClicked() {
+                            super.onAdClicked();
+                        }
+
+                        @Override
+                        public void onAdDismissedFullScreenContent() {
+                            super.onAdDismissedFullScreenContent();
+                            Intent intent = new Intent(activity, HomeActivity.class);
+                            intent.putExtra("start", false);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                            super.onAdFailedToShowFullScreenContent(adError);
+                            Intent intent = new Intent(activity, HomeActivity.class);
+                            intent.putExtra("start", false);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onAdImpression() {
+                            super.onAdImpression();
+                        }
+
+                        @Override
+                        public void onAdShowedFullScreenContent() {
+                            super.onAdShowedFullScreenContent();
+                        }
+                    });
+                    interstitialAd.show(this);
+                } else {
+                    Intent intent = new Intent(activity, HomeActivity.class);
+                    intent.putExtra("start", false);
+                    startActivity(intent);
+                }
             }
         }
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
@@ -210,6 +256,14 @@ public class CalculatorActivityy extends AppCompatActivity {
         workings = "";
         resultsTV.setText("");
         leftBracket = true;
+        if (!isPinSet) {
+            simplemsg.setText("Enter 4 digit password");
+            workings = "";
+            firstPin = "";
+            isPinConfirm = false;
+            resultsTV.setText("");
+            workingsTV.setText("");
+        }
     }
 
     boolean leftBracket = true;

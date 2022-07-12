@@ -50,7 +50,7 @@ public class GalleryAdapter extends ArrayAdapter<MediaItem> {
             ImageView ivItem = view.findViewById(R.id.ivItem);
             CheckBox checkBox = view.findViewById(R.id.checkbox);
            if(item!=null) {
-              if (item.getType().equalsIgnoreCase("image")) {
+              if (item.getType().equalsIgnoreCase("HiddenFileType.image")) {
                  Log.d("imagename",item.getName());
                  Glide.with(mContext)
                         .load(item.getPath())

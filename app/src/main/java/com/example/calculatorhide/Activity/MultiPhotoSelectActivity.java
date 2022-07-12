@@ -53,23 +53,36 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MultiPhotoSelectActivity extends BaseActivity {
     private Activity activity;
-    private ArrayList<String> imageUrls=new ArrayList<>();
+    private ArrayList<String> imageUrls = new ArrayList<>();
     private DisplayImageOptions options;
     private ImageAdapter imageAdapter;
     TextView count;
     private GridView gridView;
     private LinearLayout llCount;
-    private List<String>selectedItems=new ArrayList<>();
+    private List<String> selectedItems = new ArrayList<>();
     private InterstitialAdManager manager;
     AtomicBoolean atomicBooleanGallary = new AtomicBoolean();
     private boolean isAdShowen;
+    ImageView back;
+    TextView selectBtn,maintext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_image_grid);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        selectBtn = findViewById(R.id.selectBtn);
+        selectBtn.setText(SplashActivity.resources.getString(R.string.Hide_files));
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Pyf));
         manager = new InterstitialAdManager();
-        manager.fetchAd(this,true);
+        manager.fetchAd(this, true);
         if (Util.activityData_list.contains("MultiPhotoSelectActivity")) {
             isAdShowen = false;
         } else {
@@ -78,7 +91,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
         }
         atomicBooleanGallary.set(true);
         activity = this;
-        String sort=MediaStore.Images.Media.DATE_ADDED + " DESC";
+        String sort = MediaStore.Images.Media.DATE_ADDED + " DESC";
         final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID};
         final String orderBy = MediaStore.Images.Media.DATE_TAKEN;
         Cursor imagecursor = managedQuery(
@@ -92,17 +105,15 @@ public class MultiPhotoSelectActivity extends BaseActivity {
         }
         imageAdapter = new ImageAdapter(this, imageUrls);
         gridView = (GridView) findViewById(R.id.gridview);
-        count =  findViewById(R.id.count);
-        llCount=findViewById(R.id.llCount);
-        Timer T=new Timer();
+        count = findViewById(R.id.count);
+        llCount = findViewById(R.id.llCount);
+        Timer T = new Timer();
         T.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable()
-                {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         btnChoosePhotosClick();
                     }
                 });
@@ -111,7 +122,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
         llCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedItems.size()!=0) {
+                if (selectedItems.size() != 0) {
                     if (isAdShowen) {
                         InterstitialAd interstitialAd = manager.showIfItAvaible();
                         if (interstitialAd != null) {
@@ -124,6 +135,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
                                     setResult(2, intent);
                                     finish();
                                 }
+
                                 @Override
                                 public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                                     super.onAdFailedToShowFullScreenContent(adError);
@@ -151,15 +163,17 @@ public class MultiPhotoSelectActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
     }
+
     public void btnChoosePhotosClick() {
         selectedItems = imageAdapter.getCheckedItems();
-        if(imageAdapter.getCheckedItems().size() == 0){
+        if (imageAdapter.getCheckedItems().size() == 0) {
             count.setText("0");
-        }else{
+        } else {
             count.setText(String.valueOf(imageAdapter.getCheckedItems().size()));
         }
         Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
     }
+
     public class ImageAdapter extends BaseAdapter {
 
         ArrayList<String> mList;
@@ -175,6 +189,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             this.mList = imageList;
             imageLoader = ImageLoader.getInstance();
         }
+
         public ArrayList<String> getCheckedItems() {
             ArrayList<String> mTempArry = new ArrayList<String>();
             for (int i = 0; i < mList.size(); i++) {
@@ -184,6 +199,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             }
             return mTempArry;
         }
+
         @Override
         public int getCount() {
             return imageUrls.size();
@@ -215,10 +231,17 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             mCheckBox.setChecked(mSparseBooleanArray.get(position));
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
             frameLayout.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("NewApi")
                 @Override
                 public void onClick(View view) {
-                    mSparseBooleanArray.put(position,true);
-                    image.setVisibility(View.VISIBLE);
+                    if (image.getVisibility() == View.VISIBLE) {
+                        mSparseBooleanArray.removeAt(mSparseBooleanArray.indexOfKey(position));
+                        image.setVisibility(View.GONE);
+                    } else {
+                        mSparseBooleanArray.put(position, true);
+                        image.setVisibility(View.VISIBLE);
+                    }
+
                 }
             });
             return convertView;
@@ -231,6 +254,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             }
         };
     }
+
     protected ArrayList<String> getImageList(String sort) {
         ArrayList<String> imageList = new ArrayList<>();
         Uri collection;
@@ -260,7 +284,7 @@ public class MultiPhotoSelectActivity extends BaseActivity {
 //        }
 
 
-        try (Cursor cursor =getContentResolver().query(collection, projection, selection, selectionArgs, sortOrder)) {
+        try (Cursor cursor = getContentResolver().query(collection, projection, selection, selectionArgs, sortOrder)) {
             assert cursor != null;
 
             if (cursor.moveToFirst()) {
@@ -276,11 +300,11 @@ public class MultiPhotoSelectActivity extends BaseActivity {
 
 
                 do {
-                    Uri fileUri=Uri.withAppendedPath(collection,cursor.getString(columnIndex));
+                    Uri fileUri = Uri.withAppendedPath(collection, cursor.getString(columnIndex));
                     long dateAdded = cursor.getLong(addedCol);
                     long dateModified = cursor.getLong(modifiedCol);
-                    long size=cursor.getLong(sizeCol);
-                    String title=cursor.getString(titleCol);
+                    long size = cursor.getLong(sizeCol);
+                    String title = cursor.getString(titleCol);
                     imageList.add(fileUri.toString());
 
                 } while (cursor.moveToNext());

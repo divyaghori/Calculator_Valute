@@ -1,8 +1,5 @@
 package com.example.calculatorhide.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -13,39 +10,34 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.calculatorhide.BuildConfig;
 import com.example.calculatorhide.LOCALIZATION.LocaleHelper;
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Utils.GoogleAds;
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
 
-import java.io.File;
-
-public class SettingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
+public class SettingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     ImageView back;
-    LinearLayout security,important,langugae,blockads,disguiseicon,
-            changepassword,rateus,shareapp,recyclebin,update,privacypolicy,about;
+    LinearLayout security, important, langugae, blockads, disguiseicon,
+            changepassword, rateus, shareapp, recyclebin, update, privacypolicy, about;
     Spinner selectlangugae;
-    String[] language = {"Select Language","English","Spanish"};
+    String[] language = {"Select Language", "English", "Spanish"};
     Context context;
     int lang_selected;
     public static Resources resources;
-    TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12;
+    TextView t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12;
     TextView searchtext;
     Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +56,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         t11 = findViewById(R.id.t11);
         t12 = findViewById(R.id.t12);
         searchtext = findViewById(R.id.searchtext);
-        searchtext.setText(SplashActivity.resources.getString(R.string.Settings));
+        searchtext.setText(R.string.Settings);
         t1.setText(SplashActivity.resources.getString(R.string.Set_security_question));
         t2.setText(SplashActivity.resources.getString(R.string.Very_Important));
         t3.setText(SplashActivity.resources.getString(R.string.Language));
@@ -104,7 +96,7 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         security.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SettingActivity.this,NewPasswordActivity.class);
+                Intent i = new Intent(SettingActivity.this, NewPasswordActivity.class);
                 startActivity(i);
             }
         });
@@ -130,15 +122,21 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         disguiseicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(SettingActivity.this,DisguiseActivity.class);
+                Intent browserIntent = new Intent(SettingActivity.this, DisguiseActivity.class);
                 startActivity(browserIntent);
             }
         });
         changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SettingActivity.this,ConfirmQuestionActivity.class);
-                startActivity(i);
+                if (MyApplication.CheckPrefs(SettingActivity.this,MyApplication.QUESTION)) {
+                    Toast.makeText(context, MyApplication.GetStringFromPrefs(SettingActivity.this, MyApplication.QUESTION).toString(), Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(SettingActivity.this, ConfirmQuestionActivity.class);
+                    startActivity(i);
+                }else {
+                    startActivity(new Intent(SettingActivity.this,NewPinActivity.class));
+                    finish();
+                }
             }
         });
         rateus.setOnClickListener(new View.OnClickListener() {
@@ -158,8 +156,8 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, "I found this great vault app.");
-                String shareMessage= "\nI Found Great App For You, Hide Your Photo, Video & Documents In Calculator :\n\n";
-                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                String shareMessage = "\nI Found Great App For You, Hide Your Photo, Video & Documents In Calculator :\n\n";
+                shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, "choose one"));
             }
@@ -192,11 +190,12 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(SettingActivity.this,AboutActivity.class);
+                Intent browserIntent = new Intent(SettingActivity.this, AboutActivity.class);
                 startActivity(browserIntent);
             }
         });
     }
+
     public void adblcok() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(1);
@@ -214,22 +213,27 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         });
         dialog.show();
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
         ((TextView) view).setTextColor(Color.WHITE);
-        if(position == 0){
+        if (position == 0) {
             context = LocaleHelper.setLocale(SettingActivity.this, "en");
             resources = context.getResources();
-        }else if(position == 1){
+        } else if (position == 1) {
             context = LocaleHelper.setLocale(SettingActivity.this, "en");
             resources = context.getResources();
-            finishAffinity();
-        }else if(position == 2){
+            Intent i = new Intent(SettingActivity.this,SplashActivity.class);
+            startActivity(i);
+            finish();
+        } else if (position == 2) {
             context = LocaleHelper.setLocale(SettingActivity.this, "es");
             resources = context.getResources();
-            finishAffinity();
-        }else{
+            Intent i = new Intent(SettingActivity.this,SplashActivity.class);
+            startActivity(i);
+            finish();
+        } else {
             context = LocaleHelper.setLocale(SettingActivity.this, "en");
             resources = context.getResources();
         }
@@ -239,9 +243,10 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     public void onNothingSelected(AdapterView<?> arg0) {
 
     }
+
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(SettingActivity.this,HomeActivity.class);
+        Intent i = new Intent(SettingActivity.this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }

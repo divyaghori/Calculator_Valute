@@ -58,7 +58,6 @@ public class securityquestionActivity extends AppCompatActivity implements Adapt
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
         ((TextView) view).setTextColor(Color.WHITE);
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
     }
 

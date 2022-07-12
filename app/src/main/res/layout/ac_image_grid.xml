@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/purple_200">
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/black">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/back">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/maintext"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/varelaroundregular"
+            android:gravity="center"
+            android:text="Pick Your Files"
+            android:textColor="@color/white"
+            android:textSize="20sp">
+
+        </TextView>
+
+    </RelativeLayout>
     <GridView
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/selectBtn"
         android:columnWidth="@dimen/_70sdp"
         android:gravity="center"
+        android:layout_below="@+id/topbar"
         android:horizontalSpacing="2dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
@@ -22,7 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:background="@drawable/ic_hidden"
-        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:padding="@dimen/_9sdp">
 
         <TextView
@@ -62,4 +94,4 @@
         </TextView>
     </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>

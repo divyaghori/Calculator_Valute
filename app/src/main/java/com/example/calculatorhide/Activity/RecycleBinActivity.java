@@ -42,7 +42,7 @@ public class RecycleBinActivity extends AppCompatActivity {
     AdView mAdView;
     Activity activity;
     ImageView image,back;
-    TextView tvNoData;
+    TextView tvNoData,maintext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +65,10 @@ public class RecycleBinActivity extends AppCompatActivity {
     public void initUi()
     {
         tvNoData = findViewById(R.id.tvNodata);
+        maintext = findViewById(R.id.maintext);
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
+        tvNoData.setText(SplashActivity.resources.getString(R.string.No_files_added));
         image = findViewById(R.id.image);
         dataList=hidedDatabase.mediaDao().getRecycleData(1);
         hideFiles=new HideFiles(activity);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -56,7 +58,7 @@ public class ImportAudioActivity extends AppCompatActivity {
     private List<String>selectedItems=new ArrayList<>();
     private boolean isAdShowen;
     private InterstitialAdManager manager;
-    TextView searchtext;
+    TextView searchtext,selectBtn,maintext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,10 @@ public class ImportAudioActivity extends AppCompatActivity {
             isAdShowen = true;
             Util.activityData_list.add("ImportAudioActivity");
         }
-        searchtext = findViewById(R.id.searchtext);
-        searchtext.setText("Audio");
+        selectBtn = findViewById(R.id.selectBtn);
+        selectBtn.setText(SplashActivity.resources.getString(R.string.Hide_files));
+        maintext = findViewById(R.id.searchtext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Pyf));
         count = findViewById(R.id.count);
         checkFileFormat = "All Docs";
         itemsList = new ArrayList<>();
@@ -259,9 +263,15 @@ public class ImportAudioActivity extends AppCompatActivity {
             return convertView;
         }
         CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+                if (!isChecked) {
+                    mSparseBooleanArray.removeAt(mSparseBooleanArray.indexOfKey((Integer) buttonView.getTag()));
+                } else {
+                    mSparseBooleanArray.put((Integer) buttonView.getTag(), true);
+                }
+
             }
         };
     }

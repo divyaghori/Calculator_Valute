@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.bumptech.glide.Glide;
 import com.example.calculatorhide.R;
@@ -54,10 +56,24 @@ public class MultVideoSelectActivity extends BaseActivity {
     private InterstitialAdManager manager;
     AtomicBoolean atomicBooleanGallary = new AtomicBoolean();
     private boolean isAdShowen;
+    ImageView back;
+    TextView selectBtn,maintext;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_image_grid);
+        selectBtn = findViewById(R.id.selectBtn);
+        selectBtn.setText(SplashActivity.resources.getString(R.string.Hide_files));
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Pyf));
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         activity = this;
         manager = new InterstitialAdManager();
         manager.fetchAd(this,true);
@@ -218,10 +234,17 @@ public class MultVideoSelectActivity extends BaseActivity {
             mCheckBox.setChecked(mSparseBooleanArray.get(position));
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
             frameLayout.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.P)
                 @Override
                 public void onClick(View view) {
-                    mSparseBooleanArray.put(position,true);
-                    image.setVisibility(View.VISIBLE);
+                    if (image.getVisibility() == View.VISIBLE) {
+                        mSparseBooleanArray.removeAt(mSparseBooleanArray.indexOfKey(position));
+                        image.setVisibility(View.GONE);
+                    } else {
+                        mSparseBooleanArray.put(position, true);
+                        image.setVisibility(View.VISIBLE);
+                    }
+
                 }
             });
             return convertView;
@@ -230,6 +253,7 @@ public class MultVideoSelectActivity extends BaseActivity {
         OnCheckedChangeListener mCheckedChangeListener = new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
             }
         };

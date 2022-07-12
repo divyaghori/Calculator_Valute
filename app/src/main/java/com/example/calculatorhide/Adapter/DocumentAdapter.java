@@ -55,7 +55,7 @@ public class DocumentAdapter extends ArrayAdapter<MediaItem> {
                     public void onClick(View view) {
                          if(clickItemInterface!=null)
                          {
-                            clickItemInterface.onItemClick(position,mitemList.get(position).getPath());
+                            clickItemInterface.onItemClick(position,mitemList.get(position).getoPath());
                          }
                     }
                 });

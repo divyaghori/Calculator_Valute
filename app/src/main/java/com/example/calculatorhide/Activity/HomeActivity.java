@@ -54,20 +54,19 @@ public class HomeActivity extends AppCompatActivity  implements IAPHelper.IAPHel
     RecyclerView listhome;
     Home_Adapter home_adapter;
     HomeModel[] homeModelList = new HomeModel[]{
-            new HomeModel(R.drawable.ic_photo_gallery, "Gallery", "Hidden Gallery", R.drawable.p1, Color.rgb(186, 104, 200)),
-            new HomeModel(R.drawable.ic_video_editing_app, "Video", "Hidden Videos", R.drawable.pvideo, Color.rgb(0, 200, 83)),
-            new HomeModel(R.drawable.ic_headphone, "Audio", "Hidden Audios", R.drawable.paudio, Color.rgb(0, 137, 123)),
-            new HomeModel(R.drawable.applock, "App Lock", "Hide Apps", R.drawable.plock, Color.rgb(103, 58, 183)),
-            new HomeModel(R.drawable.ic_documents, "Documents", "Hidden Document", R.drawable.pdocument, Color.rgb(0, 176, 255)),
-            new HomeModel(R.drawable.ic_folder, "File Manager", "Categorised Docs", R.drawable.pfilemanager, Color.rgb(255, 145, 0)),
-            new HomeModel(R.drawable.ic_writing, "Notes", "Your Notes", R.drawable.pnote, Color.rgb(255, 64, 129)),
-            new HomeModel(R.drawable.ic_bin, "Recycle Bin", "Deleted Hidden Files", R.drawable.precycle, Color.rgb(255, 82, 82)),
-            new HomeModel(R.drawable.ic_settings, "Settings", "Application Settings", R.drawable.psetting, Color.rgb(96, 125, 139)),
-            new HomeModel(R.drawable.ic_disguise, "Disguise Icon", "App Icon", R.drawable.picon, Color.rgb(121, 85, 72))
+            new HomeModel(R.drawable.ic_photo_gallery, SplashActivity.resources.getString(R.string.Gallery), SplashActivity.resources.getString(R.string.Gallery_label), R.drawable.p1, Color.rgb(186, 104, 200)),
+            new HomeModel(R.drawable.ic_video_editing_app, SplashActivity.resources.getString(R.string.Video), SplashActivity.resources.getString(R.string.Video_label), R.drawable.pvideo, Color.rgb(0, 200, 83)),
+            new HomeModel(R.drawable.ic_headphone, SplashActivity.resources.getString(R.string.Audio), SplashActivity.resources.getString(R.string.Audio_label), R.drawable.paudio, Color.rgb(0, 137, 123)),
+            new HomeModel(R.drawable.applock, SplashActivity.resources.getString(R.string.App_Lock), SplashActivity.resources.getString(R.string.App_Lock_label), R.drawable.plock, Color.rgb(103, 58, 183)),
+            new HomeModel(R.drawable.ic_documents, SplashActivity.resources.getString(R.string.Documents), SplashActivity.resources.getString(R.string.Documents_label), R.drawable.pdocument, Color.rgb(0, 176, 255)),
+            new HomeModel(R.drawable.ic_folder, SplashActivity.resources.getString(R.string.File_Manager), SplashActivity.resources.getString(R.string.File_Manager_label), R.drawable.pfilemanager, Color.rgb(255, 145, 0)),
+            new HomeModel(R.drawable.ic_writing, SplashActivity.resources.getString(R.string.Notes), SplashActivity.resources.getString(R.string.Notes_label), R.drawable.pnote, Color.rgb(255, 64, 129)),
+            new HomeModel(R.drawable.ic_bin, SplashActivity.resources.getString(R.string.Recycle_Bin), SplashActivity.resources.getString(R.string.Recycle_Bin_label), R.drawable.precycle, Color.rgb(255, 82, 82)),
+            new HomeModel(R.drawable.ic_settings, SplashActivity.resources.getString(R.string.Settings), SplashActivity.resources.getString(R.string.Settings_label), R.drawable.psetting, Color.rgb(96, 125, 139)),
+            new HomeModel(R.drawable.ic_disguise, SplashActivity.resources.getString(R.string.Disguise_Icon), SplashActivity.resources.getString(R.string.Disguise_Icon_label), R.drawable.picon, Color.rgb(121, 85, 72))
     };
     ImageView more;
     Activity activity;
-
     private Context context = this;
     private InterstitialAdManager manager;
     FloatingActionButton gallery, fabvideo, fabapplock, addfolder, howtouse;

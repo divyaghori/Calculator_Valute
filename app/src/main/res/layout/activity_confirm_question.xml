@@ -22,7 +22,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/back"></ImageView>
+            android:src="@drawable/back"/>
 
         <TextView
             android:id="@+id/maintext"
@@ -33,7 +33,7 @@
             android:gravity="center"
             android:text="Security Question"
             android:textColor="@color/white"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp" />
 
 
     </RelativeLayout>
@@ -70,7 +70,8 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:hint="Code..."
+            android:hint="Enter Answer..."
+            android:textColorHint="@color/white"
             android:textColor="#686666">
 
         </EditText>

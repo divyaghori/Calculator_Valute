@@ -12,7 +12,8 @@ public abstract class HidedDatabase extends RoomDatabase {
     {
         HidedDatabase database;
         Util util=new Util();
-        database= Room.databaseBuilder(context, HidedDatabase.class, util.getFolder(context)+"/hideFiles").allowMainThreadQueries().build();
+        database= Room.databaseBuilder(context, HidedDatabase.class,
+                util.getFolder(context)+"/hideFiles").allowMainThreadQueries().build();
         return database;
     }
     public abstract MediaDao mediaDao();

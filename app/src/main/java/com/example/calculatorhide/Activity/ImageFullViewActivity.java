@@ -85,6 +85,12 @@ public class ImageFullViewActivity extends AppCompatActivity {
                 showInfo(media);
             }
         });
+        binding.ivRecycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showRcyclePopup(media);
+            }
+        });
         binding.ivUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,15 +138,29 @@ public class ImageFullViewActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.file_info, null);
         dialogBuilder.setView(dialogView);
+        TextView fileinfo = dialogView.findViewById(R.id.fileinfo);
+        TextView currentpath = dialogView.findViewById(R.id.currentpath);
+        TextView originpath = dialogView.findViewById(R.id.originpath);
+        TextView addedon = dialogView.findViewById(R.id.addedon);
+        fileinfo.setText(SplashActivity.resources.getString(R.string.file_info));
+        currentpath.setText(SplashActivity.resources.getString(R.string.Current_Path));
+        originpath.setText(SplashActivity.resources.getString(R.string.Original_Path));
+        addedon.setText(SplashActivity.resources.getString(R.string.Added_On));
         TextView tvCrPath =dialogView.findViewById(R.id.tvCurentPath);
         TextView tvDsPath =dialogView.findViewById(R.id.tvOrPath);
         TextView tvAdded=dialogView.findViewById(R.id.tvAddedOn);
-        //
-        tvDsPath.setText(media.getOrPath());
+        TextView ok = dialogView.findViewById(R.id.ok);
+        AlertDialog  alertDialog = dialogBuilder.create();
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    alertDialog.dismiss();
+            }
+        });
+        tvDsPath.setText(media.getoPath());
         tvCrPath.setText(media.getPath());
-        File f=new File(media.getOrPath());
+        File f=new File(media.getoPath());
         tvAdded.setText(String.valueOf(media.getTime()));
-        AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
     }
     public void showUnHideRcyclePopup(MediaItem item)
@@ -151,7 +171,10 @@ public class ImageFullViewActivity extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
         TextView tvUnHide =dialogView.findViewById(R.id.tvUnHide);
         TextView tvRecycle =dialogView.findViewById(R.id.tvRecycleBin);
-        //
+        TextView maintext = dialogView.findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.unhideSelected));
+        tvUnHide.setText(SplashActivity.resources.getString(R.string.yes));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.no));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +182,39 @@ public class ImageFullViewActivity extends AppCompatActivity {
                 alertDialog.dismiss();
                 List<MediaItem>itemList=new ArrayList<>();
                 itemList.add(item);
+                hideFiles.unHideFile(itemList);
+                onBackPressed();
+            }
+        });
+        tvRecycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
+    }
+    public void showRcyclePopup(MediaItem item)
+    {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.recycle_popup, null);
+        dialogBuilder.setView(dialogView);
+        TextView tvUnHide =dialogView.findViewById(R.id.tvUnHide);
+        TextView tvRecycle =dialogView.findViewById(R.id.tvRecycleBin);
+        TextView maintext = dialogView.findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.recycle));
+        tvUnHide.setText(SplashActivity.resources.getString(R.string.yes));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.no));
+        AlertDialog alertDialog = dialogBuilder.create();
+        tvUnHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+                List<MediaItem>itemList=new ArrayList<>();
+                itemList.add(item);
+                hidedDatabase.mediaDao().addtoRecycle(1, item.getPath());
                 hideFiles.unHideFile(itemList);
                 onBackPressed();
             }

@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/cal_display"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/home_item">
+
     <LinearLayout
-        android:layout_margin="@dimen/_12sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_12sdp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
+            android:id="@+id/maintext"
             android:layout_width="match_parent"
-            android:textColor="@color/white"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
             android:text="Do you want to unhide this file ?"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:gravity="right"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/_12sdp"
-            android:layout_height="wrap_content">
+            android:gravity="right"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tvUnHide"
                 android:layout_width="wrap_content"
-                android:text="@string/yes"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"
+                android:fontFamily="@font/varelaroundregular"
+                android:text="@string/yes"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content"/>
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvRecycleBin"
                 android:layout_width="wrap_content"
-                android:text="@string/no"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"
+                android:fontFamily="@font/varelaroundregular"
+
+                android:text="@string/no"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
     </LinearLayout>

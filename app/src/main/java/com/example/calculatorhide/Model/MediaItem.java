@@ -19,7 +19,7 @@ public class MediaItem implements Serializable {
     private String path;
 
     @ColumnInfo(name = "oPath")
-    private String OrPath;
+    public String oPath;
 
     @ColumnInfo(name = "fileExt")
     private String fileExt;
@@ -61,12 +61,12 @@ public class MediaItem implements Serializable {
         this.path = path;
     }
 
-    public String getOrPath() {
-        return OrPath;
+    public String getoPath() {
+        return oPath;
     }
 
-    public void setOrPath(String orPath) {
-        OrPath = orPath;
+    public void setoPath(String oPath) {
+        this.oPath = oPath;
     }
 
     public String getFileExt() {
@@ -98,7 +98,7 @@ public class MediaItem implements Serializable {
     }
 
     public void setFolder(String folder) {
-        this.folder = "Default";
+        this.folder = folder;
     }
 
     public int getDeleted() {
@@ -106,6 +106,6 @@ public class MediaItem implements Serializable {
     }
 
     public void setDeleted(int deleted) {
-        this.deleted=deleted;
+        this.deleted = deleted;
     }
 }

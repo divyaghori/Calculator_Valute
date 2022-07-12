@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Calculator</string>
-    <string name="tip_description">Set Your Password for the first time</string>
+    <string name="tip_description">Set Your Password for the first time. Only 4 Digit Password Valid.</string>
     <string name="name">Calculator</string>
     <string name="vault_name_cal">Calculator</string>
     <string name="view_by">View By</string>
@@ -28,9 +28,9 @@
     <string name="code">code</string>
     <string name="confirm">Confirm</string>
     <string name="file_info">File info</string>
-    <string name="current_path">Current Path</string>
-    <string name="original_path">Original path</string>
-    <string name="added_on">Added on</string>
+    <string name="current_path">Current Path:</string>
+    <string name="original_path">Original path:</string>
+    <string name="added_on">Added on:</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="do_you_want_to_unhide_this_file">Do you want to unhide this file ?</string>
@@ -64,7 +64,7 @@
     <string name="deleteRecycleSelected"> "Do you want to permanently delete the selected files from Recycle Bin?"</string>
     <string name="restoreRecycleSelected"> "Do you want to restore the selected files from Recycle Bin?"</string>
     <string name="Gallery"> "Gallery"</string>
-    <string name="Video"> "Video"</string>
+    <string name="Video">"Video"</string>
     <string name="Audio"> "Audio"</string>
     <string name="App_Lock"> "App Lock"</string>
     <string name="Documents"> "Documents"</string>

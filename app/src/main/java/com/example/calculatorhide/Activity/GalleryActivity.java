@@ -1,6 +1,7 @@
 package com.example.calculatorhide.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
@@ -101,7 +103,8 @@ public class GalleryActivity extends AppCompatActivity {
         });
         getimage = findViewById(R.id.getimage);
         maintext = findViewById(R.id.maintext);
-        maintext.setText("Gallery");
+        maintext.setText(SplashActivity.resources.getString(R.string.Gallery));
+        tvNoData.setText(SplashActivity.resources.getString(R.string.No_files_added));
         getimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,7 +118,6 @@ public class GalleryActivity extends AppCompatActivity {
                 getImages();
                 dialogue.dismiss();
             }
-
             @Override
             public void onLoading(boolean value) {
                 dialogue.show();
@@ -137,20 +139,25 @@ public class GalleryActivity extends AppCompatActivity {
         unlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showUnHideRcyclePopup1(0, selectedItems);
+                showUnHideRcyclePopup1(adapter.getCheckedItems());
             }
         });
     }
-
     private void getImages() {
         mediaItems.clear();
-        mediaItems = hidedDatabase.mediaDao().getImagesMedia("image", 0);
+        mediaItems = hidedDatabase.mediaDao().getImagesMedia("HiddenFileType.image", 0);
         if (mediaItems.size() != 0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
-            adapter = new GalleryAdapter(activity, mediaItems, checked);
+            adapter = new GalleryAdapter(activity, mediaItems, checked,check.isChecked());
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    adapter.OnSelectionModeChange(isChecked);
+                }
+            });
         } else {
             tvNoData.setVisibility(View.VISIBLE);
             image.setVisibility(View.VISIBLE);
@@ -171,10 +178,9 @@ public class GalleryActivity extends AppCompatActivity {
 
     public File getFolder() {
         String rootPath = "";
-        String path = ".CalculatorVault";
+        String path = "CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//            file = new File(Environment.getExternalStorageDirectory(), path);
             rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
                     + path + "/" + "files" ;
             file = new File(rootPath);
@@ -182,7 +188,6 @@ public class GalleryActivity extends AppCompatActivity {
             file = new File(Environment.getExternalStorageDirectory(), path);
             rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
                     + path + "/" + "files";
-//            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
             Log.d("root", rootPath);
             file = new File(rootPath);
         }
@@ -191,13 +196,14 @@ public class GalleryActivity extends AppCompatActivity {
         }
         return file;
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQ_CODE) {
             if (data != null) {
                 file_uris = (List<String>) data.getSerializableExtra("files");
-                hideFiles.HideFile(file_uris, "image", getFolder());
+                hideFiles.HideFile(file_uris, "HiddenFileType.image", getFolder());
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -219,7 +225,11 @@ public class GalleryActivity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.long_ubhide_popup, null);
         dialogBuilder.setView(dialogView);
         TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
+        TextView maintext = dialogView.findViewById(R.id.maintext);
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
+        maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
+        tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.recycle));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,17 +248,19 @@ public class GalleryActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-
         alertDialog.show();
     }
-    public void showUnHideRcyclePopup1(int position, List<MediaItem> itemList) {
-        MediaItem item = itemList.get(position);
+    public void showUnHideRcyclePopup1( List<MediaItem> itemList) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.long_ubhide_popup, null);
         dialogBuilder.setView(dialogView);
         TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
+        TextView maintext = dialogView.findViewById(R.id.maintext);
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
+        maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
+        tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.recycle));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,42 +268,37 @@ public class GalleryActivity extends AppCompatActivity {
 //                List<MediaItem> itemList = new ArrayList<>();
 //                itemList.add(item);
                 hideFiles.unHideFile(itemList);
+                unlock.setVisibility(View.GONE);
                 alertDialog.dismiss();
             }
         });
         tvRecycle.setVisibility(View.GONE);
-        tvRecycle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hidedDatabase.mediaDao().addtoRecycle(1, item.getPath());
-                getImages();
-                alertDialog.dismiss();
-            }
-        });
         alertDialog.show();
     }
-
     @Override
     public void onBackPressed() {
         Intent i = new Intent(GalleryActivity.this, HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
-
     public class GalleryAdapter extends ArrayAdapter<MediaItem> {
+        private Boolean selectionMode;
         private Context mContext;
         private List<MediaItem> mitemList;
         boolean cheked;
         SparseBooleanArray mSparseBooleanArray;
-
-        public GalleryAdapter(Context context, List<MediaItem> itemList, boolean checked) {
+        public void OnSelectionModeChange(Boolean selectionMode){
+            this.selectionMode = selectionMode;
+            notifyDataSetChanged();
+        }
+        public GalleryAdapter(Context context, List<MediaItem> itemList, boolean checked,Boolean selectionMode) {
             super(context, 0, itemList);
+            this.selectionMode= selectionMode;
             mContext = context;
             mitemList = itemList;
             this.cheked = checked;
             mSparseBooleanArray = new SparseBooleanArray();
         }
-
         public ArrayList<MediaItem> getCheckedItems() {
             ArrayList<MediaItem> mTempArry = new ArrayList<MediaItem>();
             for (int i = 0; i < mitemList.size(); i++) {
@@ -301,7 +308,6 @@ public class GalleryActivity extends AppCompatActivity {
             }
             return mTempArry;
         }
-
         @Override
         public int getCount() {
             return mitemList.size();
@@ -313,6 +319,8 @@ public class GalleryActivity extends AppCompatActivity {
             return mitemList.get(position);
         }
 
+
+
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -320,14 +328,12 @@ public class GalleryActivity extends AppCompatActivity {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_media_item, parent, false);
             ImageView ivItem = view.findViewById(R.id.ivItem);
             CheckBox mCheckBox = view.findViewById(R.id.checkbox);
-//            if(checked == true) {
-//                mCheckBox.setVisibility(View.VISIBLE);
-//            }
+            mCheckBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
             mCheckBox.setTag(position);
             mCheckBox.setChecked(mSparseBooleanArray.get(position));
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
             if (item != null) {
-                if (item.getType().equalsIgnoreCase("image")) {
+                if (item.getType().equalsIgnoreCase("HiddenFileType.image")) {
                     Glide.with(mContext)
                             .load(item.getPath())
                             .centerCrop()
@@ -343,7 +349,7 @@ public class GalleryActivity extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup(position, item);
+                            showUnHideRcyclePopup1(mitemList);
                             return false;
                         }
                     });
@@ -376,9 +382,22 @@ public class GalleryActivity extends AppCompatActivity {
         }
 
         CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+//                if (mSparseBooleanArray.size() > 0) {
+//                    ShowOtherOption();
+//                }else {
+//                    HideOtherOption();
+//                }
+
+                //mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+                if (isChecked){
+                    mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+                }else {
+                    mSparseBooleanArray.removeAt(mSparseBooleanArray.indexOfKey((Integer) buttonView.getTag()));
+                }
+                unlock.setVisibility(mSparseBooleanArray.size() > 0 ? View.VISIBLE :View.GONE);
             }
         };
     }

@@ -59,7 +59,7 @@ public class Util {
 
     public File getFolder(Context context) {
         String rootPath = "";
-        String path = ".CalculatorVault";
+        String path = "CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 //            file = new File(Environment.getExternalStorageDirectory(), path);

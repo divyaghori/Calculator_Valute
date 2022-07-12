@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
@@ -39,16 +40,17 @@ public class HideFiles {
             String ex = getFileExtension(path);
             String title = getFileName(path);
             File source = new File(path);
-            uuid = UuidCreator.getRandomBased();
+            uuid = UuidCreator.getTimeBased();
             File des = new File(hiddenPath, uuid + "." + "vault");
             MediaItem mediaItem = new MediaItem();
             mediaItem.setType(type);
             mediaItem.setFileExt(ex);
             mediaItem.setName(title);
             mediaItem.setPath(des.getPath());
-            mediaItem.setOrPath(source.getPath());
+            mediaItem.setoPath(source.getPath());
             mediaItem.setTime((int) Calendar.getInstance().getTimeInMillis());
             mediaItem.setDeleted(0);
+            mediaItem.setFolder("Default");
             copyFiles(source, des, path);
             hidedDatabase.mediaDao().addData(mediaItem);
         }
@@ -59,10 +61,10 @@ public class HideFiles {
         for(int i=0;i<item.size();i++) {
             successInterface.onLoading(true);
             hidedDatabase = HidedDatabase.getDatabse(mContext);
-            String title = getFileName(item.get(i).getOrPath());
-            String org = item.get(i).getOrPath();
+            String title = getFileName(item.get(i).getoPath());
+            String org = item.get(i).getoPath();
             File src = new File(item.get(i).getPath());
-            File des = new File(item.get(i).getOrPath());
+            File des = new File(item.get(i).getoPath());
             String sl = des.getParent();
             File dest = new File(sl, title);
             copyFiles(src, dest, item.get(i).getPath());

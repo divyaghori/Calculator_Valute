@@ -68,7 +68,7 @@
             android:layout_below="@+id/image"
             android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
-            android:text="File Not Found"
+            android:text="@string/No_files_added"
             android:textColor="@color/white"
             android:textSize="20sp"></TextView>
     </RelativeLayout>

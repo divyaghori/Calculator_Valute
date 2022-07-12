@@ -47,6 +47,15 @@ public class QuestionsActivity extends AppCompatActivity  implements AdapterView
                         .simple_spinner_dropdown_item);
         question_sp.setAdapter(ad);
         answer_et = findViewById(R.id.answer_et);
+        findViewById(R.id.skip_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(QuestionsActivity.this,CalcualatorTransitionActivity.class);
+                i.putExtra("index",0);
+                startActivity(i);
+                finish();
+            }
+        });
         findViewById(R.id.submit_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

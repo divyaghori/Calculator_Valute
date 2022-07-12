@@ -37,7 +37,7 @@ public class AudioActivity1 extends AppCompatActivity {
     Activity activity;
     ImageView icback,getimage;
     GridView gvGallery;
-    TextView tvNoData;
+    TextView tvNoData,maintext;
     HideFiles hideFiles;
     CustomProgressDialogue dialogue;
     private static final int REQ_CODE=123;
@@ -64,6 +64,9 @@ public class AudioActivity1 extends AppCompatActivity {
         icback = findViewById(R.id.back);
         gvGallery=findViewById(R.id.gvGallery);
         tvNoData=findViewById(R.id.tvNodata);
+        maintext = findViewById(R.id.maintext);
+        maintext.setText(SplashActivity.resources.getString(R.string.Audio));
+        tvNoData.setText(SplashActivity.resources.getString(R.string.No_files_added));
         image = findViewById(R.id.image);
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,9 +109,10 @@ public class AudioActivity1 extends AppCompatActivity {
             adapter.setClickItemInterface(new AudioAdapter.ClickItemInterface(){
                 @Override
                 public void onItemClick(int position, String path) {
-//                    Intent intent=new Intent(activity,VideoViewActivity.class);
-//                    intent.putExtra("path",path);
-//                    startActivity(intent);
+                    Intent intent=new Intent(activity,AudioViewActivity.class);
+                    intent.putExtra("path",path);
+                    intent.putExtra("name",mediaItems.get(position).getName());
+                    startActivity(intent);
                 }
 
                 @Override

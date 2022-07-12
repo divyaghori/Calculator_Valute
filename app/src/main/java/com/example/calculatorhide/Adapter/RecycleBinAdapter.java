@@ -48,7 +48,7 @@ public class RecycleBinAdapter extends ArrayAdapter<MediaItem> {
                     .centerCrop()
                     .into(ivIcon);
         }
-        if(data.getType().equalsIgnoreCase("image")) {
+        if(data.getType().equalsIgnoreCase("HiddenFileType.image")) {
             Glide.with(mContext)
                     .load(data.getPath())
                     .centerCrop()
