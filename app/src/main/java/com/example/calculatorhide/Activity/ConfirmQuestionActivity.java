@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.calculatorhide.Model.SecurityDatabase;
+import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.R;
 
 
@@ -20,11 +22,17 @@ public class ConfirmQuestionActivity extends AppCompatActivity {
     EditText answer;
     ImageView back;
     Activity activity;
+    Securityitem getquepass;
+    SecurityDatabase securityDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_question);
         activity = this;
+        securityDatabase = SecurityDatabase.getDatabse(activity);
+        getquepass = new Securityitem();
+        getquepass = securityDatabase.securityDao().getqueans();
         question = findViewById(R.id.question);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -37,15 +45,13 @@ public class ConfirmQuestionActivity extends AppCompatActivity {
         maintext.setText(SplashActivity.resources.getString(R.string.Set_security_question));
         submit_btn = findViewById(R.id.submit_btn);
         submit_btn.setText(SplashActivity.resources.getString(R.string.Confirm));
-        String wu = MyApplication.GetStringFromPrefs(ConfirmQuestionActivity.this,MyApplication.QUESTION);
-        question.setText(MyApplication.GetStringFromPrefs(activity,MyApplication.QUESTION));
+        question.setText(getquepass.getQuestion().toString());
         answer = findViewById(R.id.answer_et);
         findViewById(R.id.submit_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (answer.getText().toString().equalsIgnoreCase(MyApplication.GetStringFromPrefs(activity,MyApplication.ANSWER))){
+                if (answer.getText().toString().equalsIgnoreCase(getquepass.getAnswer().toString())){
                     startActivity(new Intent(ConfirmQuestionActivity.this,NewPinActivity.class));
-                    finish();
                 }else {
                     Toast.makeText(activity,"Please Enter Currect Answer",Toast.LENGTH_LONG).show();
                 }

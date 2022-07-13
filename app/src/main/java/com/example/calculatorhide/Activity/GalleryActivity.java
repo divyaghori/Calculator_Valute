@@ -35,6 +35,7 @@ import com.bumptech.glide.Glide;
 import com.example.calculatorhide.Adapter.GalleryAdapter;
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
+import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
 import com.example.calculatorhide.Utils.GoogleAds;
@@ -53,7 +54,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 public class GalleryActivity extends AppCompatActivity {
     HidedDatabase hidedDatabase;
     Activity activity;
@@ -178,7 +178,7 @@ public class GalleryActivity extends AppCompatActivity {
 
     public File getFolder() {
         String rootPath = "";
-        String path = "CalculatorVault";
+        String path = ".CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
@@ -229,7 +229,7 @@ public class GalleryActivity extends AppCompatActivity {
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
         maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
         tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
-        tvRecycle.setText(SplashActivity.resources.getString(R.string.recycle));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,7 +260,7 @@ public class GalleryActivity extends AppCompatActivity {
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
         maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
         tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
-        tvRecycle.setText(SplashActivity.resources.getString(R.string.recycle));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,8 +319,6 @@ public class GalleryActivity extends AppCompatActivity {
             return mitemList.get(position);
         }
 
-
-
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -349,7 +347,7 @@ public class GalleryActivity extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup1(mitemList);
+                            showUnHideRcyclePopup(position, item);
                             return false;
                         }
                     });
@@ -376,7 +374,6 @@ public class GalleryActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
             return view;
         }

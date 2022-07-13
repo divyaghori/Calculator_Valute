@@ -4,6 +4,7 @@ import static android.os.Build.VERSION.SDK_INT;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,12 +16,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,7 +51,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class HomeActivity extends AppCompatActivity  implements IAPHelper.IAPHelperListener{
+public class HomeActivity extends AppCompatActivity implements IAPHelper.IAPHelperListener {
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     AtomicBoolean atomicBooleanGallary = new AtomicBoolean();
@@ -147,10 +151,11 @@ public class HomeActivity extends AppCompatActivity  implements IAPHelper.IAPHel
         });
     }
 
-    private void launch(String sku){
-        if(!skuDetailsHashMap.isEmpty())
+    private void launch(String sku) {
+        if (!skuDetailsHashMap.isEmpty())
             iapHelper.launchBillingFLow(skuDetailsHashMap.get(sku));
     }
+
     private void setAdAtomic() {
         atomicBooleanGallary.set(true);
     }
@@ -182,7 +187,7 @@ public class HomeActivity extends AppCompatActivity  implements IAPHelper.IAPHel
 //                    if(!isAdShowen){
 //                        isAdShowen = true;
                 if (isAdShowen) {
-                   // atomicBooleanGallary.getAndSet(false);
+                    // atomicBooleanGallary.getAndSet(false);
                     InterstitialAd interstitialAd = manager.showIfItAvaible();
                     if (interstitialAd != null) {
                         interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
@@ -627,12 +632,48 @@ public class HomeActivity extends AppCompatActivity  implements IAPHelper.IAPHel
                 createAppFolder();
             }
         }
-
     }
 
     @Override
     public void onBackPressed() {
-        finishAffinity();
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.activity_rating_dialog, null);
+        dialogBuilder.setView(dialogView);
+        CardView first = dialogView.findViewById(R.id.first);
+        CardView second = dialogView.findViewById(R.id.second);
+        CardView third = dialogView.findViewById(R.id.third);
+        CardView exit = dialogView.findViewById(R.id.exit);
+        first.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Thank You", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        second.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Thank You", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        third.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Thank You", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        AlertDialog alertDialog = dialogBuilder.create();
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
     @Override
@@ -653,10 +694,11 @@ public class HomeActivity extends AppCompatActivity  implements IAPHelper.IAPHel
         updatePurchase(purchase);
     }
 
-    private void updatePurchase(Purchase purchase){
+    private void updatePurchase(Purchase purchase) {
         String sku = purchase.getSku();
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

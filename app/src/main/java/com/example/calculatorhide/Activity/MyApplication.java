@@ -473,10 +473,6 @@ public class MyApplication extends Application implements ActivityLifecycleCallb
     }
 
     public static void SetStringToPrefs(Context context, String key, String value) {
-//        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putString(key, value);
-//        editor.commit();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key, value);
@@ -485,9 +481,6 @@ public class MyApplication extends Application implements ActivityLifecycleCallb
     }
 
     public static String GetStringFromPrefs(Context context, String key) {
-//        SharedPreferences prefs = activity.getPreferences(activity.MODE_PRIVATE);
-//        return prefs.getString(key, "");
-
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
     }

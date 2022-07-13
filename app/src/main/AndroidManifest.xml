@@ -35,15 +35,11 @@
             android:exported="false" />
         <activity android:name=".Activity.QuestionsActivity"></activity>
         <activity android:name=".Activity.ConfirmQuestionActivity"></activity>
-        <activity android:name=".Activity.VideoActivity1"></activity>
         <activity android:name=".Activity.DocumentActivity1"></activity>
         <activity android:name=".Activity.ImportAudioActivity"></activity>
         <activity android:name=".Activity.AudioActivity1"></activity>
         <activity android:name=".Activity.CalcualatorTransitionActivity"></activity>
         <activity android:name=".Activity.NewPinActivity"></activity>
-        <activity
-            android:name=".Activity.RatingDialogActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.TransitionActivity"
             android:exported="false" />
@@ -52,10 +48,6 @@
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
-            android:exported="false" />
-        <activity android:name=".Activity.AudioActivity" />
-        <activity
-            android:name=".Activity.ChanepasswordActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.AdsBlockActivity"
@@ -68,15 +60,6 @@
             android:exported="false" />
         <activity
             android:name=".Activity.securityquestionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.GetAudioActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.NoteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.DisguiseActvity"
             android:exported="false" />
         <activity
             android:name=".Activity.DisguiseActivity"
@@ -1043,28 +1026,13 @@
             android:name=".Activity.ImportDocument"
             android:exported="false" />
         <activity
-            android:name=".Activity.DocumentActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.VideoPlayerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ImportVideo"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ImportAudio"
             android:exported="false" />
         <activity
             android:name=".Activity.VideoActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AdioActivity"
-            android:exported="false" />
-        <activity
             android:name=".Adapter.import_item_Adapter"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.Importphoto"
             android:exported="false" />
         <activity
             android:name=".Activity.GalleryActivity"
@@ -1073,9 +1041,6 @@
             android:name=".Activity.SettingActivity"
             android:exported="false" />
         <activity android:name=".Activity.MultiAudioSelectActivity" />
-        <activity
-            android:name=".Activity.SecurityQuesActivity"
-            android:exported="false" />
         <activity
             android:name=".Activity.ImageFullViewActivity"
             android:exported="false" />

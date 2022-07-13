@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.calculatorhide.Dialog.TipsDialog;
+import com.example.calculatorhide.Model.HidedDatabase;
+import com.example.calculatorhide.Model.SecurityDatabase;
+import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.ActivityData;
 import com.example.calculatorhide.Utils.InterstitialAdManager;
@@ -22,6 +25,7 @@ import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -37,22 +41,27 @@ public class CalculatorActivityy extends AppCompatActivity {
     private Activity activity = this;
     private InterstitialAdManager manager;
     private Boolean isPinConfirm;
+    SecurityDatabase securityDatabase;
+    Securityitem getpassword;
+    List<Securityitem> getpasswordsize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator1);
-//        if (Util.isBackPressed)
-//            Util.isBackPressed
-        //    Util.activityData_list.add(new ActivityData(CalculatorActivityy.this,true));
         getWindow().setFlags(1024, 1024);
+        securityDatabase = SecurityDatabase.getDatabse(activity);
         manager = new InterstitialAdManager();
         manager.fetchAd(this, false);
         simplemsg = findViewById(R.id.simplemsg);
         simplesubmsg = findViewById(R.id.simplesubmsg);
+        simplesubmsg.setText(SplashActivity.resources.getString(R.string.PEqual));
         initTextViews();
-
-        if (!MyApplication.CheckPrefs(this, MyApplication.PIN)) {
+        getpassword = new Securityitem();
+        getpasswordsize = new ArrayList<>();
+        getpasswordsize = securityDatabase.securityDao().getSecurity();
+//        if (!MyApplication.CheckPrefs(this, MyApplication.PIN)) {
+        if (getpasswordsize.size() == 0) {
             HideSpecialChar();
             isPinConfirm = false;
             ShowTipsDialog();
@@ -87,7 +96,6 @@ public class CalculatorActivityy extends AppCompatActivity {
         TipsDialog td = new TipsDialog(this);
         td.show();
     }
-
 
     private void initTextViews() {
         workingsTV = (TextView) findViewById(R.id.workingsTextView);
@@ -126,20 +134,21 @@ public class CalculatorActivityy extends AppCompatActivity {
                 if (workings.length() == 4) {
                     firstPin = workings;
                     workings = "";
-                    simplemsg.setText("Confirm Password");
+                    simplemsg.setText(SplashActivity.resources.getString(R.string.ConfirmPass));
                     resultsTV.setText(AddStar(firstPin));
                     workingsTV.setText("");
                     isPinConfirm = true;
                     return;
                 }
             }
-
             if (workings.equals(firstPin)) {
                 MyApplication.SetStringToPrefs(this, MyApplication.PIN, workings);
-                startActivity(new Intent(this, QuestionsActivity.class));
+                Intent i = new Intent(this, QuestionsActivity.class);
+                i.putExtra("password", workings);
+                startActivity(i);
                 finish();
             } else {
-                simplemsg.setText("Enter 4 digit password");
+                simplemsg.setText(SplashActivity.resources.getString(R.string.E4Pass));
                 workings = "";
                 firstPin = "";
                 isPinConfirm = false;
@@ -149,7 +158,8 @@ public class CalculatorActivityy extends AppCompatActivity {
                 return;
             }
         } else {
-            if (MyApplication.GetStringFromPrefs(this, MyApplication.PIN).equals(workings)) {
+            getpassword = securityDatabase.securityDao().getqueans();
+            if (getpassword.getPassword().equals(workings)) {
                 InterstitialAd interstitialAd = manager.showIfItAvaible();
                 if (interstitialAd != null) {
                     interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
@@ -190,6 +200,8 @@ public class CalculatorActivityy extends AppCompatActivity {
                     intent.putExtra("start", false);
                     startActivity(intent);
                 }
+            }else{
+                Toast.makeText(getApplicationContext(), "please Correct password", Toast.LENGTH_SHORT).show();
             }
         }
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
@@ -257,7 +269,7 @@ public class CalculatorActivityy extends AppCompatActivity {
         resultsTV.setText("");
         leftBracket = true;
         if (!isPinSet) {
-            simplemsg.setText("Enter 4 digit password");
+            simplemsg.setText(SplashActivity.resources.getString(R.string.E4Pass));
             workings = "";
             firstPin = "";
             isPinConfirm = false;

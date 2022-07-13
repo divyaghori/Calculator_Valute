@@ -87,39 +87,40 @@
                 android:src="@drawable/ic_undraw_empty_xct9">
 
             </ImageView>
+
             <TextView
                 android:id="@+id/tvNodata"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/image"
                 android:fontFamily="@font/varelaroundregular"
                 android:gravity="center"
-                android:layout_below="@+id/image"
                 android:text="@string/No_files_added"
                 android:textColor="@color/white"
-                android:textSize="20sp">
-            </TextView>
+                android:textSize="20sp"></TextView>
         </RelativeLayout>
 
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/getimage"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|right"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginBottom="@dimen/_12sdp"
-            android:src="@drawable/ic_plus"
-            app:backgroundTint="@color/teal_700"
-            app:tint="@color/white">
+            android:layout_height="wrap_content">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/getimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_plus"
+                android:layout_margin="@dimen/_13sdp"
+                app:backgroundTint="@color/teal_700"
+                app:tint="@color/white">
 
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout

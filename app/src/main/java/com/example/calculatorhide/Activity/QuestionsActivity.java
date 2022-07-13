@@ -15,28 +15,34 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.Utils.HideFiles;
 
 
-public class QuestionsActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
+public class QuestionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner question_sp;
     EditText answer_et;
     Activity activity;
     //TextView confirm_txt;
-   // boolean isForConfirm;
+    // boolean isForConfirm;
     String[] Questions_Array = {
-           SplashActivity.resources.getString(R.string.Where_were_your_born),
-           SplashActivity.resources.getString(R.string.When_is_your_birthday),
-           SplashActivity.resources.getString(R.string.Who_is_your_motherfather),
-           SplashActivity.resources.getString(R.string.Who_is_your_brothersister),
-           SplashActivity.resources.getString(R.string.Who_is_your_girlfriendboyfriend),
+            SplashActivity.resources.getString(R.string.Where_were_your_born),
+            SplashActivity.resources.getString(R.string.When_is_your_birthday),
+            SplashActivity.resources.getString(R.string.Who_is_your_motherfather),
+            SplashActivity.resources.getString(R.string.Who_is_your_brothersister),
+            SplashActivity.resources.getString(R.string.Who_is_your_girlfriendboyfriend),
     };
+    String password;
+    HideFiles hideFiles;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_securityquestion_main);
         activity = this;
+        hideFiles = new HideFiles(activity);
         question_sp = findViewById(R.id.question_spinner);
         question_sp.setOnItemSelectedListener(this);
+        password = getIntent().getStringExtra("password");
         ArrayAdapter ad
                 = new ArrayAdapter(
                 this,
@@ -47,11 +53,20 @@ public class QuestionsActivity extends AppCompatActivity  implements AdapterView
                         .simple_spinner_dropdown_item);
         question_sp.setAdapter(ad);
         answer_et = findViewById(R.id.answer_et);
+        hideFiles.getSuccess(new HideFiles.SuccessInterface() {
+            @Override
+            public void onSuccess(boolean value) {
+            }
+            @Override
+            public void onLoading(boolean value) {
+            }
+        });
         findViewById(R.id.skip_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(QuestionsActivity.this,CalcualatorTransitionActivity.class);
-                i.putExtra("index",0);
+                hideFiles.createSecurity(password,null,null);
+                Intent i = new Intent(QuestionsActivity.this, CalcualatorTransitionActivity.class);
+                i.putExtra("index", 0);
                 startActivity(i);
                 finish();
             }
@@ -63,26 +78,18 @@ public class QuestionsActivity extends AppCompatActivity  implements AdapterView
                 if (ans.length() == 0) {
                     Toast.makeText(activity, "Please Enter Answer", Toast.LENGTH_SHORT).show();
                 } else {
-                    //if (!MyApplication.CheckPrefs(QuestionsActivity.this, MyApplication.ANSWER)) {
-                        MyApplication.SetStringToPrefs(QuestionsActivity.this, MyApplication.QUESTION, question_sp.getSelectedItem().toString());
-                        MyApplication.SetStringToPrefs(QuestionsActivity.this, MyApplication.ANSWER, ans);
-                        Intent i = new Intent(QuestionsActivity.this,CalcualatorTransitionActivity.class);
-                        i.putExtra("index",0);
-                        startActivity(i);
-                        finish();
-//                    } else {
-//                        if (ans.equalsIgnoreCase(MyApplication.GetStringFromPrefs(QuestionsActivity.this, MyApplication.ANSWER))
-//                                && question_sp.getSelectedItem().toString() == MyApplication.GetStringFromPrefs(QuestionsActivity.this, MyApplication.QUESTION)) {
-//                            MyApplication.RemovePrefs(QuestionsActivity.this, MyApplication.PIN);
-//                            finish();
-//                        } else {
-//                            Toast.makeText(QuestionsActivity.this, "Make Sure Your Question and Answer is Right!", Toast.LENGTH_LONG).show();
-//                        }
-//                    }
+                    hideFiles.createSecurity(password,question_sp.getSelectedItem().toString(),ans);
+                    MyApplication.SetStringToPrefs(QuestionsActivity.this, MyApplication.QUESTION, question_sp.getSelectedItem().toString());
+                    MyApplication.SetStringToPrefs(QuestionsActivity.this, MyApplication.ANSWER, ans);
+                    Intent i = new Intent(QuestionsActivity.this, CalcualatorTransitionActivity.class);
+                    i.putExtra("index", 0);
+                    startActivity(i);
+                    finish();
                 }
             }
         });
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();

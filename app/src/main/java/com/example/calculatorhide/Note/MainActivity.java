@@ -41,16 +41,15 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     ImageView back;
     AdView mAdView;
+    TextView tvNoData;
     Activity activity;
+    ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainnote);
         activity = this;
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         });
         maintext = findViewById(R.id.maintext);
         maintext.setText(SplashActivity.resources.getString(R.string.Notes));
+        tvNoData = findViewById(R.id.tvNodata);
+        tvNoData.setText(SplashActivity.resources.getString(R.string.No_files_added));
+        image = findViewById(R.id.image);
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_node);
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setNotes(notes);
             }
         });
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -107,19 +108,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == ADD_NODE_REQUEST && resultCode == RESULT_OK) {
             String title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
             String description = data.getStringExtra(AddEditNoteActivity.EXTRA_DESCRIPTION);
             int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
-
             Note note = new Note(title, description, priority);
             noteViewModel.insert(note);
-
             Toast.makeText(this, "Note Saved!", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_NODE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditNoteActivity.EXTRA_ID, -1);

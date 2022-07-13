@@ -59,7 +59,30 @@ public class Util {
 
     public File getFolder(Context context) {
         String rootPath = "";
-        String path = "CalculatorVault";
+        String path = ".CalculatorVault";
+        File file = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            file = new File(Environment.getExternalStorageDirectory(), path);
+            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
+                    + path + "/"  ;
+            file = new File(rootPath);
+        } else {
+            file = new File(Environment.getExternalStorageDirectory(), path);
+            rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
+                    + path + "/" ;
+//            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
+            Log.d("root", rootPath);
+            file = new File(rootPath);
+        }
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return file;
+    }
+
+    public File securitygetFolder(Context context) {
+        String rootPath = "";
+        String path = ".SecurityVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 //            file = new File(Environment.getExternalStorageDirectory(), path);

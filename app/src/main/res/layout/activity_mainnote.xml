@@ -60,6 +60,36 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="@dimen/_15sdp"
         android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/tvdata"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_250sdp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_undraw_empty_xct9">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/tvNodata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/image"
+                android:fontFamily="@font/varelaroundregular"
+                android:gravity="center"
+                android:text="@string/No_files_added"
+                android:textColor="@color/white"
+                android:textSize="20sp"></TextView>
+        </RelativeLayout>
 
 
         <RelativeLayout
@@ -74,22 +104,19 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 tools:listitem="@layout/note_item" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/button_add_node"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom|right"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="32dp"
-                android:src="@android:drawable/ic_input_add"
-                app:backgroundTint="@color/teal_700"
-                app:tint="@color/white" />
-        </RelativeLayout>
 
+        </RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_add_node"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/_10sdp"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="@color/teal_700"
+            app:tint="@color/white" />
     </FrameLayout>
 
 

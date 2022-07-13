@@ -20,9 +20,9 @@
         android:gravity="center|left"
         android:orientation="vertical"
         android:paddingLeft="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_20sdp"
+        android:paddingTop="@dimen/_20sdp"
         android:paddingRight="@dimen/_10sdp"
-        android:paddingTop="@dimen/_20sdp">
+        android:paddingBottom="@dimen/_20sdp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview"
@@ -36,8 +36,8 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:padding="@dimen/_8sdp"
-                android:tint="@color/white"
-                android:src="@drawable/ic_plus">
+                android:src="@drawable/ic_plus"
+                android:tint="@color/white">
 
             </ImageView>
         </androidx.cardview.widget.CardView>
@@ -47,6 +47,8 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:fontFamily="@font/varelaroundregular"
             android:paddingTop="@dimen/_7sdp"
             android:text="Gallery"
@@ -59,6 +61,8 @@
             android:id="@+id/subname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
             android:fontFamily="@font/varelaroundregular"
             android:padding="@dimen/_2sdp"
             android:text="Hidden Gallery"

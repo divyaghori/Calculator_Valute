@@ -241,7 +241,7 @@ public class VideoActivity extends AppCompatActivity {
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
         maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
         tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
-        tvRecycle.setText(SplashActivity.resources.getString(R.string.recycle));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -274,7 +274,7 @@ public class VideoActivity extends AppCompatActivity {
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
         maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
         tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
-        tvRecycle.setText(SplashActivity.resources.getString(R.string.recycle));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override

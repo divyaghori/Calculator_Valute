@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
+import com.example.calculatorhide.Model.SecurityDatabase;
+import com.example.calculatorhide.Model.Securityitem;
 import com.github.f4b6a3.uuid.UuidCreator;
 
 import org.apache.commons.io.FileUtils;
@@ -27,12 +29,16 @@ public class HideFiles {
     HidedDatabase hidedDatabase;
     SuccessInterface successInterface;
     UUID uuid;
+    SecurityDatabase securityDatabase;
+
+
     public HideFiles(Context context) {
         mContext = context;
     }
-    public void  HideFile(List<String> uris, String type, File hiddenPath) {
+
+    public void HideFile(List<String> uris, String type, File hiddenPath) {
         hidedDatabase = HidedDatabase.getDatabse(mContext);
-        Log.d("databse",hidedDatabase.toString());
+        Log.d("databse", hidedDatabase.toString());
 //        hidedDatabase= Room.databaseBuilder(mContext, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         for (int i = 0; i < uris.size(); i++) {
             successInterface.onLoading(true);
@@ -56,9 +62,9 @@ public class HideFiles {
         }
         successInterface.onSuccess(true);
     }
-    public void unHideFile(List<MediaItem> item)
-    {
-        for(int i=0;i<item.size();i++) {
+
+    public void unHideFile(List<MediaItem> item) {
+        for (int i = 0; i < item.size(); i++) {
             successInterface.onLoading(true);
             hidedDatabase = HidedDatabase.getDatabse(mContext);
             String title = getFileName(item.get(i).getoPath());
@@ -72,7 +78,6 @@ public class HideFiles {
         }
         successInterface.onSuccess(true);
     }
-
 
     public String getFileName(String path) {
         File f = new File(path);
@@ -89,15 +94,16 @@ public class HideFiles {
     public void copyFiles(File source, File destination, String path) {
         try {
             FileUtils.copyFile(source, destination);
-            delete(mContext,source);
+            delete(mContext, source);
             mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(destination)));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public  boolean delete(final Context context, final File file) {
+
+    public boolean delete(final Context context, final File file) {
         final String where = MediaStore.MediaColumns.DATA + "=?";
-        final String[] selectionArgs = new String[] {
+        final String[] selectionArgs = new String[]{
                 file.getAbsolutePath()
         };
         final ContentResolver contentResolver = context.getContentResolver();
@@ -108,14 +114,27 @@ public class HideFiles {
         }
         return !file.exists();
     }
-    public void getSuccess(SuccessInterface successInterface)
-    {
-        this.successInterface=successInterface;
+
+    public void getSuccess(SuccessInterface successInterface) {
+        this.successInterface = successInterface;
     }
-    public interface SuccessInterface
-    {
-        void  onSuccess(boolean value);
-        void  onLoading(boolean value);
+
+    public interface SuccessInterface {
+        void onSuccess(boolean value);
+
+        void onLoading(boolean value);
+    }
+
+
+    public void createSecurity(String password, String question, String answer) {
+        securityDatabase = SecurityDatabase.getDatabse(mContext);
+        successInterface.onLoading(true);
+        Securityitem securityitem = new Securityitem();
+        securityitem.setQuestion(question);
+        securityitem.setPassword(password);
+        securityitem.setAnswer(answer);
+        securityDatabase.securityDao().addData(securityitem);
+        successInterface.onSuccess(true);
     }
 
 }
