@@ -1,139 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/home_item">
+    android:background="@color/home_item"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:fontFamily="@font/varelaroundregular"
-        android:text="Music Play"
-        android:textColor="@color/white"
-        android:textSize="35dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_load"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_25sdp"
+        app:lottie_autoPlay="true"
         android:layout_centerHorizontal="true"
-        android:text="Tutorials point"
-        android:textColor="#ff7aff24"
-        android:textSize="35dp"
-        android:visibility="gone" />
+        android:layout_margin="@dimen/_25sdp"
+        app:lottie_rawRes="@raw/music" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:src="@drawable/app_icon_0" />
 
     <LinearLayout
-        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button"
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_25sdp"
+            android:fontFamily="@font/varelaroundregular"
+            android:singleLine="true"
+            android:text="Medium Text text text text text "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linear"
+            android:layout_marginBottom="@dimen/_25sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:fontFamily="@font/varelaroundregular"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_toLeftOf="@id/textView3"
+                android:layout_toRightOf="@id/textView2" />
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:fontFamily="@font/varelaroundregular"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_weight="1"
-            android:text="forward" />
+           >
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/imageView"
-            android:layout_alignLeft="@+id/imageView"
-            android:layout_alignParentBottom="true"
-            android:layout_weight="1"
-            android:text="pause" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button2"
-            android:layout_toEndOf="@+id/button2"
-            android:layout_toRightOf="@+id/button2"
-            android:layout_weight="1"
-            android:text="back" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/button3"
-            android:layout_toEndOf="@+id/button3"
-            android:layout_toRightOf="@+id/button3"
-            android:layout_weight="1"
-            android:text="rewind" />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/imageView"
+                android:layout_alignLeft="@+id/imageView"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:text="pause" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/button2"
+                android:layout_toEndOf="@+id/button2"
+                android:layout_toRightOf="@+id/button2"
+                android:layout_weight="1"
+                android:text="Play" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="#000000"
+            android:alpha="0.5"
+            android:padding="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ivInfo"
+                android:layout_width="@dimen/_20sdp"
+                android:src="@drawable/info"
+                android:layout_weight="1"
+                android:layout_height="@dimen/_20sdp"
+                app:tint="@color/white" />
+            <ImageView
+                android:id="@+id/ivUnHide"
+                android:layout_width="@dimen/_20sdp"
+                android:src="@drawable/unlock"
+                android:layout_weight="1"
+                android:layout_height="@dimen/_20sdp"
+                app:tint="@color/white" />
+            <ImageView
+                android:id="@+id/ivRecycle"
+                android:layout_width="@dimen/_20sdp"
+                android:src="@drawable/delete"
+                android:layout_weight="1"
+                android:layout_height="@dimen/_20sdp"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linear"
-        android:layout_marginBottom="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginRight="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
-        />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_toStartOf="@+id/textView"
-        android:layout_toLeftOf="@+id/textView"
-        android:fontFamily="@font/varelaroundregular"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar"
-        android:layout_marginRight="@dimen/_5sdp"
-        android:layout_alignParentRight="true"
-        android:fontFamily="@font/varelaroundregular"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/varelaroundregular"
-        android:text="Medium Text"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_15sdp"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/white" />
 
 </RelativeLayout>

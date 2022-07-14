@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 noteViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Note deleted!", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
         adapter.SetOnClickListner(new NoteAdapter.OnItemClickListner() {
@@ -117,11 +116,9 @@ public class MainActivity extends AppCompatActivity {
             int priority = data.getIntExtra(AddEditNoteActivity.EXTRA_PRIORITY, 1);
             Note note = new Note(title, description, priority);
             noteViewModel.insert(note);
-            Toast.makeText(this, "Note Saved!", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_NODE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditNoteActivity.EXTRA_ID, -1);
             if (id == -1) {
-                Toast.makeText(this, "Note can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
             String title = data.getStringExtra(AddEditNoteActivity.EXTRA_TITLE);
@@ -132,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
             noteViewModel.update(note);
 
         } else {
-            Toast.makeText(this, "Note not Saved!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -148,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete_all_notes:
                 noteViewModel.deleteAllNotes();
-                Toast.makeText(this, "All notes deleted!", Toast.LENGTH_SHORT).show();
             default:
                 return super.onOptionsItemSelected(item);
         }

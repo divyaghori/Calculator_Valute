@@ -3,6 +3,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,6 +33,8 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.calculatorhide.Adapter.GalleryAdapter;
 import com.example.calculatorhide.Model.HidedDatabase;
@@ -79,7 +83,6 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         activity = this;
         hidedDatabase = HidedDatabase.getDatabse(activity);
-//        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         findId();
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -204,6 +207,19 @@ public class GalleryActivity extends AppCompatActivity {
             if (data != null) {
                 file_uris = (List<String>) data.getSerializableExtra("files");
                 hideFiles.HideFile(file_uris, "HiddenFileType.image", getFolder());
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.activity_hide_progress, null);
+                dialogBuilder.setView(dialogView);
+                TextView done = dialogView.findViewById(R.id.done);
+                AlertDialog alertDialog = dialogBuilder.create();
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -382,13 +398,6 @@ public class GalleryActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (mSparseBooleanArray.size() > 0) {
-//                    ShowOtherOption();
-//                }else {
-//                    HideOtherOption();
-//                }
-
-                //mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
                 if (isChecked){
                     mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
                 }else {

@@ -3,6 +3,7 @@ package com.example.calculatorhide.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -12,14 +13,21 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -36,6 +44,8 @@ import com.google.android.gms.ads.AdView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DocumentActivity1 extends AppCompatActivity {
     HidedDatabase hidedDatabase;
@@ -51,7 +61,10 @@ public class DocumentActivity1 extends AppCompatActivity {
     private DocumentAdapter adapter;
     ImageView image;
     AdView mAdView;
-
+    CheckBox check;
+    private List<MediaItem> selectedItems = new ArrayList<>();
+    ImageView unlock;
+    boolean checked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +88,8 @@ public class DocumentActivity1 extends AppCompatActivity {
         maintext.setText(SplashActivity.resources.getString(R.string.Documents));
         tvNoData.setText(SplashActivity.resources.getString(R.string.No_files_added));
         image = findViewById(R.id.image);
+        check = findViewById(R.id.check);
+        unlock = findViewById(R.id.unlock);
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +107,6 @@ public class DocumentActivity1 extends AppCompatActivity {
         hideFiles.getSuccess(new HideFiles.SuccessInterface() {
             @Override
             public void onSuccess(boolean value) {
-                Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show();
                 getDocument();
                 dialogue.dismiss();
 
@@ -103,37 +117,50 @@ public class DocumentActivity1 extends AppCompatActivity {
                 dialogue.show();
             }
         });
+        Timer T = new Timer();
+        T.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        btnChoosePhotosClick();
+                        checked = check.isChecked();
+                    }
+                });
+            }
+        }, 1000, 1000);
+        unlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showUnHideRcyclePopup1(adapter.getCheckedItems());
+            }
+        });
     }
-
+    public void btnChoosePhotosClick() {
+        if(selectedItems.size()!=0) {
+            selectedItems = adapter.getCheckedItems();
+            if (selectedItems.size() == 0) {
+                unlock.setVisibility(View.GONE);
+            } else {
+                unlock.setVisibility(View.VISIBLE);
+            }
+        }
+        Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
+    }
     private void getDocument() {
         mediaItems.clear();
         mediaItems = hidedDatabase.mediaDao().getImagesMedia("doc", 0);
         if (mediaItems.size() != 0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
-            adapter = new DocumentAdapter(activity, mediaItems);
+            adapter = new DocumentAdapter(activity, mediaItems, checked,check.isChecked());
             gvGallery.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-            adapter.setClickItemInterface(new DocumentAdapter.ClickItemInterface() {
+            check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onItemClick(int position, String path) {
-                    File file = new File(path);
-                    if (file.exists()) {
-                        Uri filepath = Uri.fromFile(file);
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(filepath, "application/pdf");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        try {
-                            startActivity(intent);
-                        } catch (Exception e) {
-                            Log.e("error", "" + e);
-                        }
-                    } else {
-                    }
-                }
-                @Override
-                public void onItemLongClick(int position, MediaItem item) {
-                    showUnHideRcyclePopup(position, item);
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    adapter.OnSelectionModeChange(isChecked);
                 }
             });
 
@@ -144,21 +171,28 @@ public class DocumentActivity1 extends AppCompatActivity {
 
     }
 
-    private void loadDocInReader(String doc) {
-        File file = new File(doc);
-        if (file.exists()) {
-            Uri filepath = Uri.fromFile(file);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(filepath, "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            try {
-                startActivity(intent);
-            } catch (Exception e) {
-                Log.e("error", "" + e);
+    public void showUnHideRcyclePopup1( List<MediaItem> itemList) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.long_ubhide_popup, null);
+        dialogBuilder.setView(dialogView);
+        TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
+        TextView maintext = dialogView.findViewById(R.id.maintext);
+        TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
+        maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
+        tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
+        AlertDialog alertDialog = dialogBuilder.create();
+        tvUnHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideFiles.unHideFile(itemList);
+                unlock.setVisibility(View.GONE);
+                alertDialog.dismiss();
             }
-        } else {
-
-        }
+        });
+        tvRecycle.setVisibility(View.GONE);
+        alertDialog.show();
     }
 
     public File getFolder() {
@@ -166,7 +200,6 @@ public class DocumentActivity1 extends AppCompatActivity {
         String path = ".CalculatorVault";
         File file = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//            file = new File(Environment.getExternalStorageDirectory(), path);
             rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
                     + path + "/" + "files";
             file = new File(rootPath);
@@ -174,7 +207,6 @@ public class DocumentActivity1 extends AppCompatActivity {
             file = new File(Environment.getExternalStorageDirectory(), path);
             rootPath = Environment.getExternalStorageDirectory().getAbsolutePath().split("Android")[0] + "/"
                     + path + "/" + "files";
-//            rootPath = getExternalFilesDir(null).getAbsoluteFile() + "/" + path + "/" + "files";
             Log.d("root", rootPath);
             file = new File(rootPath);
         }
@@ -191,6 +223,19 @@ public class DocumentActivity1 extends AppCompatActivity {
             if (data != null) {
                 file_uris = (List<String>) data.getSerializableExtra("files");
                 hideFiles.HideFile(file_uris, "doc", getFolder());
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.activity_hide_progress, null);
+                dialogBuilder.setView(dialogView);
+                TextView done = dialogView.findViewById(R.id.done);
+                AlertDialog alertDialog = dialogBuilder.create();
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -208,7 +253,6 @@ public class DocumentActivity1 extends AppCompatActivity {
     protected void onResume() {
         getDocument();
         super.onResume();
-
     }
 
     public void showUnHideRcyclePopup(int position, MediaItem item) {
@@ -248,4 +292,98 @@ public class DocumentActivity1 extends AppCompatActivity {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
+
+
+    public class DocumentAdapter extends ArrayAdapter<MediaItem> {
+        private Context mContext;
+        private List<MediaItem>mitemList;
+         boolean cheked;
+        SparseBooleanArray mSparseBooleanArray;
+        private Boolean selectionMode;
+        public void OnSelectionModeChange(Boolean selectionMode){
+            this.selectionMode = selectionMode;
+            notifyDataSetChanged();
+        }
+        public DocumentAdapter(Context context, List<MediaItem>itemList, boolean checked,Boolean selectionMode) {
+            super(context,0,itemList);
+            mContext=context;
+            this.selectionMode= selectionMode;
+            mitemList=itemList;
+            this.cheked = checked;
+            mSparseBooleanArray = new SparseBooleanArray();
+        }
+        public ArrayList<MediaItem> getCheckedItems() {
+            ArrayList<MediaItem> mTempArry = new ArrayList<MediaItem>();
+            for (int i = 0; i < mitemList.size(); i++) {
+                if (mSparseBooleanArray.get(i)) {
+                    mTempArry.add(mitemList.get(i));
+                }
+            }
+            return mTempArry;
+        }
+        @Override
+        public int getCount() {
+            return mitemList.size();
+        }
+
+        @Nullable
+        @Override
+        public MediaItem getItem(int position) {
+            return mitemList.get(position);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            MediaItem item=mitemList.get(position);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_document_item, parent, false);
+            TextView ivItem = view.findViewById(R.id.ivItem);
+            CheckBox mCheckBox = view.findViewById(R.id.checkbox);
+            mCheckBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+            mCheckBox.setTag(position);
+            mCheckBox.setChecked(mSparseBooleanArray.get(position));
+            mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
+            if(item!=null) {
+                if (item.getType().equalsIgnoreCase("doc")) {
+                    ivItem.setText(item.getName());
+                    view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent=new Intent(activity,AudioViewActivity.class);
+                            intent.putExtra("path",mediaItems.get(position).getPath());
+                            intent.putExtra("name",mediaItems.get(position).getName());
+                            startActivity(intent);
+                        }
+                    });
+                    view.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            showUnHideRcyclePopup(position, item);
+                            return false;
+                        }
+                    });
+                }
+
+            }
+
+            return view;
+
+        }
+        CompoundButton.OnCheckedChangeListener mCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
+                }else {
+                    mSparseBooleanArray.removeAt(mSparseBooleanArray.indexOfKey((Integer) buttonView.getTag()));
+                }
+                unlock.setVisibility(mSparseBooleanArray.size() > 0 ? View.VISIBLE :View.GONE);
+            }
+        };
+
+
+    }
+
+
 }

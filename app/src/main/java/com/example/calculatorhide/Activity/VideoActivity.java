@@ -211,6 +211,19 @@ public class VideoActivity extends AppCompatActivity {
             if(data!=null) {
                 file_uris = (List<String>) data.getSerializableExtra("files");
                 hideFiles.HideFile(file_uris, "video", getFolder());
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.activity_hide_progress, null);
+                dialogBuilder.setView(dialogView);
+                TextView done = dialogView.findViewById(R.id.done);
+                AlertDialog alertDialog = dialogBuilder.create();
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
                 Handler handler=new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override

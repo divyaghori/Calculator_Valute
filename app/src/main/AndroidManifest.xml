@@ -27,19 +27,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalculatorHide"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".Activity.ImageViewpagerActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.AudioViewActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.CalculatorActivityy"
             android:exported="false" />
-        <activity android:name=".Activity.QuestionsActivity"></activity>
-        <activity android:name=".Activity.ConfirmQuestionActivity"></activity>
-        <activity android:name=".Activity.DocumentActivity1"></activity>
-        <activity android:name=".Activity.ImportAudioActivity"></activity>
-        <activity android:name=".Activity.AudioActivity1"></activity>
-        <activity android:name=".Activity.CalcualatorTransitionActivity"></activity>
-        <activity android:name=".Activity.NewPinActivity"></activity>
+        <activity android:name=".Activity.QuestionsActivity" />
+        <activity android:name=".Activity.ConfirmQuestionActivity" />
+        <activity android:name=".Activity.DocumentActivity1" />
+        <activity android:name=".Activity.ImportAudioActivity" />
+        <activity android:name=".Activity.AudioActivity1" />
+        <activity android:name=".Activity.CalcualatorTransitionActivity" />
+        <activity android:name=".Activity.NewPinActivity" />
         <activity
             android:name=".Activity.TransitionActivity"
             android:exported="false" />

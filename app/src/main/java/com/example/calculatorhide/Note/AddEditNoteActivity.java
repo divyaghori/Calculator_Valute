@@ -70,7 +70,6 @@ public class AddEditNoteActivity extends AppCompatActivity {
         int priority = numberPickerPriority.getValue();
 
         if (title.trim().isEmpty() ) {
-            Toast.makeText(this, "Please insert the title and description", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -40,7 +40,22 @@
             android:layout_centerVertical="true"
             android:buttonTint="@color/white"
             android:padding="@dimen/_5sdp">
+
         </CheckBox>
+
+        <ImageView
+            android:id="@+id/unlock"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_toLeftOf="@+id/check"
+            android:src="@drawable/unlock"
+            android:text="0"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            app:tint="@color/white">
+
+        </ImageView>
     </RelativeLayout>
 
     <RelativeLayout

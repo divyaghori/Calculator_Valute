@@ -35,39 +35,24 @@
             android:textColor="@color/white"
             android:textSize="20sp"></TextView>
     </RelativeLayout>
+
     <RelativeLayout
-        android:id="@+id/adLAyout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
-        android:background="@color/purple_700"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-3940256099942544/6300978111">
-
-        </com.google.android.gms.ads.AdView>
-
-    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_15sdp">
         <RelativeLayout
             android:id="@+id/tvdata"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/image"
@@ -90,44 +75,26 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"></TextView>
         </RelativeLayout>
-
-
-        <RelativeLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginRight="@dimen/_15sdp"
-                tools:listitem="@layout/note_item" />
-
-
-        </RelativeLayout>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_add_node"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="@dimen/_10sdp"
-            android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="@color/teal_700"
-            app:tint="@color/white" />
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp" />
     </FrameLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_add_node"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/_10sdp"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/teal_700"
+        app:tint="@color/white" />
 
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="12dp"
-        android:visibility="gone"
-        android:layout_marginRight="10dp"
-        />
+    </RelativeLayout>
 
 </LinearLayout>

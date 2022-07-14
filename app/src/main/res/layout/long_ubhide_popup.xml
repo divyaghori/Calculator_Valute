@@ -16,7 +16,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/_12sdp"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:fontFamily="@font/varelaroundregular"
             android:text="@string/do_you_want_to_unhide_this_file_or_send_it_to_recycle_bin"
             android:layout_height="wrap_content"/>

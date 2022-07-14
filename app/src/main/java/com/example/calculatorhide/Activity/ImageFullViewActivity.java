@@ -211,11 +211,8 @@ public class ImageFullViewActivity extends AppCompatActivity {
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alertDialog.dismiss();
-                List<MediaItem>itemList=new ArrayList<>();
-                itemList.add(item);
                 hidedDatabase.mediaDao().addtoRecycle(1, item.getPath());
-                hideFiles.unHideFile(itemList);
+                alertDialog.dismiss();
                 onBackPressed();
             }
         });

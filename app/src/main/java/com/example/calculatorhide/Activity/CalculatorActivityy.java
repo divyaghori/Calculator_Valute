@@ -211,8 +211,8 @@ public class CalculatorActivityy extends AppCompatActivity {
         } catch (ScriptException e) {
             Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
         }
-        if (result != null)
-            resultsTV.setText(String.valueOf(result.doubleValue()));
+//        if (result != null)
+//            resultsTV.setText(String.valueOf(result.doubleValue()));
     }
 
     @Override

@@ -15,7 +15,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
 
             android:fontFamily="@font/varelaroundregular"
             android:text="Do You Want to delete or restore this file?"
