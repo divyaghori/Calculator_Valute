@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context="com.example.calculatorhide.Activity.ImageFullViewActivity">
+    tools:context="com.example.calculatorhide.Activity.VideoViewActivity">
     <RelativeLayout
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"

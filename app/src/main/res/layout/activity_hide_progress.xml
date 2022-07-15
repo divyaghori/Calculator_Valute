@@ -41,7 +41,6 @@
 
         </TextView>
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lav_load"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:lottie_autoPlay="true"

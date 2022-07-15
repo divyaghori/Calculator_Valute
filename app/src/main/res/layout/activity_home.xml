@@ -60,7 +60,6 @@
         android:visibility="gone">
 
         <LinearLayout
-            android:id="@+id/Ad_Contianer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" />
@@ -92,7 +91,6 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/fab_menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
