@@ -54,9 +54,6 @@
             android:name=".Activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AdsBlockActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.AboutActivity"
             android:exported="false" />
         <activity
@@ -1036,15 +1033,11 @@
             android:name=".Activity.VideoActivity"
             android:exported="false" />
         <activity
-            android:name=".Adapter.import_item_Adapter"
-            android:exported="false" />
-        <activity
             android:name=".Activity.GalleryActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SettingActivity"
             android:exported="false" />
-        <activity android:name=".Activity.MultiAudioSelectActivity" />
         <activity
             android:name=".Activity.ImageFullViewActivity"
             android:exported="false" />
@@ -1072,8 +1065,8 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".Note.MainActivity" />
-        <activity android:name=".Note.AddEditNoteActivity" />
+        <activity android:name=".Activity.NoteActivity" />
+        <activity android:name=".Activity.AddEditNoteActivity" />
     </application>
 
 </manifest>

@@ -12,10 +12,6 @@
         android:layout_centerInParent="true"
         android:src="@drawable/ic_launcher_background" />
 
-
-
-
-
         <ImageView
             android:id="@+id/image"
             android:layout_width="wrap_content"
@@ -24,7 +20,6 @@
             android:layout_centerInParent="true"
             android:visibility="gone"
             android:src="@drawable/tick" />
-
 
 
     <CheckBox

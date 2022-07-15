@@ -1,4 +1,4 @@
-package com.example.calculatorhide.Note.Model;
+package com.example.calculatorhide.Model;
 
 import android.content.Context;
 import android.os.AsyncTask;

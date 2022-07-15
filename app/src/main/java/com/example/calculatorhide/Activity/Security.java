@@ -24,8 +24,6 @@ import java.security.Signature;
 import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
-
-
 public class Security {
     private static final String TAG = Security.class.getSimpleName();
     private static final String KEY_FACTORY_ALGORITHM = "RSA";

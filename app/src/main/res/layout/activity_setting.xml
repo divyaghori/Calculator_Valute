@@ -158,7 +158,8 @@
                     android:layout_width="match_parent"
                     android:layout_gravity="right"
                     android:gravity="right"
-                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:background="@drawable/ic_text_input"
+                    android:layout_marginLeft="@dimen/_45sdp"
                     android:layout_height="match_parent">
                 </Spinner>
             </LinearLayout>

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.Util;
-import com.example.calculatorhide.Note.MainActivity;
 
 public class TransitionActivity extends AppCompatActivity {
 
@@ -102,7 +101,7 @@ public class TransitionActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(TransitionActivity.this, MainActivity.class);
+                    Intent i = new Intent(TransitionActivity.this, NoteActivity.class);
                     startActivity(i);
                 }
             }, 1000);

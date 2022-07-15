@@ -78,7 +78,36 @@ public class HideFiles {
         }
         successInterface.onSuccess(true);
     }
-
+    public void deletemultiplefile(List<MediaItem> item) {
+        for (int i = 0; i < item.size(); i++) {
+            successInterface.onLoading(true);
+            hidedDatabase = HidedDatabase.getDatabse(mContext);
+            String title = getFileName(item.get(i).getoPath());
+            String org = item.get(i).getoPath();
+            File src = new File(item.get(i).getPath());
+            File des = new File(item.get(i).getoPath());
+            String sl = des.getParent();
+            File dest = new File(sl, title);
+            copyFiles(src, dest, item.get(i).getPath());
+            hidedDatabase.mediaDao().addtoRecycle(1, item.get(i).getPath());
+        }
+        successInterface.onSuccess(true);
+    }
+    public void restorefile(List<MediaItem> item) {
+        for (int i = 0; i < item.size(); i++) {
+            successInterface.onLoading(true);
+            hidedDatabase = HidedDatabase.getDatabse(mContext);
+            String title = getFileName(item.get(i).getoPath());
+            String org = item.get(i).getoPath();
+            File src = new File(item.get(i).getPath());
+            File des = new File(item.get(i).getoPath());
+            String sl = des.getParent();
+            File dest = new File(sl, title);
+            copyFiles(src, dest, item.get(i).getPath());
+            hidedDatabase.mediaDao().addtoRecycle(1, item.get(i).getPath());
+        }
+        successInterface.onSuccess(true);
+    }
     public String getFileName(String path) {
         File f = new File(path);
         String name = f.getName();

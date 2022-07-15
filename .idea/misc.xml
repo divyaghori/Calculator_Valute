@@ -5,14 +5,23 @@
       <map>
         <entry key="..\:/Users/lenovo/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.19907407407407407" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/arithmatic_button.xml" value="0.1305" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/button.xml" value="0.1275" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_authentication.xml" value="0.115" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_authentication__1_.xml" value="0.1275" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_disguise.xml" value="0.1315" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_guidelayout.xml" value="0.115" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_hidden.xml" value="0.115" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_input_text1.xml" value="0.149" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_plus.xml" value="0.1275" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_text_input.xml" value="0.149" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/ic_undraw_empty_xct9.xml" value="0.101" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/new_but.xml" value="0.1" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/paudio.xml" value="0.1275" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/plock.xml" value="0.1275" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/pnote.xml" value="0.1275" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/precycle.xml" value="0.1275" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/drawable/whitecorner.xml" value="0.139" />
-        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/ac_image_grid.xml" value="0.33" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/ac_image_grid.xml" value="0.5" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/ac_image_grid_audio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_about.xml" value="0.16" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_add_note.xml" value="0.20416666666666666" />
@@ -34,7 +43,7 @@
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_get_audio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_guide.xml" value="0.11" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_hide_progress.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_home.xml" value="0.16" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_home_adapter.xml" value="0.20092592592592592" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_image_full_view.xml" value="0.1" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_image_viewpager.xml" value="0.20416666666666666" />
@@ -43,6 +52,7 @@
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_import_item_adapter.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_import_photo.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_import_video_item_adapter.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_main1.xml" value="0.1935185185185185" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_main_audio.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_mainnote.xml" value="0.18" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_multi_photo_select.xml" value="0.20416666666666666" />
@@ -54,9 +64,9 @@
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_rating_dialog.xml" value="0.22" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_recycle_bin.xml" value="0.22" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_security_ques.xml" value="0.18" />
-        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_securityquestion.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_securityquestion.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_securityquestion_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_setting.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_setting.xml" value="0.18" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_settings.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/lenovo/Downloads/Calculator_Valute1/Calculator_Valute/app/src/main/res/layout/activity_touch_image_view.xml" value="0.1" />

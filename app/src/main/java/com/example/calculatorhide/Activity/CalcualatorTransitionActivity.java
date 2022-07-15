@@ -1,7 +1,6 @@
 package com.example.calculatorhide.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -10,9 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.example.calculatorhide.Note.MainActivity;
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Utils.Util;
 
 public class CalcualatorTransitionActivity extends AppCompatActivity {
 

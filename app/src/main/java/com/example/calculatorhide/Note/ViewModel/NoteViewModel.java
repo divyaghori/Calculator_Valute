@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.calculatorhide.Note.Model.Note;
+import com.example.calculatorhide.Model.Note;
 import com.example.calculatorhide.Note.Repository.NoteRepository;
 
 import java.util.List;

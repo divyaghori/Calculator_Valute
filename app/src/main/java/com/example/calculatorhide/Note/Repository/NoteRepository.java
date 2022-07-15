@@ -5,9 +5,9 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.calculatorhide.Note.Model.Note;
-import com.example.calculatorhide.Note.Model.NoteDao;
-import com.example.calculatorhide.Note.Model.NoteDatabase;
+import com.example.calculatorhide.Model.Note;
+import com.example.calculatorhide.Model.NoteDao;
+import com.example.calculatorhide.Model.NoteDatabase;
 
 import java.util.List;
 

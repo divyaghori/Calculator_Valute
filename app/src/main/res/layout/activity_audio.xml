@@ -51,8 +51,21 @@
             android:layout_toLeftOf="@+id/check"
             android:src="@drawable/unlock"
             android:text="0"
-            android:textColor="@color/white"
             android:visibility="gone"
+            android:textColor="@color/white"
+            app:tint="@color/white">
+
+        </ImageView>
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_toLeftOf="@+id/unlock"
+            android:src="@drawable/delete1"
+            android:text="0"
+            android:visibility="gone"
+            android:textColor="@color/white"
             app:tint="@color/white">
 
         </ImageView>

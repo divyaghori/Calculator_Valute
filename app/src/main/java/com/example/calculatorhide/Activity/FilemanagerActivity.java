@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Note.MainActivity;
 
 public class FilemanagerActivity extends AppCompatActivity {
 
@@ -71,7 +70,7 @@ public class FilemanagerActivity extends AppCompatActivity {
         note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(FilemanagerActivity.this, MainActivity.class);
+                Intent i = new Intent(FilemanagerActivity.this, NoteActivity.class);
                 startActivity(i);
             }
         });

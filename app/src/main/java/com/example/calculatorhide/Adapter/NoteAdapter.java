@@ -1,4 +1,4 @@
-package com.example.calculatorhide.Note.Adapter;
+package com.example.calculatorhide.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Note.Model.Note;
+import com.example.calculatorhide.Model.Note;
 
 import java.util.ArrayList;
 import java.util.List;

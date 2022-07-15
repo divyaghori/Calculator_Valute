@@ -64,6 +64,7 @@
             android:drawableLeft="@drawable/padlock"
             android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
+            android:textSize="18sp"
             android:paddingLeft="@dimen/_15sdp"
             android:text=" Hide Files"
             android:textColor="@color/black" />
@@ -75,6 +76,8 @@
             android:fontFamily="@font/varelaroundregular"
             android:paddingLeft="@dimen/_5sdp"
             android:text="("
+            android:textSize="18sp"
+
             android:textColor="@color/black"></TextView>
 
         <TextView
@@ -84,6 +87,8 @@
             android:fontFamily="@font/varelaroundregular"
             android:paddingLeft="@dimen/_2sdp"
             android:text="0"
+            android:textSize="18sp"
+
             android:textColor="@color/black"></TextView>
 
         <TextView
@@ -93,6 +98,7 @@
             android:fontFamily="@font/varelaroundregular"
             android:paddingLeft="@dimen/_2sdp"
             android:text=")"
+            android:textSize="18sp"
             android:textColor="@color/black"></TextView>
     </LinearLayout>
 

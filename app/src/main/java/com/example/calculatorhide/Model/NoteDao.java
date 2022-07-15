@@ -1,4 +1,4 @@
-package com.example.calculatorhide.Note.Model;
+package com.example.calculatorhide.Model;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

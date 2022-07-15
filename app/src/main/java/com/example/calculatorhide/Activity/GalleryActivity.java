@@ -3,7 +3,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,48 +10,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.calculatorhide.Adapter.GalleryAdapter;
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
-import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
-import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.HideFiles;
-import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +58,7 @@ public class GalleryActivity extends AppCompatActivity {
     ImageView image;
     CheckBox check;
     private List<MediaItem> selectedItems = new ArrayList<>();
-    ImageView unlock;
+    ImageView unlock,delete;
     boolean checked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +81,7 @@ public class GalleryActivity extends AppCompatActivity {
         image = findViewById(R.id.image);
         check = findViewById(R.id.check);
         unlock = findViewById(R.id.unlock);
+        delete = findViewById(R.id.delete);
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,6 +129,12 @@ public class GalleryActivity extends AppCompatActivity {
                 showUnHideRcyclePopup1(adapter.getCheckedItems());
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showRcyclePopup1(adapter.getCheckedItems());
+            }
+        });
     }
     private void getImages() {
         mediaItems.clear();
@@ -172,8 +162,10 @@ public class GalleryActivity extends AppCompatActivity {
             selectedItems = adapter.getCheckedItems();
             if (selectedItems.size() == 0) {
                 unlock.setVisibility(View.GONE);
+                delete.setVisibility(View.GONE);
             } else {
                 unlock.setVisibility(View.VISIBLE);
+                delete.setVisibility(View.VISIBLE);
             }
         }
         Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
@@ -274,7 +266,7 @@ public class GalleryActivity extends AppCompatActivity {
         TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
         TextView maintext = dialogView.findViewById(R.id.maintext);
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
-        maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
+        maintext.setText(SplashActivity.resources.getString(R.string.unhideSelected));
         tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
         tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
         AlertDialog alertDialog = dialogBuilder.create();
@@ -283,12 +275,40 @@ public class GalleryActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                List<MediaItem> itemList = new ArrayList<>();
 //                itemList.add(item);
+//                hideFiles.deletemultiplefile(itemList);
                 hideFiles.unHideFile(itemList);
                 unlock.setVisibility(View.GONE);
+                delete.setVisibility(View.GONE);
                 alertDialog.dismiss();
             }
         });
         tvRecycle.setVisibility(View.GONE);
+        alertDialog.show();
+    }
+    public void showRcyclePopup1( List<MediaItem> itemList) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.long_ubhide_popup, null);
+        dialogBuilder.setView(dialogView);
+        TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
+        TextView maintext = dialogView.findViewById(R.id.maintext);
+        TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
+        maintext.setText(SplashActivity.resources.getString(R.string.recycleSelected));
+        tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
+        AlertDialog alertDialog = dialogBuilder.create();
+        tvRecycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                List<MediaItem> itemList = new ArrayList<>();
+//                itemList.add(item);
+                hideFiles.deletemultiplefile(itemList);
+                unlock.setVisibility(View.GONE);
+                delete.setVisibility(View.GONE);
+                alertDialog.dismiss();
+            }
+        });
+        tvUnHide.setVisibility(View.GONE);
         alertDialog.show();
     }
     @Override
@@ -358,6 +378,9 @@ public class GalleryActivity extends AppCompatActivity {
                             Intent intent = new Intent(activity, ImageFullViewActivity.class);
                             intent.putExtra("path", mitemList.get(position).getPath());
                             startActivity(intent);
+//                            Intent intent = new Intent(activity, ImageViewpagerActivity.class);
+//                            intent.putExtra("path", mitemList);
+//                            startActivity(intent);
                         }
                     });
                     view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -377,7 +400,7 @@ public class GalleryActivity extends AppCompatActivity {
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(activity, ImageFullViewActivity.class);
+                            Intent intent = new Intent(activity, VideoViewActivity.class);
                             intent.putExtra("path", mitemList.get(position).getPath());
                             startActivity(intent);
                         }
@@ -404,6 +427,7 @@ public class GalleryActivity extends AppCompatActivity {
                     mSparseBooleanArray.removeAt(mSparseBooleanArray.indexOfKey((Integer) buttonView.getTag()));
                 }
                 unlock.setVisibility(mSparseBooleanArray.size() > 0 ? View.VISIBLE :View.GONE);
+                delete.setVisibility(mSparseBooleanArray.size() > 0 ? View.VISIBLE :View.GONE);
             }
         };
     }

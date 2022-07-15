@@ -1,4 +1,4 @@
-package com.example.calculatorhide.Note.Model;
+package com.example.calculatorhide.Model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

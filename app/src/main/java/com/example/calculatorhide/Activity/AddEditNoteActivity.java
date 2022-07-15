@@ -1,4 +1,4 @@
-package com.example.calculatorhide.Note;
+package com.example.calculatorhide.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;

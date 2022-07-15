@@ -26,8 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.calculatorhide.Adapter.AudioAdapter;
-import com.example.calculatorhide.Adapter.DocumentAdapter;
 import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
@@ -58,7 +56,7 @@ public class AudioActivity1 extends AppCompatActivity {
     AdView mAdView;
     CheckBox check;
     private List<MediaItem> selectedItems = new ArrayList<>();
-    ImageView unlock;
+    ImageView unlock,delete;
     boolean checked = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +82,8 @@ public class AudioActivity1 extends AppCompatActivity {
         image = findViewById(R.id.image);
         check = findViewById(R.id.check);
         unlock = findViewById(R.id.unlock);
+        delete = findViewById(R.id.delete);
+
         icback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,14 +130,22 @@ public class AudioActivity1 extends AppCompatActivity {
                 showUnHideRcyclePopup1(adapter.getCheckedItems());
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showRcyclePopup1(adapter.getCheckedItems());
+            }
+        });
     }
     public void btnChoosePhotosClick() {
         if(selectedItems.size()!=0) {
             selectedItems = adapter.getCheckedItems();
             if (selectedItems.size() == 0) {
                 unlock.setVisibility(View.GONE);
+                delete.setVisibility(View.GONE);
             } else {
                 unlock.setVisibility(View.VISIBLE);
+                delete.setVisibility(View.VISIBLE);
             }
         }
         Log.d(MultiPhotoSelectActivity.class.getSimpleName(), "Selected Items: " + selectedItems.toString());
@@ -268,19 +276,49 @@ public class AudioActivity1 extends AppCompatActivity {
         TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
         TextView maintext = dialogView.findViewById(R.id.maintext);
         TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
-        maintext.setText(SplashActivity.resources.getString(R.string.unhide_recycle));
+        maintext.setText(SplashActivity.resources.getString(R.string.unhideSelected));
         tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
         tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
         AlertDialog alertDialog = dialogBuilder.create();
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                List<MediaItem> itemList = new ArrayList<>();
+//                itemList.add(item);
+//                hideFiles.deletemultiplefile(itemList);
                 hideFiles.unHideFile(itemList);
                 unlock.setVisibility(View.GONE);
+                delete.setVisibility(View.GONE);
                 alertDialog.dismiss();
             }
         });
         tvRecycle.setVisibility(View.GONE);
+        alertDialog.show();
+    }
+    public void showRcyclePopup1( List<MediaItem> itemList) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.long_ubhide_popup, null);
+        dialogBuilder.setView(dialogView);
+        TextView tvUnHide = dialogView.findViewById(R.id.tvUnHide);
+        TextView maintext = dialogView.findViewById(R.id.maintext);
+        TextView tvRecycle = dialogView.findViewById(R.id.tvRecycleBin);
+        maintext.setText(SplashActivity.resources.getString(R.string.recycleSelected));
+        tvUnHide.setText(SplashActivity.resources.getString(R.string.unhide));
+        tvRecycle.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
+        AlertDialog alertDialog = dialogBuilder.create();
+        tvRecycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                List<MediaItem> itemList = new ArrayList<>();
+//                itemList.add(item);
+                hideFiles.deletemultiplefile(itemList);
+                unlock.setVisibility(View.GONE);
+                delete.setVisibility(View.GONE);
+                alertDialog.dismiss();
+            }
+        });
+        tvUnHide.setVisibility(View.GONE);
         alertDialog.show();
     }
     @Override
@@ -374,6 +412,8 @@ public class AudioActivity1 extends AppCompatActivity {
                     mSparseBooleanArray.removeAt(mSparseBooleanArray.indexOfKey((Integer) buttonView.getTag()));
                 }
                 unlock.setVisibility(mSparseBooleanArray.size() > 0 ? View.VISIBLE :View.GONE);
+                delete.setVisibility(mSparseBooleanArray.size() > 0 ? View.VISIBLE :View.GONE);
+
             }
         };
 

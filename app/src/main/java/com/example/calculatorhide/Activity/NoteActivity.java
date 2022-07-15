@@ -1,4 +1,4 @@
-package com.example.calculatorhide.Note;
+package com.example.calculatorhide.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,19 +20,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.calculatorhide.Activity.HomeActivity;
-import com.example.calculatorhide.Activity.SplashActivity;
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Note.Adapter.NoteAdapter;
-import com.example.calculatorhide.Note.Model.Note;
+import com.example.calculatorhide.Adapter.NoteAdapter;
+import com.example.calculatorhide.Model.Note;
 import com.example.calculatorhide.Note.ViewModel.NoteViewModel;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity {
     public static final int ADD_NODE_REQUEST = 1;
     public static final int EDIT_NODE_REQUEST = 2;
     private NoteViewModel noteViewModel;
@@ -66,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddEditNoteActivity.class);
+                Intent intent = new Intent(NoteActivity.this, AddEditNoteActivity.class);
                 startActivityForResult(intent, ADD_NODE_REQUEST);
             }
         });
@@ -97,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.SetOnClickListner(new NoteAdapter.OnItemClickListner() {
             @Override
             public void OnItemClick(Note note) {
-                Intent intent = new Intent(MainActivity.this, AddEditNoteActivity.class);
+                Intent intent = new Intent(NoteActivity.this, AddEditNoteActivity.class);
                 intent.putExtra(AddEditNoteActivity.EXTRA_ID, note.getId());
                 intent.putExtra(AddEditNoteActivity.EXTRA_TITLE, note.getTitle());
                 intent.putExtra(AddEditNoteActivity.EXTRA_DESCRIPTION, note.getDescription());
@@ -152,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(MainActivity.this,HomeActivity.class);
+        Intent i = new Intent(NoteActivity.this,HomeActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
     }
