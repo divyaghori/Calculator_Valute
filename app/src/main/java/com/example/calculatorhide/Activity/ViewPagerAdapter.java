@@ -8,8 +8,11 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
+import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 
+import java.util.List;
 import java.util.Objects;
 
 class ViewPagerAdapter extends PagerAdapter {
@@ -18,23 +21,26 @@ class ViewPagerAdapter extends PagerAdapter {
     Context context;
 
     // Array of images
-    int[] images;
+   // int[] images;
+    List<MediaItem> mediaItems ;
 
     // Layout Inflater
     LayoutInflater mLayoutInflater;
+    // ama list joise ne? haa
 
 
     // Viewpager Constructor
-    public ViewPagerAdapter(Context context, int[] images) {
+    public ViewPagerAdapter(Context context, List<MediaItem> items) {
+        mediaItems = items;
         this.context = context;
-        this.images = images;
+        //this.images = images;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
         // return the number of images
-        return images.length;
+        return mediaItems.size();
     }
 
     @Override
@@ -52,7 +58,11 @@ class ViewPagerAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewMain);
 
         // setting the image in the imageView
-        imageView.setImageResource(images[position]);
+        // path kyathi avsr?
+        Glide.with(context)
+                .load(mediaItems.get(position).getPath())
+                .into(imageView);
+        //imageView.set(mediaItems.get(position).getPath());
 
         // Adding the View
         Objects.requireNonNull(container).addView(itemView);

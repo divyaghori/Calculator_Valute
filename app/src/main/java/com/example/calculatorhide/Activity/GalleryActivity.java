@@ -33,10 +33,12 @@ import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
 import com.example.calculatorhide.Utils.HideFiles;
+import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -375,12 +377,10 @@ public class GalleryActivity extends AppCompatActivity {
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(activity, ImageFullViewActivity.class);
-                            intent.putExtra("path", mitemList.get(position).getPath());
+                            Intent intent = new Intent(activity, ImageViewpagerActivity.class);
+                            intent.putExtra("path",position);
+                            Util.tempList = mitemList;
                             startActivity(intent);
-//                            Intent intent = new Intent(activity, ImageViewpagerActivity.class);
-//                            intent.putExtra("path", mitemList);
-//                            startActivity(intent);
                         }
                     });
                     view.setOnLongClickListener(new View.OnLongClickListener() {
