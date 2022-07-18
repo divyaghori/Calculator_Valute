@@ -48,13 +48,10 @@ import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MultiPhotoSelectActivity extends BaseActivity {
     private Activity activity;
     private ArrayList<String> imageUrls = new ArrayList<>();
-    private DisplayImageOptions options;
     private ImageAdapter imageAdapter;
     TextView count;
     private GridView gridView;
@@ -186,7 +183,6 @@ public class MultiPhotoSelectActivity extends BaseActivity {
             mSparseBooleanArray = new SparseBooleanArray();
             mList = new ArrayList<String>();
             this.mList = imageList;
-            imageLoader = ImageLoader.getInstance();
         }
 
         public ArrayList<String> getCheckedItems() {

@@ -21,6 +21,7 @@ import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.HideFiles;
 import com.example.calculatorhide.Utils.InterstitialAdManager;
 import com.example.calculatorhide.Utils.Util;
+import com.example.calculatorhide.database.DBController;
 import com.example.calculatorhide.databinding.ActivityImageFullViewBinding;
 import com.example.calculatorhide.databinding.ActivityVideoViewBinding;
 import com.google.android.gms.ads.AdError;
@@ -44,12 +45,14 @@ public class VideoViewActivity extends AppCompatActivity {
     private boolean isAdShowen;
     private InterstitialAdManager manager;
     ImageView back;
+    DBController db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityVideoViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        db = new DBController(this);
         manager = new InterstitialAdManager();
         manager.fetchAd(this, true);
         back = findViewById(R.id.back);
@@ -148,7 +151,7 @@ public class VideoViewActivity extends AppCompatActivity {
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hidedDatabase.mediaDao().addtoRecycle(1, item.getPath());
+                db.addtoRecycle(1, item.getPath());
                 alertDialog.dismiss();
                 onBackPressed();
             }

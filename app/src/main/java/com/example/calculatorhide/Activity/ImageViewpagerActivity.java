@@ -13,17 +13,12 @@ import java.util.List;
 public class ImageViewpagerActivity extends AppCompatActivity {
 
     ViewPager mViewPager;
-  //  int[] images = {R.drawable.app_icon_0};
     ViewPagerAdapter mViewPagerAdapter;
     List<MediaItem> mediaItems;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewpager);
-       // mediaItems = (List<MediaItem>) savedInstanceState.getParcelable("path");
-       // mediaItems = (List<MediaItem>) getIntent().getSerializableExtra("path");
-//        mediaItems = Util.tempList;
-//        Util.tempList.clear();
         int tempPos = getIntent().getExtras().getInt("path");
         mViewPager = (ViewPager)findViewById(R.id.viewPagerMain);
         mViewPagerAdapter = new ViewPagerAdapter(ImageViewpagerActivity.this, Util.tempList);

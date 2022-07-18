@@ -35,8 +35,6 @@ import com.example.calculatorhide.Utils.Util;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -191,7 +189,6 @@ public class MultVideoSelectActivity extends BaseActivity {
             mSparseBooleanArray = new SparseBooleanArray();
             mList = new ArrayList<String>();
             this.mList = imageList;
-            imageLoader = ImageLoader.getInstance();
         }
         public ArrayList<String> getCheckedItems() {
             ArrayList<String> mTempArry = new ArrayList<String>();

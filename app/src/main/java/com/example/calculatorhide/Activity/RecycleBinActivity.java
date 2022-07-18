@@ -18,6 +18,7 @@ import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.HideFiles;
+import com.example.calculatorhide.database.DBController;
 import com.example.calculatorhide.databinding.ActivityRecycleBinBinding;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -43,6 +44,7 @@ public class RecycleBinActivity extends AppCompatActivity {
     Activity activity;
     ImageView image,back;
     TextView tvNoData,maintext;
+    DBController dbController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,7 @@ public class RecycleBinActivity extends AppCompatActivity {
             }
         });
         hidedDatabase=HidedDatabase.getDatabse(getApplicationContext());
+        dbController = new DBController(getApplicationContext());
         initUi();
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -70,7 +73,7 @@ public class RecycleBinActivity extends AppCompatActivity {
         maintext.setText(SplashActivity.resources.getString(R.string.Recycle_Bin));
         tvNoData.setText(SplashActivity.resources.getString(R.string.No_files_added));
         image = findViewById(R.id.image);
-        dataList=hidedDatabase.mediaDao().getRecycleData(1);
+        dataList=dbController.getRecycleData(1);
         hideFiles=new HideFiles(activity);
         if(dataList.size()!=0)
         {
@@ -106,7 +109,7 @@ public class RecycleBinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 File f=new File(data.getPath());
                 hideFiles.delete(activity,f);
-                hidedDatabase.mediaDao().deleteByPath(data.getPath());
+               dbController.deletepath(data.getPath());
                 dataList.remove(position);
                 adapter.notifyDataSetChanged();
                 alertDialog.dismiss();
@@ -115,7 +118,7 @@ public class RecycleBinActivity extends AppCompatActivity {
         tvRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    hidedDatabase.mediaDao().addtoRecycle(0,data.getPath());
+                    dbController.addtoRecycle(0,data.getPath());
                     dataList.remove(position);
                     adapter.notifyDataSetChanged();
                     alertDialog.dismiss();

@@ -34,6 +34,7 @@ import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
 import com.example.calculatorhide.Utils.HideFiles;
+import com.example.calculatorhide.database.DBController;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -61,12 +62,14 @@ public class VideoActivity extends AppCompatActivity {
     CheckBox check;
     boolean checked = false;
     private List<MediaItem> selectedItems = new ArrayList<>();
+    DBController db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         activity=this;
+        db = new DBController(this);
         hidedDatabase=HidedDatabase.getDatabse(activity);
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         findId();
@@ -147,7 +150,7 @@ public class VideoActivity extends AppCompatActivity {
 
     private void getVideos() {
         mediaItems.clear();
-        mediaItems= hidedDatabase.mediaDao().getImagesMedia("video",0);
+        mediaItems = db.getmedia("video", 0);
         if(mediaItems.size()!=0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
@@ -271,7 +274,7 @@ public class VideoActivity extends AppCompatActivity {
         tvRecycle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hidedDatabase.mediaDao().addtoRecycle(1,item.getPath());
+                db.addtoRecycle(1,item.getPath());
                 getVideos();
                 alertDialog.dismiss();
             }

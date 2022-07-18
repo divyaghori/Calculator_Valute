@@ -25,6 +25,7 @@ import com.example.calculatorhide.Utils.GoogleAds;
 import com.example.calculatorhide.Utils.HideFiles;
 import com.example.calculatorhide.Utils.InterstitialAdManager;
 import com.example.calculatorhide.Utils.Util;
+import com.example.calculatorhide.database.DBController;
 import com.example.calculatorhide.databinding.ActivityImageFullViewBinding;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -46,12 +47,14 @@ public class ImageFullViewActivity extends AppCompatActivity {
     TouchImageView ivImg;
     String path;
     private boolean isAdShowen;
+    DBController db;
     private InterstitialAdManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityImageFullViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        db = new DBController(this);
         activity=this;
         manager = new InterstitialAdManager();
         manager.fetchAd(this,true);
@@ -211,7 +214,7 @@ public class ImageFullViewActivity extends AppCompatActivity {
         tvUnHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hidedDatabase.mediaDao().addtoRecycle(1, item.getPath());
+                db.addtoRecycle(1, item.getPath());
                 alertDialog.dismiss();
                 onBackPressed();
             }

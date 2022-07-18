@@ -17,29 +17,21 @@ import java.util.Objects;
 
 class ViewPagerAdapter extends PagerAdapter {
 
-    // Context object
     Context context;
 
-    // Array of images
-   // int[] images;
     List<MediaItem> mediaItems ;
 
-    // Layout Inflater
     LayoutInflater mLayoutInflater;
-    // ama list joise ne? haa
 
 
-    // Viewpager Constructor
     public ViewPagerAdapter(Context context, List<MediaItem> items) {
         mediaItems = items;
         this.context = context;
-        //this.images = images;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        // return the number of images
         return mediaItems.size();
     }
 
@@ -51,20 +43,13 @@ class ViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        // inflating the item.xml
         View itemView = mLayoutInflater.inflate(R.layout.activity_imageviewpageritem, container, false);
 
-        // referencing the image view from the item.xml file
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewMain);
 
-        // setting the image in the imageView
-        // path kyathi avsr?
         Glide.with(context)
                 .load(mediaItems.get(position).getPath())
                 .into(imageView);
-        //imageView.set(mediaItems.get(position).getPath());
-
-        // Adding the View
         Objects.requireNonNull(container).addView(itemView);
 
         return itemView;
@@ -72,7 +57,6 @@ class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
         container.removeView((LinearLayout) object);
     }
 }

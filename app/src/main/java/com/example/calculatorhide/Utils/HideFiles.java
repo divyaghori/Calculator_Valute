@@ -13,6 +13,7 @@ import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.Model.Securityitem;
+import com.example.calculatorhide.database.DBController;
 import com.github.f4b6a3.uuid.UuidCreator;
 
 import org.apache.commons.io.FileUtils;
@@ -27,6 +28,7 @@ public class HideFiles {
     private List<String> listUris;
     private Context mContext;
     HidedDatabase hidedDatabase;
+    DBController dbController;
     SuccessInterface successInterface;
     UUID uuid;
     SecurityDatabase securityDatabase;
@@ -38,8 +40,8 @@ public class HideFiles {
 
     public void HideFile(List<String> uris, String type, File hiddenPath) {
         hidedDatabase = HidedDatabase.getDatabse(mContext);
+        dbController = new DBController(mContext);
         Log.d("databse", hidedDatabase.toString());
-//        hidedDatabase= Room.databaseBuilder(mContext, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         for (int i = 0; i < uris.size(); i++) {
             successInterface.onLoading(true);
             String path = uris.get(i);
@@ -54,11 +56,11 @@ public class HideFiles {
             mediaItem.setName(title);
             mediaItem.setPath(des.getPath());
             mediaItem.setoPath(source.getPath());
-            mediaItem.setTime((int) Calendar.getInstance().getTimeInMillis());
+            mediaItem.setTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
             mediaItem.setDeleted(0);
             mediaItem.setFolder("Default");
             copyFiles(source, des, path);
-            hidedDatabase.mediaDao().addData(mediaItem);
+            dbController.adddata(mediaItem);
         }
         successInterface.onSuccess(true);
     }
@@ -67,6 +69,7 @@ public class HideFiles {
         for (int i = 0; i < item.size(); i++) {
             successInterface.onLoading(true);
             hidedDatabase = HidedDatabase.getDatabse(mContext);
+            dbController = new DBController(mContext);
             String title = getFileName(item.get(i).getoPath());
             String org = item.get(i).getoPath();
             File src = new File(item.get(i).getPath());
@@ -74,7 +77,8 @@ public class HideFiles {
             String sl = des.getParent();
             File dest = new File(sl, title);
             copyFiles(src, dest, item.get(i).getPath());
-            hidedDatabase.mediaDao().deleteByPath(item.get(i).getPath());
+            dbController.deletepath(item.get(i).getPath());
+//            hidedDatabase.mediaDao().deleteByPath(item.get(i).getPath());
         }
         successInterface.onSuccess(true);
     }
@@ -82,6 +86,7 @@ public class HideFiles {
         for (int i = 0; i < item.size(); i++) {
             successInterface.onLoading(true);
             hidedDatabase = HidedDatabase.getDatabse(mContext);
+            dbController = new DBController(mContext);
             String title = getFileName(item.get(i).getoPath());
             String org = item.get(i).getoPath();
             File src = new File(item.get(i).getPath());
@@ -89,7 +94,7 @@ public class HideFiles {
             String sl = des.getParent();
             File dest = new File(sl, title);
             copyFiles(src, dest, item.get(i).getPath());
-            hidedDatabase.mediaDao().addtoRecycle(1, item.get(i).getPath());
+            dbController.addtoRecycle(1, item.get(i).getPath());
         }
         successInterface.onSuccess(true);
     }
@@ -97,6 +102,7 @@ public class HideFiles {
         for (int i = 0; i < item.size(); i++) {
             successInterface.onLoading(true);
             hidedDatabase = HidedDatabase.getDatabse(mContext);
+            dbController = new DBController(mContext);
             String title = getFileName(item.get(i).getoPath());
             String org = item.get(i).getoPath();
             File src = new File(item.get(i).getPath());
@@ -104,7 +110,7 @@ public class HideFiles {
             String sl = des.getParent();
             File dest = new File(sl, title);
             copyFiles(src, dest, item.get(i).getPath());
-            hidedDatabase.mediaDao().addtoRecycle(1, item.get(i).getPath());
+            dbController.addtoRecycle(1, item.get(i).getPath());
         }
         successInterface.onSuccess(true);
     }

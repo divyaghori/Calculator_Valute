@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity(tableName = "hidden_file")
-public class MediaItem implements Serializable {
+public class MediaItem1 implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int _id;
@@ -28,7 +28,7 @@ public class MediaItem implements Serializable {
     private String type;
 
     @ColumnInfo(name = "time")
-    private String time;
+    private int time;
 
     @ColumnInfo(name = "folder")
     private String folder;
@@ -85,11 +85,11 @@ public class MediaItem implements Serializable {
         this.type = type;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 

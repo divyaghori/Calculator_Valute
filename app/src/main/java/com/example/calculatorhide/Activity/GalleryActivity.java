@@ -34,6 +34,7 @@ import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
 import com.example.calculatorhide.Utils.HideFiles;
 import com.example.calculatorhide.Utils.Util;
+import com.example.calculatorhide.database.DBController;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -62,12 +63,14 @@ public class GalleryActivity extends AppCompatActivity {
     private List<MediaItem> selectedItems = new ArrayList<>();
     ImageView unlock,delete;
     boolean checked = false;
+    DBController db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         activity = this;
         hidedDatabase = HidedDatabase.getDatabse(activity);
+        db = new DBController(this);
         findId();
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -140,7 +143,7 @@ public class GalleryActivity extends AppCompatActivity {
     }
     private void getImages() {
         mediaItems.clear();
-        mediaItems = hidedDatabase.mediaDao().getImagesMedia("HiddenFileType.image", 0);
+        mediaItems = db.getmedia("HiddenFileType.image", 0);
         if (mediaItems.size() != 0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
@@ -253,7 +256,7 @@ public class GalleryActivity extends AppCompatActivity {
         tvRecycle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hidedDatabase.mediaDao().addtoRecycle(1, item.getPath());
+               db.addtoRecycle(1, item.getPath());
                 getImages();
                 alertDialog.dismiss();
             }
