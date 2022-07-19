@@ -70,9 +70,8 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:hint="Enter Answer..."
             android:textColorHint="@color/white"
-            android:textColor="#686666">
+            android:textColor="@color/white">
 
         </EditText>
 

@@ -17,13 +17,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calculatorhide.BuildConfig;
 import com.example.calculatorhide.LOCALIZATION.LocaleHelper;
-import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.R;
 
@@ -39,7 +37,6 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
     TextView t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12;
     TextView searchtext;
     Activity activity;
-    SecurityDatabase securityDatabase;
     Securityitem getpassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +70,6 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         t11.setText(SplashActivity.resources.getString(R.string.Privacy_Policy));
         t12.setText(SplashActivity.resources.getString(R.string.About_Us));
         getpassword = new Securityitem();
-        securityDatabase = SecurityDatabase.getDatabse(activity);
         back = findViewById(R.id.back);
         security = findViewById(R.id.security);
         important = findViewById(R.id.important);
@@ -172,8 +168,8 @@ public class SettingActivity extends AppCompatActivity implements AdapterView.On
         recyclebin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent browserIntent = new Intent(SettingActivity.this,DisguiseActivity.class);
-//                startActivity(browserIntent);
+                Intent i = new Intent(SettingActivity.this, RecycleBinActivity.class);
+                startActivity(i);
             }
         });
         update.setOnClickListener(new View.OnClickListener() {

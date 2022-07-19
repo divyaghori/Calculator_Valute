@@ -14,15 +14,12 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.HideFiles;
 import com.example.calculatorhide.Utils.InterstitialAdManager;
 import com.example.calculatorhide.Utils.Util;
 import com.example.calculatorhide.database.DBController;
-import com.example.calculatorhide.databinding.ActivityImageFullViewBinding;
 import com.example.calculatorhide.databinding.ActivityVideoViewBinding;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -39,7 +36,7 @@ public class VideoViewActivity extends AppCompatActivity {
     private Activity activity = this;
     private ActivityVideoViewBinding binding;
     private MediaItem media;
-    HidedDatabase hidedDatabase;
+   
     HideFiles hideFiles;
     String path;
     private boolean isAdShowen;
@@ -68,11 +65,11 @@ public class VideoViewActivity extends AppCompatActivity {
             isAdShowen = true;
             Util.activityData_list.add("VideoViewActivity");
         }
-        hidedDatabase = HidedDatabase.getDatabse(activity);
+        
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         if (getIntent() != null) {
             path = getIntent().getStringExtra("path");
-            media = hidedDatabase.mediaDao().getFilesByPath(path);
+            media = db.getFilesByPath(path);
         }
         initUi();
     }

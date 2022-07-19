@@ -28,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
@@ -39,13 +38,12 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 public class GalleryActivity extends AppCompatActivity {
-    HidedDatabase hidedDatabase;
+   
     Activity activity;
     ImageView icback, getimage;
     GridView gvGallery;
@@ -69,7 +67,7 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         activity = this;
-        hidedDatabase = HidedDatabase.getDatabse(activity);
+        
         db = new DBController(this);
         findId();
         mAdView = findViewById(R.id.adView);
@@ -257,6 +255,8 @@ public class GalleryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                db.addtoRecycle(1, item.getPath());
+                mediaItems.remove(position);
+                adapter.notifyDataSetChanged();
                 getImages();
                 alertDialog.dismiss();
             }

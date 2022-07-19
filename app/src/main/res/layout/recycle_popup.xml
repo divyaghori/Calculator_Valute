@@ -19,6 +19,7 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
+            android:singleLine="true"
             android:text="Do you want to Delete this file ?"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -37,6 +38,7 @@
                 android:layout_margin="@dimen/_12sdp"
                 android:fontFamily="@font/varelaroundregular"
                 android:text="@string/yes"
+                android:singleLine="true"
                 android:textColor="@color/cal_blue"
                 android:textSize="16sp" />
 
@@ -46,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"
                 android:fontFamily="@font/varelaroundregular"
-
+                android:singleLine="true"
                 android:text="@string/no"
                 android:textColor="@color/cal_blue"
                 android:textSize="16sp" />

@@ -7,11 +7,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
-import android.widget.Toast;
 
-import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
-import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.database.DBController;
 import com.github.f4b6a3.uuid.UuidCreator;
@@ -27,11 +24,10 @@ import java.util.UUID;
 public class HideFiles {
     private List<String> listUris;
     private Context mContext;
-    HidedDatabase hidedDatabase;
+   
     DBController dbController;
     SuccessInterface successInterface;
     UUID uuid;
-    SecurityDatabase securityDatabase;
 
 
     public HideFiles(Context context) {
@@ -39,9 +35,9 @@ public class HideFiles {
     }
 
     public void HideFile(List<String> uris, String type, File hiddenPath) {
-        hidedDatabase = HidedDatabase.getDatabse(mContext);
+        
         dbController = new DBController(mContext);
-        Log.d("databse", hidedDatabase.toString());
+      
         for (int i = 0; i < uris.size(); i++) {
             successInterface.onLoading(true);
             String path = uris.get(i);
@@ -68,7 +64,7 @@ public class HideFiles {
     public void unHideFile(List<MediaItem> item) {
         for (int i = 0; i < item.size(); i++) {
             successInterface.onLoading(true);
-            hidedDatabase = HidedDatabase.getDatabse(mContext);
+            
             dbController = new DBController(mContext);
             String title = getFileName(item.get(i).getoPath());
             String org = item.get(i).getoPath();
@@ -85,7 +81,7 @@ public class HideFiles {
     public void deletemultiplefile(List<MediaItem> item) {
         for (int i = 0; i < item.size(); i++) {
             successInterface.onLoading(true);
-            hidedDatabase = HidedDatabase.getDatabse(mContext);
+            
             dbController = new DBController(mContext);
             String title = getFileName(item.get(i).getoPath());
             String org = item.get(i).getoPath();
@@ -101,7 +97,7 @@ public class HideFiles {
     public void restorefile(List<MediaItem> item) {
         for (int i = 0; i < item.size(); i++) {
             successInterface.onLoading(true);
-            hidedDatabase = HidedDatabase.getDatabse(mContext);
+            
             dbController = new DBController(mContext);
             String title = getFileName(item.get(i).getoPath());
             String org = item.get(i).getoPath();
@@ -162,13 +158,13 @@ public class HideFiles {
 
 
     public void createSecurity(String password, String question, String answer) {
-        securityDatabase = SecurityDatabase.getDatabse(mContext);
         successInterface.onLoading(true);
+        dbController = new DBController(mContext);
         Securityitem securityitem = new Securityitem();
         securityitem.setQuestion(question);
         securityitem.setPassword(password);
         securityitem.setAnswer(answer);
-        securityDatabase.securityDao().addData(securityitem);
+        dbController.addsecuritydata(securityitem);
         successInterface.onSuccess(true);
     }
 

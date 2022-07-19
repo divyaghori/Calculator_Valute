@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
@@ -22,12 +23,22 @@ class ViewPagerAdapter extends PagerAdapter {
     List<MediaItem> mediaItems ;
 
     LayoutInflater mLayoutInflater;
+    ViewAdapterInterface viewAdapterInterface;
 
 
-    public ViewPagerAdapter(Context context, List<MediaItem> items) {
+    public ViewPagerAdapter(Context context, List<MediaItem> items,ViewAdapterInterface viewAdapterInterface) {
         mediaItems = items;
         this.context = context;
+        this.viewAdapterInterface = viewAdapterInterface;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public interface ViewAdapterInterface {
+        void onInfoClick(String click);
+        void onUnhideClick(String click);
+        void onDeleteClick(String click);
+
+
     }
 
     @Override
@@ -37,7 +48,7 @@ class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == ((LinearLayout) object);
+        return view == ((ConstraintLayout) object);
     }
 
     @NonNull
@@ -46,8 +57,31 @@ class ViewPagerAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.activity_imageviewpageritem, container, false);
 
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewMain);
+        ImageView ivInfo = (ImageView) itemView.findViewById(R.id.ivInfo);
+        ImageView ivUnHide = (ImageView) itemView.findViewById(R.id.ivUnHide);
+        ImageView ivRecycle = (ImageView) itemView.findViewById(R.id.ivRecycle);
+        ivInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewAdapterInterface.onInfoClick(mediaItems.get(position).getPath());
 
-        Glide.with(context)
+            }
+        });
+        ivUnHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewAdapterInterface.onUnhideClick(mediaItems.get(position).getPath());
+
+            }
+        });
+        ivRecycle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewAdapterInterface.onDeleteClick(mediaItems.get(position).getPath());
+
+            }
+        });
+         Glide.with(context)
                 .load(mediaItems.get(position).getPath())
                 .into(imageView);
         Objects.requireNonNull(container).addView(itemView);
@@ -57,6 +91,6 @@ class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((LinearLayout) object);
+        container.removeView((ConstraintLayout) object);
     }
 }

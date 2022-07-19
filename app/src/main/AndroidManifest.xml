@@ -32,6 +32,12 @@
             android:name=".Activity.ImageViewpagerActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.ResetpasswordActivity"
+            android:exported="false" />
+        <activity
+        android:name=".Activity.ResetQuestionActivity"
+        android:exported="false" />
+        <activity
             android:name=".Activity.AudioViewActivity"
             android:exported="false" />
         <activity
@@ -1037,9 +1043,6 @@
             android:exported="false" />
         <activity
             android:name=".Activity.SettingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.ImageFullViewActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.RecycleBinActivity"

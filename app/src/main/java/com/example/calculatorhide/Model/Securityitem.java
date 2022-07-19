@@ -1,25 +1,9 @@
 package com.example.calculatorhide.Model;
-
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-import java.io.Serializable;
-
-@Entity(tableName = "security")
-public class Securityitem implements Serializable {
-
-    @PrimaryKey(autoGenerate = true)
-    private int _id;
-
-    @ColumnInfo(name = "password")
-    private String password;
-
-    @ColumnInfo(name = "question")
-    private String question;
-
-    @ColumnInfo(name = "answer")
-    public String answer;
+public class Securityitem{
+    int _id;
+    String password;
+    String question;
+    String answer;
 
     public int get_id() {
         return _id;

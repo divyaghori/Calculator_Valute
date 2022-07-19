@@ -29,7 +29,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
@@ -45,7 +44,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class VideoActivity extends AppCompatActivity {
-    HidedDatabase hidedDatabase;
+   
     Activity activity;
     ImageView icback,getimage;
     GridView gvGallery;
@@ -70,7 +69,7 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video);
         activity=this;
         db = new DBController(this);
-        hidedDatabase=HidedDatabase.getDatabse(activity);
+       
 //        hidedDatabase= Room.databaseBuilder(activity, HidedDatabase.class,"hidedDb").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         findId();
 
@@ -402,7 +401,7 @@ public class VideoActivity extends AppCompatActivity {
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(activity, ImageFullViewActivity.class);
+                            Intent intent = new Intent(activity, ImageViewpagerActivity.class);
                             intent.putExtra("path", mitemList.get(position).getPath());
                             startActivity(intent);
                         }

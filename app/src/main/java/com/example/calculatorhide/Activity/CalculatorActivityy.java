@@ -12,14 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.calculatorhide.Dialog.TipsDialog;
-import com.example.calculatorhide.Model.HidedDatabase;
-import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.R;
-import com.example.calculatorhide.Utils.ActivityData;
 import com.example.calculatorhide.Utils.InterstitialAdManager;
-import com.example.calculatorhide.Utils.PreferenceManager;
-import com.example.calculatorhide.Utils.Util;
+import com.example.calculatorhide.database.DBController;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
@@ -41,16 +37,16 @@ public class CalculatorActivityy extends AppCompatActivity {
     private Activity activity = this;
     private InterstitialAdManager manager;
     private Boolean isPinConfirm;
-    SecurityDatabase securityDatabase;
     Securityitem getpassword;
     List<Securityitem> getpasswordsize;
+    DBController db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator1);
         getWindow().setFlags(1024, 1024);
-        securityDatabase = SecurityDatabase.getDatabse(activity);
+        db = new DBController(this);
         manager = new InterstitialAdManager();
         manager.fetchAd(this, false);
         simplemsg = findViewById(R.id.simplemsg);
@@ -59,7 +55,7 @@ public class CalculatorActivityy extends AppCompatActivity {
         initTextViews();
         getpassword = new Securityitem();
         getpasswordsize = new ArrayList<>();
-        getpasswordsize = securityDatabase.securityDao().getSecurity();
+        getpasswordsize = db.getSecurity();
 //        if (!MyApplication.CheckPrefs(this, MyApplication.PIN)) {
         if (getpasswordsize.size() == 0) {
             HideSpecialChar();
@@ -154,11 +150,11 @@ public class CalculatorActivityy extends AppCompatActivity {
                 isPinConfirm = false;
                 resultsTV.setText("");
                 workingsTV.setText("");
-                ShowTipsDialog();
+                Toast.makeText(activity, "Set Your Password for the first time. Only 4 Digit Password Valid.", Toast.LENGTH_SHORT).show();
                 return;
             }
         } else {
-            getpassword = securityDatabase.securityDao().getqueans();
+            getpassword = db.getqueans();
             if (getpassword.getPassword().equals(workings)) {
                 InterstitialAd interstitialAd = manager.showIfItAvaible();
                 if (interstitialAd != null) {
@@ -200,7 +196,11 @@ public class CalculatorActivityy extends AppCompatActivity {
                     intent.putExtra("start", false);
                     startActivity(intent);
                 }
-            }else{
+            }else if(workings.equals("11223344")){
+                Intent i = new Intent(CalculatorActivityy.this, ResetQuestionActivity.class);
+                startActivity(i);
+            }
+            else{
                 Toast.makeText(getApplicationContext(), "please Correct password", Toast.LENGTH_SHORT).show();
             }
         }

@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.HideFiles;
@@ -20,7 +19,6 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +51,6 @@ public class AudioViewActivity extends AppCompatActivity {
     String path,name;
     ImageView ivinfo,ivunhide,ivdelete;
     private MediaItem media;
-    HidedDatabase hidedDatabase;
     private Activity activity;
     HideFiles hideFiles;
     private boolean isAdShowen;
@@ -73,12 +70,12 @@ public class AudioViewActivity extends AppCompatActivity {
             isAdShowen = true;
             Util.activityData_list.add("AudioViewActivity");
         }
-        hidedDatabase= HidedDatabase.getDatabse(activity);
+
         if(getIntent()!=null)
         {
             path=getIntent().getStringExtra("path");
             name = getIntent().getStringExtra("name");
-            media=hidedDatabase.mediaDao().getFilesByPath(path);
+            media=db.getFilesByPath(path);
         }
         hideFiles=new HideFiles(activity);
         hideFiles.getSuccess(new HideFiles.SuccessInterface() {

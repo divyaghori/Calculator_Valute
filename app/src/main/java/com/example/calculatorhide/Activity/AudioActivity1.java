@@ -19,14 +19,12 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
@@ -42,7 +40,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AudioActivity1 extends AppCompatActivity {
-    HidedDatabase hidedDatabase;
+   
     Activity activity;
     ImageView icback,getimage;
     GridView gvGallery;
@@ -66,7 +64,6 @@ public class AudioActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio);
         activity=this;
-        hidedDatabase=HidedDatabase.getDatabse(activity);
         db = new DBController(this);
         findId();
         mAdView = findViewById(R.id.adView);

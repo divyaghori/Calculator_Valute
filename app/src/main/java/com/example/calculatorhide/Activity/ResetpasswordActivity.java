@@ -15,7 +15,7 @@ import com.example.calculatorhide.R;
 import com.example.calculatorhide.database.DBController;
 
 
-public class NewPinActivity extends AppCompatActivity {
+public class ResetpasswordActivity extends AppCompatActivity {
 
     EditText pin_et;
     Activity activity;
@@ -53,8 +53,7 @@ public class NewPinActivity extends AppCompatActivity {
                     Toast.makeText(activity,"PIN is Changed successfully",Toast.LENGTH_LONG).show();
                     db.updatepassword(pin);
                     MyApplication.SetStringToPrefs(activity,MyApplication.PIN,pin);
-                    Intent i = new Intent(NewPinActivity.this, SettingActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Intent i = new Intent(ResetpasswordActivity.this, HomeActivity.class);
                     startActivity(i);
                 }
             }

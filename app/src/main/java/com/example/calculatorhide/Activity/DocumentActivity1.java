@@ -2,12 +2,8 @@ package com.example.calculatorhide.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,16 +19,12 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
-import com.example.calculatorhide.BuildConfig;
-import com.example.calculatorhide.Model.HidedDatabase;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
@@ -48,7 +40,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DocumentActivity1 extends AppCompatActivity {
-    HidedDatabase hidedDatabase;
+   
     Activity activity;
     ImageView icback, getimage;
     GridView gvGallery;
@@ -72,7 +64,7 @@ public class DocumentActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
         activity = this;
-        hidedDatabase = HidedDatabase.getDatabse(activity);
+        
         db = new DBController(this);
         findId();
         mAdView = findViewById(R.id.adView);

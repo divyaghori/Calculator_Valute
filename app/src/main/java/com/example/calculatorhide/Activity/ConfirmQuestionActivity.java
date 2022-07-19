@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.database.DBController;
 
 
 public class ConfirmQuestionActivity extends AppCompatActivity {
@@ -23,16 +23,16 @@ public class ConfirmQuestionActivity extends AppCompatActivity {
     ImageView back;
     Activity activity;
     Securityitem getquepass;
-    SecurityDatabase securityDatabase;
+    DBController db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_question);
+        db = new DBController(this);
         activity = this;
-        securityDatabase = SecurityDatabase.getDatabse(activity);
         getquepass = new Securityitem();
-        getquepass = securityDatabase.securityDao().getqueans();
+        getquepass = db.getqueans();
         question = findViewById(R.id.question);
         back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +53,7 @@ public class ConfirmQuestionActivity extends AppCompatActivity {
                 if (answer.getText().toString().equalsIgnoreCase(getquepass.getAnswer().toString())){
                     startActivity(new Intent(ConfirmQuestionActivity.this,NewPinActivity.class));
                 }else {
-                    Toast.makeText(activity,"Please Enter Currect Answer",Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity,"Please Enter Correct Answer",Toast.LENGTH_LONG).show();
                 }
             }
         });

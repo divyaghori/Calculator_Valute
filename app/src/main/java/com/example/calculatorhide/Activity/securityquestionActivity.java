@@ -12,10 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.calculatorhide.Model.SecurityDatabase;
 import com.example.calculatorhide.R;
+import com.example.calculatorhide.database.DBController;
 
 public class securityquestionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -28,16 +27,16 @@ public class securityquestionActivity extends AppCompatActivity implements Adapt
             SplashActivity.resources.getString(R.string.Who_is_your_girlfriendboyfriend),
     };
     TextView maintext, oldsecurity, selectquestion, enteryourans, confirm, hinit,submit_btn;
-    SecurityDatabase securityDatabase;
     Activity activity;
     EditText answer_et;
+    DBController db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_securityquestion);
         activity = this;
-        securityDatabase = SecurityDatabase.getDatabse(activity);
+        db = new DBController(this);
         question = findViewById(R.id.question_spinner);
         maintext = findViewById(R.id.maintext);
         maintext.setText(SplashActivity.resources.getString(R.string.Set_security_question));
@@ -59,7 +58,7 @@ public class securityquestionActivity extends AppCompatActivity implements Adapt
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                securityDatabase.securityDao().updateQuestionAndAnswer(question.getSelectedItem().toString(),answer_et.getText().toString());
+                db.updateQuestionAndAnswer(question.getSelectedItem().toString(),answer_et.getText().toString());
                 Intent i = new Intent(securityquestionActivity.this, SettingActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);

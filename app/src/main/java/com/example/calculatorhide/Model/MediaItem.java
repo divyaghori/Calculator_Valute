@@ -1,41 +1,17 @@
 package com.example.calculatorhide.Model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
 
-@Entity(tableName = "hidden_file")
-public class MediaItem implements Serializable {
-
-    @PrimaryKey(autoGenerate = true)
-    private int _id;
-
-    @ColumnInfo(name = "name")
-    private String name;
-
-    @ColumnInfo(name = "path")
-    private String path;
-
-    @ColumnInfo(name = "oPath")
-    public String oPath;
-
-    @ColumnInfo(name = "fileExt")
-    private String fileExt;
-
-    @ColumnInfo(name = "type")
-    private String type;
-
-    @ColumnInfo(name = "time")
-    private String time;
-
-    @ColumnInfo(name = "folder")
-    private String folder;
-
-    @ColumnInfo(name = "deleted")
-    private int deleted;
-
+public class MediaItem {
+    int _id;
+    String name;
+    String path;
+    String oPath;
+    String fileExt;
+    String type;
+    String time;
+    String folder;
+    int deleted;
 
     public int get_id() {
         return _id;

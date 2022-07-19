@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.calculatorhide.Model.MediaDao;
 import com.example.calculatorhide.Model.MediaItem;
 
 import java.io.File;

@@ -19,6 +19,7 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
+            android:singleLine="true"
             android:text="Do you want to unhide this file ?"
             android:textColor="@color/white"
             android:textSize="16sp" />
