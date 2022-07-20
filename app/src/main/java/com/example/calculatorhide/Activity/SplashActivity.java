@@ -59,9 +59,6 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AdDetails details = dataSnapshot.getValue(AdDetails.class);
-                Log.e("Ad cal ",details.getCalAdId().toString());
-                Log.e("Ad open",details.getOpenAppId().toString());
-                Log.e("Ad home",details.getHomeAdId().toString());
                 sessionManager.setCanAdId(details.getCalAdId());
                 sessionManager.setOpenAppId(details.getOpenAppId());
                 sessionManager.setHomeAdId(details.getHomeAdId());

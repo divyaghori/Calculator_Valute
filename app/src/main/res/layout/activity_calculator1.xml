@@ -27,7 +27,7 @@
             android:visibility="gone"
             android:textColor="@color/white"
             android:text="Enter 4 digit password"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
         <TextView
             android:id="@+id/simplesubmsg"
             android:layout_width="match_parent"

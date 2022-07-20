@@ -1,8 +1,9 @@
 package com.example.calculatorhide.Utils;
 
-public class AdDetails {
-    String CalAdId, openAppId,homeAdId;
+import java.io.Serializable;
 
+public class AdDetails implements Serializable {
+    private String CalAdId, openAppId, homeAdId;
 
     public String getCalAdId() {
         return CalAdId;

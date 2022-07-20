@@ -11,21 +11,25 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.GoogleAds;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DisguiseActivity extends AppCompatActivity {
     private static final String disguise = "com.example.calculatorhide.icon.icon_disguise";
     ImageView i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17;
     ImageView back;
-    AlertDialog.Builder builder;
     TextView maintext;
     Activity activity;
     @Override
@@ -36,7 +40,6 @@ public class DisguiseActivity extends AppCompatActivity {
         maintext = findViewById(R.id.maintext);
         maintext.setText(SplashActivity.resources.getString(R.string.Disguise_Icon));
         back = findViewById(R.id.back);
-        builder = new AlertDialog.Builder(this);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,25 +168,34 @@ public class DisguiseActivity extends AppCompatActivity {
             }
         });
     }
-    public  void dialog(int i){
-        builder.setMessage("Do you want to Chanage this app Icon?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        ChangeAppIcon(i);
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
 
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.setTitle("Alert");
-        alert.show();
+    public void dialog(int i) {
+        android.app.AlertDialog.Builder dialogBuilder = new android.app.AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.disguise_dialog, null);
+        dialogBuilder.setView(dialogView);
+        TextView done = dialogView.findViewById(R.id.done);
+        TextView cancel = dialogView.findViewById(R.id.cancel);
+        android.app.AlertDialog alertDialog = dialogBuilder.create();
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChangeAppIcon(i);
+                finish();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
+
+
+
+
 
     public void ChangeAppIcon(int i) {
         for (int i2 = 0; i2 <= 15; i2++) {

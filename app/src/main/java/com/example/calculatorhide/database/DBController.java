@@ -33,8 +33,6 @@ public class DBController extends SQLiteOpenHelper {
     static final String columnQuestion = "question";
     static final String columnAnswer = "answer";
 
-
-
     public DBController(Context context) {
         super(context, databasename, null, versioncode);
     }

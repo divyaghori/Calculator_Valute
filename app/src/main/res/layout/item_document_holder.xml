@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/itemView_acFilesHolder_Iv"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_27sdp"
+            android:layout_height="@dimen/_27sdp"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
@@ -50,7 +50,7 @@
             <TextView
                 android:id="@+id/itemView_acFilesHolder_FileNameTV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center|left"
                 android:layout_marginLeft="8dp"
                 android:fontFamily="@font/varelaroundregular"
@@ -97,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
             android:buttonTint="@color/white"
+            android:layout_centerInParent="true"
             android:layout_height="wrap_content">
         </CheckBox>
 

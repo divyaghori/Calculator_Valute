@@ -57,8 +57,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/security_question">
 
@@ -95,8 +95,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/very_important">
 
@@ -133,8 +133,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/language">
 
@@ -178,8 +178,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/block_ads">
 
@@ -214,8 +214,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/disguise">
 
@@ -250,8 +250,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/chnage_password">
 
@@ -286,8 +286,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/rate_us">
 
@@ -323,8 +323,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/share">
 
@@ -359,8 +359,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/recycle_bin">
 
@@ -395,8 +395,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/update">
 
@@ -431,8 +431,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/privacy_policy">
 
@@ -467,8 +467,8 @@
 
 
                 <ImageView
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
                     android:paddingLeft="@dimen/_15sdp"
                     android:src="@drawable/about">
 

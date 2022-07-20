@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,7 +25,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import com.example.calculatorhide.BuildConfig;
 import com.example.calculatorhide.Model.MediaItem;
 import com.example.calculatorhide.R;
 import com.example.calculatorhide.Utils.CustomProgressDialogue;
@@ -263,6 +266,13 @@ public class DocumentActivity1 extends AppCompatActivity {
                 dialogBuilder.setView(dialogView);
                 TextView done = dialogView.findViewById(R.id.done);
                 AlertDialog alertDialog = dialogBuilder.create();
+                Handler h1 = new Handler();
+                h1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        done.setVisibility(View.VISIBLE);
+                    }
+                }, 2500);
                 done.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -383,10 +393,17 @@ public class DocumentActivity1 extends AppCompatActivity {
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent=new Intent(activity,AudioViewActivity.class);
-                            intent.putExtra("path",mediaItems.get(position).getPath());
-                            intent.putExtra("name",mediaItems.get(position).getName());
-                            startActivity(intent);
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            Uri outputFileUri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", new File(mediaItems.get(position).getPath()));
+                            intent.setDataAndType(outputFileUri, "application/pdf");
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Intent in = Intent.createChooser(intent, "Open File");
+                            startActivity(in);
+//                            Intent intent=new Intent(activity,AudioViewActivity.class);
+//                            intent.putExtra("path",mediaItems.get(position).getPath());
+//                            intent.putExtra("name",mediaItems.get(position).getName());
+//                            startActivity(intent);
                         }
                     });
                     view.setOnLongClickListener(new View.OnLongClickListener() {

@@ -8,8 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center"
-    android:layout_margin="@dimen/_5sdp"
-    tools:context=".Activity.AdsBlockActivity">
+    android:layout_margin="@dimen/_5sdp">
 
 
     <RelativeLayout
@@ -21,9 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/varelaroundregular"
             android:gravity="center"
             android:text="Ads Block"
-            android:fontFamily="@font/varelaroundregular"
             android:textColor="@color/white"
             android:textSize="20sp">
 

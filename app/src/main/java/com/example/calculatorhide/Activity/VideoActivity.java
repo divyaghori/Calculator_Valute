@@ -222,6 +222,13 @@ public class VideoActivity extends AppCompatActivity {
                 dialogBuilder.setView(dialogView);
                 TextView done = dialogView.findViewById(R.id.done);
                 AlertDialog alertDialog = dialogBuilder.create();
+                Handler h1 = new Handler();
+                h1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        done.setVisibility(View.VISIBLE);
+                    }
+                }, 2500);
                 done.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

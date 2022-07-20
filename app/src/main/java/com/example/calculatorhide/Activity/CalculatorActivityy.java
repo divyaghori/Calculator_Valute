@@ -40,6 +40,7 @@ public class CalculatorActivityy extends AppCompatActivity {
     Securityitem getpassword;
     List<Securityitem> getpasswordsize;
     DBController db;
+    Double result ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class CalculatorActivityy extends AppCompatActivity {
         getpasswordsize = db.getSecurity();
 //        if (!MyApplication.CheckPrefs(this, MyApplication.PIN)) {
         if (getpasswordsize.size() == 0) {
-            HideSpecialChar();
+//            HideSpecialChar();
             isPinConfirm = false;
             ShowTipsDialog();
             simplemsg.setVisibility(View.VISIBLE);
@@ -124,7 +125,6 @@ public class CalculatorActivityy extends AppCompatActivity {
     }
 
     public void equalsOnClick(View view) {
-        Double result = null;
         if (!isPinSet) {
             if (!isPinConfirm) {
                 if (workings.length() == 4) {
@@ -206,11 +206,11 @@ public class CalculatorActivityy extends AppCompatActivity {
         }
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
         checkForPowerOf();
-        try {
-            result = (double) engine.eval(formula);
-        } catch (ScriptException e) {
-            Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
-        }
+//        try {
+//            result = (double) engine.eval(formula);
+//        } catch (ScriptException e) {
+//            Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
+//        }
 //        if (result != null)
 //            resultsTV.setText(String.valueOf(result.doubleValue()));
     }

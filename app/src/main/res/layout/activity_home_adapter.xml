@@ -38,7 +38,7 @@
                 android:layout_height="55dp"
                 android:padding="@dimen/_8sdp"
                 android:src="@drawable/ic_plus"
-                android:tint="@color/white">
+                app:tint="@color/white">
 
             </ImageView>
         </androidx.cardview.widget.CardView>
@@ -53,6 +53,7 @@
             android:fontFamily="@font/varelaroundregular"
             android:paddingTop="@dimen/_7sdp"
             android:text="Gallery"
+            android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="18sp">
 
