@@ -153,7 +153,7 @@ public class AudioActivity1 extends AppCompatActivity {
     }
     private void getAudio() {
         mediaItems.clear();
-        mediaItems = db.getmedia("audio", 0);
+        mediaItems = db.getmedia("HiddenFileType.audio", 0);
         if(mediaItems.size()!=0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
@@ -205,7 +205,7 @@ public class AudioActivity1 extends AppCompatActivity {
         {
             if(data!=null) {
                 file_uris = (List<String>) data.getSerializableExtra("files");
-                hideFiles.HideFile(file_uris, "audio", getFolder());
+                hideFiles.HideFile(file_uris, "HiddenFileType.audio", getFolder());
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = this.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.activity_hide_progress, null);
@@ -385,7 +385,7 @@ public class AudioActivity1 extends AppCompatActivity {
             mCheckBox.setChecked(mSparseBooleanArray.get(position));
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
             if(item!=null) {
-                if (item.getType().equalsIgnoreCase("audio")) {
+                if (item.getType().equalsIgnoreCase("HiddenFileType.audio")) {
                     ivItem.setText(item.getName());
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -399,7 +399,8 @@ public class AudioActivity1 extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup(position, item);
+                            mCheckBox.setVisibility(View.VISIBLE);
+//                            showUnHideRcyclePopup(position, item);
                             return false;
                         }
                     });

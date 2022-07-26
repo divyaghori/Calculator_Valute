@@ -123,7 +123,6 @@ public class NoteActivity extends AppCompatActivity {
             Note note = new Note(title, description, priority);
             note.setId(id);
             noteViewModel.update(note);
-
         } else {
         }
     }

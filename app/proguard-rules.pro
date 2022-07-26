@@ -32,3 +32,7 @@
 -keep class com.example.calculatorhide.Utils.** {
   *;
 }
+-keepattributes Signature
+-keep class com.example.calculatorhide.Activity.** {
+  *;
+}

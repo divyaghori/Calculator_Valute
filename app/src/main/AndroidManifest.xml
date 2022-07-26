@@ -32,6 +32,12 @@
             android:name=".Activity.ImageViewpagerActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.NoteActivity1"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.AddEditNoteActivity1"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ResetpasswordActivity"
             android:exported="false" />
         <activity

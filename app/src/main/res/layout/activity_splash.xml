@@ -18,11 +18,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:elevation="10dp">
+            app:cardCornerRadius="@dimen/_18sdp"
+           >
             <ImageView
                 android:id="@+id/ivIcon"
                 android:layout_gravity="center"
-                android:src="@drawable/appicon"
+                android:src="@drawable/logo"
                 android:layout_width="@dimen/_80sdp"
                 android:padding="@dimen/_2sdp"
                 android:layout_height="@dimen/_80sdp"/>

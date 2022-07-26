@@ -101,7 +101,7 @@ public class TransitionActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(TransitionActivity.this, NoteActivity.class);
+                    Intent i = new Intent(TransitionActivity.this, NoteActivity1.class);
                     startActivity(i);
                 }
             }, 1000);

@@ -149,7 +149,7 @@ public class VideoActivity extends AppCompatActivity {
 
     private void getVideos() {
         mediaItems.clear();
-        mediaItems = db.getmedia("video", 0);
+        mediaItems = db.getmedia("HiddenFileType.video", 0);
         if(mediaItems.size()!=0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
@@ -215,7 +215,7 @@ public class VideoActivity extends AppCompatActivity {
         {
             if(data!=null) {
                 file_uris = (List<String>) data.getSerializableExtra("files");
-                hideFiles.HideFile(file_uris, "video", getFolder());
+                hideFiles.HideFile(file_uris, "HiddenFileType.video", getFolder());
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = this.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.activity_hide_progress, null);
@@ -416,12 +416,13 @@ public class VideoActivity extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup1(mitemList);
+                            mCheckBox.setVisibility(View.VISIBLE);
+//                            showUnHideRcyclePopup1(mitemList);
                             return false;
                         }
                     });
                 }
-                if (item.getType().equalsIgnoreCase("video")) {
+                if (item.getType().equalsIgnoreCase("HiddenFileType.video")) {
                     Bitmap bitmap2 = ThumbnailUtils.createVideoThumbnail(item.getPath(), MediaStore.Images.Thumbnails.MINI_KIND);
                     Glide.with(mContext)
                             .load(bitmap2)
@@ -438,7 +439,8 @@ public class VideoActivity extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup(position, item);
+                            mCheckBox.setVisibility(View.VISIBLE);
+//                            showUnHideRcyclePopup(position, item);
                             return false;
                         }
                     });

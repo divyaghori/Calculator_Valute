@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.room.Query;
 
 import com.example.calculatorhide.Model.MediaItem;
+import com.example.calculatorhide.Model.NoteModel;
 import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.Utils.Util;
 
@@ -32,6 +33,8 @@ public class DBController extends SQLiteOpenHelper {
     static final String columnPassword = "password";
     static final String columnQuestion = "question";
     static final String columnAnswer = "answer";
+    static final String notetable = "note";
+    static final String columnDescription = "description";
 
     public DBController(Context context) {
         super(context, databasename, null, versioncode);
@@ -56,6 +59,11 @@ public class DBController extends SQLiteOpenHelper {
                 + columnQuestion + " text, "
                 + columnAnswer + " text )";
         database.execSQL(security);
+        String note;
+        note =  "CREATE TABLE IF NOT EXISTS " + notetable + "(" + columnId + " integer primary key, "
+                + columnDescription + " text, "
+                + columnTime + " integer )";
+        database.execSQL(note);
     }
     @Override
     public void onUpgrade(SQLiteDatabase database, int version_old,
@@ -66,6 +74,9 @@ public class DBController extends SQLiteOpenHelper {
         String security;
         security = "DROP TABLE IF EXISTS " + table;
         database.execSQL(security);
+        String note;
+        note = "DROP TABLE IF EXISTS " + notetable;
+        database.execSQL(note);
         onCreate(database);
     }
     public void adddata(MediaItem mediaItem) {
@@ -197,7 +208,6 @@ public class DBController extends SQLiteOpenHelper {
         db.update(table, values,null,null);
         db.close();
     }
-
     public void updateQuestionAndAnswer(String question, String answer) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -206,7 +216,6 @@ public class DBController extends SQLiteOpenHelper {
         db.update(table, values,null,null);
         db.close();
     }
-
     public Securityitem getqueans(){
         String selectQuery = "select * from " + table;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -222,5 +231,45 @@ public class DBController extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return securityitem;
+    }
+
+
+    public void addnotedata(NoteModel noteModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(columnDescription, noteModel.getDesc());
+        values.put(columnTime, noteModel.getTime());
+        db.insert(notetable, null, values);
+        db.close();
+    }
+    public void updatenotedata(int id,String description) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(columnDescription, description);
+        db.update(notetable, values,columnId + " = ?",
+                new String[] { String.valueOf(id) });
+        db.close();
+    }
+    public List<NoteModel> getnote() {
+        List<NoteModel> noteModels = new ArrayList<NoteModel>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = "select * from " + notetable;
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        if (cursor.moveToFirst()) {
+            do {
+                NoteModel noteModel = new NoteModel();
+                noteModel.set_id(Integer.parseInt(cursor.getString(0)));
+                noteModel.setDesc(cursor.getString(1));
+                noteModel.setTime(cursor.getString(2));
+                noteModels.add(noteModel);
+            } while (cursor.moveToNext());
+        }
+        return noteModels;
+    }
+    public void deletenote(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(notetable, columnId + " = ?",
+                new String[] { String.valueOf(id) });
+        db.close();
     }
 }

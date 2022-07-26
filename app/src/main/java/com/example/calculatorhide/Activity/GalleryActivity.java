@@ -396,12 +396,13 @@ public class GalleryActivity extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup(position, item);
+                            mCheckBox.setVisibility(View.VISIBLE);
+//                            showUnHideRcyclePopup(position, item);
                             return false;
                         }
                     });
                 }
-                if (item.getType().equalsIgnoreCase("video")) {
+                if (item.getType().equalsIgnoreCase("HiddenFileType.video")) {
                     Bitmap bitmap2 = ThumbnailUtils.createVideoThumbnail(item.getPath(),MediaStore.Images.Thumbnails.MINI_KIND);
                     Glide.with(mContext)
                             .load(bitmap2)
@@ -418,7 +419,8 @@ public class GalleryActivity extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup(position, item);
+                            mCheckBox.setVisibility(View.VISIBLE);
+//                            showUnHideRcyclePopup(position, item);
                             return false;
                         }
                     });

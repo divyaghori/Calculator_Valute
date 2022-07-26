@@ -157,7 +157,7 @@ public class DocumentActivity1 extends AppCompatActivity {
     }
     private void getDocument() {
         mediaItems.clear();
-        mediaItems = db.getmedia("doc", 0);
+        mediaItems = db.getmedia("HiddenFileType.document", 0);
         if (mediaItems.size() != 0) {
             tvNoData.setVisibility(View.GONE);
             image.setVisibility(View.GONE);
@@ -259,7 +259,7 @@ public class DocumentActivity1 extends AppCompatActivity {
         if (requestCode == REQ_CODE) {
             if (data != null) {
                 file_uris = (List<String>) data.getSerializableExtra("files");
-                hideFiles.HideFile(file_uris, "doc", getFolder());
+                hideFiles.HideFile(file_uris,"HiddenFileType.document" , getFolder());
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = this.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.activity_hide_progress, null);
@@ -289,10 +289,8 @@ public class DocumentActivity1 extends AppCompatActivity {
                 }, 1000);
 
             }
-
         }
     }
-
     @Override
     protected void onResume() {
         getDocument();
@@ -388,7 +386,7 @@ public class DocumentActivity1 extends AppCompatActivity {
             mCheckBox.setChecked(mSparseBooleanArray.get(position));
             mCheckBox.setOnCheckedChangeListener(mCheckedChangeListener);
             if(item!=null) {
-                if (item.getType().equalsIgnoreCase("doc")) {
+                if (item.getType().equalsIgnoreCase("HiddenFileType.document")) {
                     ivItem.setText(item.getName());
                     view.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -409,7 +407,8 @@ public class DocumentActivity1 extends AppCompatActivity {
                     view.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            showUnHideRcyclePopup(position, item);
+                              mCheckBox.setVisibility(View.VISIBLE);
+//                            showUnHideRcyclePopup(position, item);
                             return false;
                         }
                     });

@@ -51,7 +51,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:visibility="gone">
+          >
 
             <ImageView
                 android:id="@+id/image"
@@ -74,6 +74,7 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"></TextView>
         </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -82,17 +83,20 @@
             android:layout_marginRight="@dimen/_15sdp" />
     </FrameLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_add_node"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="@dimen/_10sdp"
-        android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/teal_700"
-        app:tint="@color/white" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_add_node"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|right"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="@color/teal_700"
+            app:tint="@color/white" />
 
     </RelativeLayout>
 

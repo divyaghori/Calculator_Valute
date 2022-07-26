@@ -7,15 +7,36 @@
     android:background="@color/home_item"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/home_item">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/back"></ImageView>
+
+
+    </RelativeLayout>
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_25sdp"
-        app:lottie_autoPlay="true"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/_25sdp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/topbar"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
+        app:lottie_autoPlay="true"
+        app:lottie_colorFilter="@color/white"
+        app:lottie_loop="true"
         app:lottie_rawRes="@raw/music" />
 
 
@@ -34,7 +55,10 @@
             android:layout_marginBottom="@dimen/_25sdp"
             android:fontFamily="@font/varelaroundregular"
             android:singleLine="true"
-            android:text="Medium Text text text text text "
+            android:text="Name"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="16sp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white" />
 
@@ -51,7 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:fontFamily="@font/varelaroundregular"
-                android:text="Small Text"
+                android:text="0:0"
+                android:textSize="14sp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/white" />
 
@@ -72,7 +97,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/_5sdp"
                 android:fontFamily="@font/varelaroundregular"
-                android:text="Small Text"
+                android:text="0:0"
+                android:textSize="14sp"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/white" />
         </RelativeLayout>
@@ -81,9 +107,7 @@
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-           >
-
+            android:layout_alignParentBottom="true">
 
 
             <Button
@@ -108,36 +132,40 @@
 
 
         </LinearLayout>
+
         <LinearLayout
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="3"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="#000000"
             android:alpha="0.5"
+            android:background="#000000"
+            android:orientation="horizontal"
             android:padding="@dimen/_10sdp"
-            android:layout_height="wrap_content">
+            android:weightSum="3"
+            app:layout_constraintBottom_toBottomOf="parent">
+
             <ImageView
                 android:id="@+id/ivInfo"
                 android:layout_width="@dimen/_20sdp"
-                android:src="@drawable/info"
-                android:layout_weight="1"
                 android:layout_height="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:src="@drawable/info"
                 app:tint="@color/white" />
+
             <ImageView
                 android:id="@+id/ivUnHide"
                 android:layout_width="@dimen/_20sdp"
-                android:src="@drawable/unlock"
-                android:layout_weight="1"
                 android:layout_height="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:src="@drawable/unlock"
                 app:tint="@color/white" />
+
             <ImageView
                 android:id="@+id/ivRecycle"
                 android:layout_width="@dimen/_20sdp"
-                android:src="@drawable/delete"
-                android:layout_weight="1"
                 android:layout_height="@dimen/_20sdp"
+                android:layout_weight="1"
+                android:src="@drawable/delete"
                 app:tint="@color/white" />
 
         </LinearLayout>

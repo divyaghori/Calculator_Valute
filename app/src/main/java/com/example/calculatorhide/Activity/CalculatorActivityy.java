@@ -3,6 +3,7 @@ package com.example.calculatorhide.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ public class CalculatorActivityy extends AppCompatActivity {
     Securityitem getpassword;
     List<Securityitem> getpasswordsize;
     DBController db;
-    Double result ;
+    Double result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +103,24 @@ public class CalculatorActivityy extends AppCompatActivity {
     private void setWorkings(String givenValue) {
         if (isNumeric(givenValue) || givenValue == "(" || givenValue == ")") {
             workings = workings + givenValue;
+            if (workings.length() > 2) {
+                ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
+                checkForPowerOf();
+                    try {
+                        result = (double) engine.eval(formula);
+                    } catch (ScriptException e) {
+                        Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
+                    }
+                if (result != null)
+                    resultsTV.setText(String.valueOf(result.doubleValue()));
+            }
         } else {
             if (workings.length() != 0) {
                 if (!isLastCharIsNumber(workings)) {
                     workings = workings.substring(0, workings.length() - 1) + givenValue;
                 } else {
                     workings = workings + givenValue;
+
                 }
             }
         }
@@ -131,8 +144,8 @@ public class CalculatorActivityy extends AppCompatActivity {
                     firstPin = workings;
                     workings = "";
                     simplemsg.setText(SplashActivity.resources.getString(R.string.ConfirmPass));
-                    resultsTV.setText(AddStar(firstPin));
-                    workingsTV.setText("");
+                    workingsTV.setText(AddStar(firstPin));
+                    resultsTV.setText("");
                     isPinConfirm = true;
                     return;
                 }
@@ -150,7 +163,7 @@ public class CalculatorActivityy extends AppCompatActivity {
                 isPinConfirm = false;
                 resultsTV.setText("");
                 workingsTV.setText("");
-                Toast.makeText(activity, "Set Your Password for the first time. Only 4 Digit Password Valid.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "Only 4 Digit Password Valid.", Toast.LENGTH_SHORT).show();
                 return;
             }
         } else {
@@ -196,23 +209,20 @@ public class CalculatorActivityy extends AppCompatActivity {
                     intent.putExtra("start", false);
                     startActivity(intent);
                 }
-            }else if(workings.equals("11223344")){
+            } else if (workings.equals("11223344")) {
                 Intent i = new Intent(CalculatorActivityy.this, ResetQuestionActivity.class);
                 startActivity(i);
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "please Correct password", Toast.LENGTH_SHORT).show();
             }
         }
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
         checkForPowerOf();
-//        try {
-//            result = (double) engine.eval(formula);
-//        } catch (ScriptException e) {
-//            Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
-//        }
-//        if (result != null)
-//            resultsTV.setText(String.valueOf(result.doubleValue()));
+        try {
+            result = (double) engine.eval(formula);
+        } catch (ScriptException e) {
+            Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
+        }
+        if (result != null)
+            resultsTV.setText(String.valueOf(result));
     }
 
     @Override

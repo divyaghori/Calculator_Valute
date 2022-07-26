@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements IAPHelper.IAPHelp
     FloatingActionButton gallery, fabvideo, fabapplock, addfolder, howtouse;
     HashMap<String, SkuDetails> skuDetailsHashMap = new HashMap<>();
     IAPHelper iapHelper;
-    final String TEST = "android.test.purchased"; //This id can be used for testing purpose
+    final String TEST = "android.test.purchased";
     private List<String> skuList = Arrays.asList(TEST);
     private boolean isAdShowen;
     boolean isFromCalculatorActivity;
@@ -97,7 +97,6 @@ public class HomeActivity extends AppCompatActivity implements IAPHelper.IAPHelp
             }
         });
         iapHelper = new IAPHelper(this, this, skuList);
-        // if(Util.activityData_list.)
         if (Util.activityData_list.contains("HomeActivity")) {
             isAdShowen = false;
         } else {

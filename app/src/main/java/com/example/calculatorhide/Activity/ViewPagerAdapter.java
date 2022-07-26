@@ -24,6 +24,7 @@ class ViewPagerAdapter extends PagerAdapter {
 
     LayoutInflater mLayoutInflater;
     ViewAdapterInterface viewAdapterInterface;
+    boolean isPlaying = false;
 
 
     public ViewPagerAdapter(Context context, List<MediaItem> items,ViewAdapterInterface viewAdapterInterface) {
@@ -60,6 +61,7 @@ class ViewPagerAdapter extends PagerAdapter {
         ImageView ivInfo = (ImageView) itemView.findViewById(R.id.ivInfo);
         ImageView ivUnHide = (ImageView) itemView.findViewById(R.id.ivUnHide);
         ImageView ivRecycle = (ImageView) itemView.findViewById(R.id.ivRecycle);
+        LinearLayout linear = itemView.findViewById(R.id.linear);
         ivInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +81,17 @@ class ViewPagerAdapter extends PagerAdapter {
             public void onClick(View view) {
                 viewAdapterInterface.onDeleteClick(mediaItems.get(position).getPath());
 
+            }
+        });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlaying) {
+                    linear.setVisibility(View.GONE);
+                }else{
+                    linear.setVisibility(View.VISIBLE);
+                }
+                isPlaying = !isPlaying;
             }
         });
          Glide.with(context)

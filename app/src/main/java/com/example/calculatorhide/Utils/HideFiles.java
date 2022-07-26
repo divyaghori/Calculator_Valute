@@ -9,6 +9,7 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import com.example.calculatorhide.Model.MediaItem;
+import com.example.calculatorhide.Model.NoteModel;
 import com.example.calculatorhide.Model.Securityitem;
 import com.example.calculatorhide.database.DBController;
 import com.github.f4b6a3.uuid.UuidCreator;
@@ -165,6 +166,17 @@ public class HideFiles {
         securityitem.setPassword(password);
         securityitem.setAnswer(answer);
         dbController.addsecuritydata(securityitem);
+        successInterface.onSuccess(true);
+    }
+
+
+    public void createnote(String description) {
+        successInterface.onLoading(true);
+        dbController = new DBController(mContext);
+        NoteModel noteModel = new NoteModel();
+        noteModel.setDesc(description);
+        noteModel.setTime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
+        dbController.addnotedata(noteModel);
         successInterface.onSuccess(true);
     }
 

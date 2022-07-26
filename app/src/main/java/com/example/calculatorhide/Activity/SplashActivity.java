@@ -47,10 +47,6 @@ public class SplashActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         firebaseData();
         initUi();
-        Log.d("Splash a", "onCreate: ");
-      //  CurrentScreen = 0;
-       // if (CurrentScreen > Util.CurrentScreen){   Util.CurrentScreen = CurrentScreen;}
-       // Util.activityData_list.add(new ActivityData(SplashActivity.this,true));
     }
 
     private void firebaseData() {

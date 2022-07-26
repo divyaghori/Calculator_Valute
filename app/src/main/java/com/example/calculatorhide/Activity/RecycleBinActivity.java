@@ -90,8 +90,8 @@ public class RecycleBinActivity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.restore_file_layout, null);
         dialogBuilder.setView(dialogView);
         TextView tvDelete =dialogView.findViewById(R.id.tvDelete);
+        TextView textView =dialogView.findViewById(R.id.text);
         TextView tvRestore =dialogView.findViewById(R.id.tvRestore);
-        //
         AlertDialog alertDialog = dialogBuilder.create();
         tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override

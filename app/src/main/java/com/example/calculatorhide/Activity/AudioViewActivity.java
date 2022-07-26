@@ -56,11 +56,19 @@ public class AudioViewActivity extends AppCompatActivity {
     private boolean isAdShowen;
     private InterstitialAdManager manager;
     DBController db;
+    ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_view);
         db = new DBController(this);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         activity=this;
         manager = new InterstitialAdManager();
         manager.fetchAd(this,true);

@@ -44,11 +44,11 @@
             android:layout_marginRight="5sp"
             android:layout_toStartOf="@id/text_view_priority"
             android:ellipsize="end"
-            android:textColor="@color/white"
-            android:text="rererererer"
             android:fontFamily="@font/varelaroundregular"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:text="rererererer"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_view_description"

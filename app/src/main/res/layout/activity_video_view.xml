@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,21 +7,61 @@
     android:background="@color/black"
     android:orientation="vertical"
     tools:context="com.example.calculatorhide.Activity.VideoViewActivity">
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <VideoView
+            android:id="@+id/vvImg"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <FrameLayout
+            android:id="@+id/zoom_surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.otaliastudios.zoom.ZoomSurfaceView
+                android:id="@+id/surface_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:horizontalPanEnabled="true"
+                app:verticalPanEnabled="true"
+                app:zoomEnabled="true" />
+
+            <com.google.android.exoplayer2.ui.PlayerControlView
+                android:id="@+id/player_control_view"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:alpha="0.5"
+                android:visibility="gone"
+                android:layout_height="@dimen/_65sdp"/>
+
+        </FrameLayout>
+
+
+    </FrameLayout>
     <RelativeLayout
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/topbar"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="3"
         android:background="#000000"
         android:alpha="0.5"
-        android:padding="@dimen/_10sdp"
-        android:layout_height="wrap_content">
+        android:visibility="gone"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:layout_height="50dp">
 
         <ImageView
             android:id="@+id/back"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             android:src="@drawable/back"
+            android:layout_marginLeft="@dimen/_3sdp"
             android:layout_centerVertical="true"
             app:tint="@color/white" />
         <LinearLayout
@@ -32,7 +72,8 @@
                 android:id="@+id/ivInfo"
                 android:layout_width="@dimen/_20sdp"
                 android:src="@drawable/info"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_height="@dimen/_20sdp"
                 app:tint="@color/white" />
             <ImageView
@@ -40,29 +81,19 @@
                 android:layout_width="@dimen/_20sdp"
                 android:src="@drawable/unlock"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 app:tint="@color/white" />
             <ImageView
                 android:id="@+id/ivRecycle"
                 android:layout_width="@dimen/_20sdp"
                 android:src="@drawable/delete"
                 android:layout_height="@dimen/_20sdp"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 app:tint="@color/white" />
         </LinearLayout>
 
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <VideoView
-            android:id="@+id/vvImg"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>
