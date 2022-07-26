@@ -70,7 +70,7 @@ public class FilemanagerActivity extends AppCompatActivity {
         note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(FilemanagerActivity.this, NoteActivity.class);
+                Intent i = new Intent(FilemanagerActivity.this, NoteActivity1.class);
                 startActivity(i);
             }
         });

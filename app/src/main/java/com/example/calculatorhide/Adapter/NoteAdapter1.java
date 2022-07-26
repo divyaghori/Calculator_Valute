@@ -1,26 +1,17 @@
 package com.example.calculatorhide.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.calculatorhide.Activity.AddEditNoteActivity;
-import com.example.calculatorhide.Activity.AddEditNoteActivity1;
-import com.example.calculatorhide.Activity.NoteActivity1;
-import com.example.calculatorhide.Model.MediaItem;
-import com.example.calculatorhide.Model.Note;
 import com.example.calculatorhide.Model.NoteModel;
 import com.example.calculatorhide.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

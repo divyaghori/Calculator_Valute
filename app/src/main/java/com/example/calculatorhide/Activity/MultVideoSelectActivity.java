@@ -157,7 +157,7 @@ public class MultVideoSelectActivity extends BaseActivity {
                     Toast.makeText(getApplicationContext(),
                             "position " + position + " " +
                                     imageUrls.get(position), 300).show();
-                Intent i = new Intent(MultVideoSelectActivity.this,VideoPlayerActivity.class);
+                Intent i = new Intent(MultVideoSelectActivity.this,VideoViewActivity.class);
                 i.putExtra("getvideo",imageUrls.get(position));
                 startActivity(i);
             }

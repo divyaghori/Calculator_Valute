@@ -1039,9 +1039,6 @@
             android:name=".Activity.ImportDocument"
             android:exported="false" />
         <activity
-            android:name=".Activity.VideoPlayerActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.VideoActivity"
             android:exported="false" />
         <activity
@@ -1074,8 +1071,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".Activity.NoteActivity" />
-        <activity android:name=".Activity.AddEditNoteActivity" />
     </application>
 
 </manifest>
